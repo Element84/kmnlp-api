@@ -1,0 +1,85 @@
+image: quay.io/element84/e84-build-python:3.12-main
+
+stages:
+  - test
+  - side_effecting
+  - deploy
+
+# Build the Docker image. This runs in parallel with the other test jobs. The
+# idea is to prepare and push the image eagerly so that the deploy job can
+# run quickly. It is useful to run it on merge requests so that we can
+# anticipate whether the build will succeed on merge.
+build_image:
+  stage: test
+  services:
+    - docker:dind
+  script:
+    - scripts/build.sh
+    - . scripts/gitlab/assume_role.sh
+    - scripts/push_containers.sh
+  rules:
+    # Make this run on every branch and merge requests too
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH
+
+lint:
+  stage: test
+  script:
+    - git config --global url."https://gitlab-ci-token:$CI_JOB_TOKEN@repo.element84.com/".insteadOf ssh://git@repo.element84.com/; 
+    - pip3.12 install uv
+    - uv sync --all-extras
+    - source .venv/bin/activate
+    - scripts/lint.sh
+  rules:
+    # Make this run on every branch and merge requests too
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH
+
+unit_tests:
+  stage: test
+  script:
+    - git config --global url."https://gitlab-ci-token:$CI_JOB_TOKEN@repo.element84.com/".insteadOf ssh://git@repo.element84.com/; 
+    - pip3.12 install uv
+    - uv sync --all-extras
+    - source .venv/bin/activate
+    - scripts/test.sh
+  rules:
+    # Make this run on every branch and merge requests too
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH
+
+integration_tests:
+  stage: test
+  script:
+    - git config --global url."https://gitlab-ci-token:$CI_JOB_TOKEN@repo.element84.com/".insteadOf ssh://git@repo.element84.com/; 
+    - pip3.12 install uv
+    - uv sync --all-extras
+    - source .venv/bin/activate
+    - . scripts/gitlab/assume_role.sh
+    - scripts/integration_tests.sh
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+
+deploy:
+  stage: deploy
+  services:
+    - docker:dind
+  script:
+    - . scripts/gitlab/assume_role.sh
+    - scripts/gitlab/pull_api_container.sh
+    - scripts/gitlab/push_image_tag_file.sh
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+upgrade-llm-agent-dependency:
+  stage: deploy
+  image: ghcr.io/astral-sh/uv:python3.12-bookworm-slim # Use smaller image for trivial task
+  before_script:
+    - '' # Do not install usual dependencies for trivial task
+  variables:
+    BRANCH_NAME: "ci/update-llm-agent-${CI_PIPELINE_ID}"
+  script:
+    - scripts/gitlab/update-llm-agent-dependency.sh
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "pipeline" && $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH # Run only if triggered by another pipeline and we are on main.

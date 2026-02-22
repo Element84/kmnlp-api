@@ -1,0 +1,6 @@
+import os
+
+NOMINATIM_USER_AGENT: str | None = os.getenv("NOMINATIM_USER_AGENT")
+GEOCODE_INDEX_HOST: str | None = os.getenv("GEOCODE_INDEX_HOST")
+DASK_SCHEDULER_ADDRESS: str | None = os.getenv("DASK_SCHEDULER_ADDRESS")
+ALLOW_LOCAL_DASK_CLUSTER: bool = bool(os.getenv("ALLOW_LOCAL_DASK_CLUSTER"))

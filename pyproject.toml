@@ -1,0 +1,158 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+
+[tool.setuptools.packages.find]
+include = ["app"]
+
+
+[project]
+name = "kmnlp-api"
+authors = []
+maintainers = []
+description = ""
+readme = "README.md"
+requires-python = ">=3.12"
+license-files = ["LICENSE"]
+dependencies = [
+  "fastapi[standard]>=0.116.1",
+  "click>=8.0.0",
+  "httpx>=0.27.0",
+  "llm-agent[data-processing]",
+  "geojson-pydantic>=2.1.0",
+  "boto3>=1.40.49",
+  "boto3-stubs[bedrock-runtime, s3, rds]>=1.40.58",
+  "sqlalchemy>=2.0.46",
+  "psycopg2-binary>=2.9.11",
+]
+dynamic = ["version"]
+
+
+[project.urls]
+Gitlab = "https://repo.element84.com/noaa_km_nlp/kmnlp-api"
+
+[project.scripts]
+kmnlp = "app.cli.main:cli"
+
+[dependency-groups]
+dev = [
+  { include-group = "lint" },
+  { include-group = "test" },
+  "build>=1.2.2",
+  "debugpy",
+  "ipython>=8.28.0",
+  "ipywidgets>=8.1.5",
+  "jupyterlab>=4.3.3",
+]
+lint = [
+  "debugpy",
+  "pre-commit-hooks>=4.6.0",
+  "pre-commit>=3.8.0",
+  "pyright>=1.1.394",
+  "ruff>=0.9",
+]
+test = [
+  "moto>=5.1.20",
+  "pytest-asyncio>=1.0.0",
+  "pytest-socket>=0.7.0",
+  "pytest-watch",
+  "pytest-xdist>=3.8.0",
+  "pytest>=8.3.3",
+  "testcontainers[postgres]>=4.14.1",
+]
+
+
+[tool.pytest.ini_options]
+pythonpath = "app"
+testpaths = ["tests"]
+markers = [
+  "integration: test that requires making network calls to an LLM",
+  "enable_socket: enable socket connections for this test"
+]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+# pytest-socket configuration: disable sockets by default, allow localhost for Dask
+addopts = "--disable-socket --allow-hosts=127.0.0.1"
+
+
+[tool.pyright]
+include = ["app/", "tests/"]
+ignore = ["**/.venv/**", "*.pyc"] # suppress errors
+exclude = ["**/.venv/**", "*.pyc", "**/__pycache__", "**/.local/**"] # do not analyze files
+typeCheckingMode = "strict"
+reportGeneralTypeIssues = true
+reportImplicitStringConcatenation = "none"
+reportPropertyTypeMismatch = "error"
+reportUninitializedInstanceVariable = "error"
+reportUnknownArgumentType = "error"
+reportUnknownMemberType = "error"
+reportUnknownVariableType = "error"
+reportUnnecessaryComparison = "error"
+
+
+[tool.ruff]
+line-length = 100
+extend-exclude = ["notebooks/", ".history/"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint]
+# http://docs.astral.sh/ruff/rules/
+select = ["ALL"]
+ignore = [
+  # Unnecessary assignment before return statement
+  "RET504",
+  # Trailing comma missing
+  "COM812",
+  # Missing docstring for module
+  "D100",
+  # Missing docstring in magic method
+  "D105",
+  # 1 blank line required before class docstring
+  "D203",
+  # Multi-line docstring summary should start at the second line
+  "D213",
+  # T O D O comment missing author name
+  "TD002",
+  # T O D O comment missing issue link
+  "TD003",
+  # comment contains T O D O
+  "FIX002",
+  # comment contains HACK
+  "FIX004",
+  # recommendations to use Path over os.path -- ignoring because Path does not
+  # work with S3 URIs
+  "PTH",
+  # Exceptions
+  # Allow messages inside errors
+  "TRY003",
+  "EM101",
+  # Allow f-strings in exception messages
+  "EM102",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = [
+  # Module level import not at top of cell
+  "E402",
+  # Imported but unused
+  "F401",
+]
+"tests/**/*" = [
+  # Use of assert detected
+  "S101",
+  # Missing return type annotation for public function
+  "ANN201",
+  # Missing docstrings
+  "D1",
+  # Private member accessed
+  "SLF001",
+  # magic values
+  "PLR2004",
+]
+
+[tool.uv.sources]
+llm-agent = { git = "ssh://git@repo.element84.com/noaa_km_nlp/llm-agent.git", branch = "main" }
+# llm-agent = { path = "../llm-agent", editable = true }
