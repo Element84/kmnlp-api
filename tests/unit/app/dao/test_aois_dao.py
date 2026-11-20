@@ -2,7 +2,6 @@ from datetime import datetime
 from uuid import UUID, uuid4
 
 import pytest
-from sqlalchemy import MetaData, create_engine
 
 from app.dao.aois_dao import AOIsDAO
 from app.dao.users_dao import UserNotFoundError, UsersDAO
@@ -13,13 +12,9 @@ from tests.utils.fixtures.aoi_fixture import AOIFixture
 
 
 class TestAOIsDAO:
-    @pytest.fixture
-    def db(self) -> SQLAlchemyDB:
-        return SQLAlchemyDB(create_engine("sqlite+pysqlite:///:memory:", echo=False), MetaData())
-
-    def test_create_aoi_returns_expected_value(self, db: SQLAlchemyDB):
-        users_dao = UsersDAO(db)
-        aois_dao = AOIsDAO(db)
+    def test_create_aoi_returns_expected_value(self, sqlalchemy_db: SQLAlchemyDB):
+        users_dao = UsersDAO(sqlalchemy_db)
+        aois_dao = AOIsDAO(sqlalchemy_db)
 
         _ = users_dao.create_user("test")
 
@@ -36,8 +31,42 @@ class TestAOIsDAO:
         assert result.name == "Gulf of Mexico"
         assert result.geojson == GeoJSONGeometry(type="Point", coordinates=(0, 0), bbox=None)
 
-    def test_create_aoi_fails_if_user_not_exists(self, db: SQLAlchemyDB):
-        aois_dao = AOIsDAO(db)
+    def test_create_aoi_as_feature_collection(self, sqlalchemy_db: SQLAlchemyDB):
+        users_dao = UsersDAO(sqlalchemy_db)
+        aois_dao = AOIsDAO(sqlalchemy_db)
+
+        _ = users_dao.create_user("test")
+
+        result = aois_dao.create_aoi(
+            "test",
+            "Gulf of Mexico",
+            GeoJSONGeometry(type="Point", coordinates=(0, 0), bbox=None).as_feature_collection(),
+        )
+
+        assert isinstance(result.uuid, UUID)
+        assert result.uuid.version == 4
+
+        assert str(result.user_id) == "test"
+        assert result.name == "Gulf of Mexico"
+        assert result.geojson.model_dump() == {
+            "type": "FeatureCollection",
+            "features": [
+                {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": (0.0, 0.0),
+                        "bbox": None,
+                    },
+                    "properties": None,
+                    "bbox": None,
+                }
+            ],
+            "bbox": None,
+        }
+
+    def test_create_aoi_fails_if_user_not_exists(self, sqlalchemy_db: SQLAlchemyDB):
+        aois_dao = AOIsDAO(sqlalchemy_db)
 
         with pytest.raises(UserNotFoundError):
             aois_dao.create_aoi(
@@ -46,9 +75,9 @@ class TestAOIsDAO:
                 GeoJSONGeometry(type="Point", coordinates=(0, 0), bbox=None),
             )
 
-    def test_get_aoi(self, db: SQLAlchemyDB):
-        users_dao = UsersDAO(db)
-        aois_dao = AOIsDAO(db)
+    def test_get_aoi(self, sqlalchemy_db: SQLAlchemyDB):
+        users_dao = UsersDAO(sqlalchemy_db)
+        aois_dao = AOIsDAO(sqlalchemy_db)
 
         _ = users_dao.create_user("test")
 
@@ -62,9 +91,9 @@ class TestAOIsDAO:
 
         assert aoi == created_aoi
 
-    def test_get_aoi_returns_none_if_wrong_user_requesting(self, db: SQLAlchemyDB):
-        users_dao = UsersDAO(db)
-        aois_dao = AOIsDAO(db)
+    def test_get_aoi_returns_none_if_wrong_user_requesting(self, sqlalchemy_db: SQLAlchemyDB):
+        users_dao = UsersDAO(sqlalchemy_db)
+        aois_dao = AOIsDAO(sqlalchemy_db)
 
         _ = users_dao.create_user("test")
 
@@ -78,22 +107,22 @@ class TestAOIsDAO:
 
         assert aoi is None
 
-    def test_get_aoi_return_none_if_not_exists(self, db: SQLAlchemyDB):
-        aois_dao = AOIsDAO(db)
+    def test_get_aoi_return_none_if_not_exists(self, sqlalchemy_db: SQLAlchemyDB):
+        aois_dao = AOIsDAO(sqlalchemy_db)
         aoi = aois_dao.get_aoi(uuid4(), "test")
 
         assert aoi is None
 
-    def test_list_aois_when_empty(self, db: SQLAlchemyDB):
-        aois_dao = AOIsDAO(db)
+    def test_list_aois_when_empty(self, sqlalchemy_db: SQLAlchemyDB):
+        aois_dao = AOIsDAO(sqlalchemy_db)
         result = aois_dao.list_aois("test")
 
         assert result == AOIListResponse(aois=[], cursor=None, total_count=0)
 
-    def test_list_aois_empty_for_other_user(self, db: SQLAlchemyDB):
+    def test_list_aois_empty_for_other_user(self, sqlalchemy_db: SQLAlchemyDB):
         # Init DAOs
-        users_dao = UsersDAO(db)
-        aois_dao = AOIsDAO(db)
+        users_dao = UsersDAO(sqlalchemy_db)
+        aois_dao = AOIsDAO(sqlalchemy_db)
 
         # Create user "test" and create an AOI for it.
         _ = users_dao.create_user("test")
@@ -109,10 +138,10 @@ class TestAOIsDAO:
         # List should be empty.
         assert result == AOIListResponse(aois=[], cursor=None, total_count=0)
 
-    def test_list_aois_for_user(self, db: SQLAlchemyDB):
+    def test_list_aois_for_user(self, sqlalchemy_db: SQLAlchemyDB):
         # Init DAOs
-        users_dao = UsersDAO(db)
-        aois_dao = AOIsDAO(db)
+        users_dao = UsersDAO(sqlalchemy_db)
+        aois_dao = AOIsDAO(sqlalchemy_db)
 
         # Create user "test" and create 2 AOIs for it.
         _ = users_dao.create_user("test")
@@ -147,10 +176,10 @@ class TestAOIsDAO:
             total_count=2,
         )
 
-    def test_list_aois_first_page(self, db: SQLAlchemyDB):
+    def test_list_aois_first_page(self, sqlalchemy_db: SQLAlchemyDB):
         # Init DAOs
-        users_dao = UsersDAO(db)
-        aois_dao = AOIsDAO(db)
+        users_dao = UsersDAO(sqlalchemy_db)
+        aois_dao = AOIsDAO(sqlalchemy_db)
 
         # Create test user.
         _ = users_dao.create_user("test")
@@ -186,11 +215,11 @@ class TestAOIsDAO:
             "AOI 14",
         ]
 
-    def test_list_aois_second_page(self, db: SQLAlchemyDB):
+    def test_list_aois_second_page(self, sqlalchemy_db: SQLAlchemyDB):
         # Init DAOs and fixture
-        users_dao = UsersDAO(db)
-        aois_dao = AOIsDAO(db)
-        aoi_fixture = AOIFixture(db)
+        users_dao = UsersDAO(sqlalchemy_db)
+        aois_dao = AOIsDAO(sqlalchemy_db)
+        aoi_fixture = AOIFixture(sqlalchemy_db)
 
         # Create test user.
         _ = users_dao.create_user("test")

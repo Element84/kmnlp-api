@@ -23,3 +23,13 @@ def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item
         # Otherwise, test is not an integration test. Disable tracing.
         else:
             os.environ["LANGFUSE_TRACING_ENABLED"] = "false"
+
+
+pytest_plugins = [
+    "tests.utils.fixtures.db",
+    "tests.utils.fixtures.context",
+    "tests.utils.fixtures.geometries",
+    "tests.utils.fixtures.data",
+    "tests.utils.fixtures.app_state",
+    "tests.utils.fixtures.dask",
+]

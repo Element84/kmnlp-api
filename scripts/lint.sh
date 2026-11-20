@@ -8,6 +8,7 @@ set -e -o pipefail
 
 echo "Running shellcheck"
 scripts/shellcheck.sh
+echo "---"
 
 echo "Running Ruff"
 ruff check app/ tests/
@@ -18,7 +19,7 @@ pyright app/ tests/
 echo "---"
 
 echo "Checking if code has been formatted with Ruff"
-if ! ruff format --check; then
+if ! ruff format --check app/ tests/; then
     echo "ERROR: Code has not been formatted with Ruff. Please run: ruff format."
     exit 1
 fi

@@ -26,7 +26,7 @@ done
 
 # Execute shellcheck with constructed arguments
 # shellcheck disable=SC2086
-find . -name "*.sh" ! -path "./.venv/*" ! -path "*/.history/*" ! -path "./dist/*" -exec \
+find . -name "*.sh" ! -path "**/.venv/*" ! -path "*/.history/*" ! -path "./dist/*" -exec \
     shellcheck \
     --severity=style \
     --enable=all \

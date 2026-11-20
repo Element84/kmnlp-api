@@ -1,0 +1,129 @@
+services:
+  api:
+    platform: linux/amd64
+    build:
+      context: .
+      target: base
+      args:
+        BUILD_ENV_IS_CI: 0
+      ssh:
+        - default
+    command: bash -c "rm -rf /root/.cache/uv/git-v0 && uv pip install -e /llm-agent && uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload --reload-dir /code --reload-dir /llm-agent"
+    volumes:
+      - .:/code
+      - venv_data:/code/.venv
+      - ../llm-agent:/llm-agent
+      - ~/.aws:/root/.aws:ro
+    ports:
+      - "8000:8000"
+    environment:
+      - ALLOW_LOCAL_DASK_CLUSTER=false
+      - UV_LINK_MODE=copy
+      - AWS_BEARER_TOKEN_BEDROCK
+      - AWS_PROFILE
+      - DASK_COMPUTE_SIZE_LIMIT_GB
+      - DASK_PROGRESS_POLL_INTERVAL_SEC
+      - DASK_SCHEDULER_ADDRESS=dask_scheduler:8786
+      - ALGORITHM_AGENT_MAX_TOKENS
+      - DB_ENDPOINT=db
+      - DB_NAME
+      - DB_PASSWORD
+      - DB_PORT
+      - DB_USERNAME
+      - FRONTEND_ENDPOINT
+      - GEOCODE_INDEX_HOST=host.docker.internal
+      - GEOCODE_INDEX_PORT
+      - GEOCODE_INDEX_REGION
+      - LANGFUSE_DB_HOST
+      - LANGFUSE_HOST
+      - LANGFUSE_PUBLIC_KEY
+      - LANGFUSE_SECRET_KEY
+      - LITE_LLM_PROXY_URL
+      - ORCHESTRATION_AGENT_MAX_CONSECUTIVE_RESPONSES
+      - OPENSEARCH_ENDPOINT_HOST=host.docker.internal
+      - ORCHESTRATION_AGENT_MAX_TOKENS
+      - USE_ICECHUNK_STORES
+
+  web:
+    image: node:22-slim
+    working_dir: /web
+    command: bash -c "corepack enable && yarn && yarn dev --host"
+    volumes:
+      - ../Front-End:/web
+    ports:
+      - "5173:5173"
+
+  db:
+    build:
+      context: .
+      dockerfile: postgres.Dockerfile
+    command: >
+      postgres -c ssl=on -c ssl_cert_file=/var/lib/postgresql/server.crt -c ssl_key_file=/var/lib/postgresql/server.key
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  dask_scheduler:
+    platform: linux/amd64
+    build:
+      context: .
+      target: base
+      args:
+        BUILD_ENV_IS_CI: 0
+      ssh:
+        - default
+    command: dask scheduler --host="dask_scheduler" --port="8786"
+    ports:
+      - "8786:8786"
+      - "8787:8787"
+    volumes:
+      - .:/code
+      - venv_data:/code/.venv
+      - ../llm-agent:/llm-agent
+      - ~/.aws:/root/.aws:ro
+
+  dask_worker:
+    platform: linux/amd64
+    build:
+      context: .
+      target: base
+      args:
+        BUILD_ENV_IS_CI: 0
+      ssh:
+        - default
+    command: dask worker tcp://dask_scheduler:8786 --nworkers="auto"
+    environment:
+      - ALLOW_LOCAL_DASK_CLUSTER=false
+      - AWS_BEARER_TOKEN_BEDROCK
+      - AWS_PROFILE
+      - DASK_SCHEDULER_ADDRESS=dask_scheduler:8786
+      - DB_ENDPOINT=db
+      - DB_NAME
+      - DB_PASSWORD
+      - DB_PORT
+      - DB_USERNAME
+      - FRONTEND_ENDPOINT
+      - GEOCODE_INDEX_HOST=host.docker.internal
+      - GEOCODE_INDEX_PORT
+      - GEOCODE_INDEX_REGION
+      - LANGFUSE_DB_HOST
+      - LANGFUSE_HOST
+      - LANGFUSE_PUBLIC_KEY
+      - LANGFUSE_SECRET_KEY
+      - LITE_LLM_PROXY_URL
+      - OPENSEARCH_ENDPOINT_HOST=host.docker.internal
+      - USE_ICECHUNK_STORES
+    volumes:
+      - .:/code
+      - venv_data:/code/.venv
+      - ../llm-agent:/llm-agent
+      - ~/.aws:/root/.aws:ro
+
+volumes:
+  postgres_data:
+  venv_data:

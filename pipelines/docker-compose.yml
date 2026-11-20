@@ -1,0 +1,11 @@
+services:
+  kmnlp-ingest:
+    build: .
+    environment:
+      AWS_PROFILE:
+      SOURCE_BUCKET: noaa-cdr-sea-surface-temp-whoi-pds
+      DESTINATION_BUCKET: kendall-test-datasource
+      DESTINATION_PREFIX: icechunk-container-test/
+      SOURCE_PATHS: '["data/2019/SEAFLUX-OSB-CDR_V02R00_SST_D20191030_C20200225.nc","data/2019/SEAFLUX-OSB-CDR_V02R00_SST_D20191031_C20200225.nc","data/2019/SEAFLUX-OSB-CDR_V02R00_SST_D20191201_C20200421.nc"]'
+    volumes:
+      - ~/.aws:/root/.aws:ro

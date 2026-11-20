@@ -17,7 +17,7 @@ WORKDIR /code
 
 # Install git and ssh
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends git openssh-client shellcheck libatomic1 && \
+    apt-get install -y --no-install-recommends git openssh-client shellcheck libatomic1 ffmpeg && \
     apt-get clean
 
 # Create venv and use it
@@ -70,7 +70,9 @@ ENV PATH="/code/.venv/bin:$PATH"
 EXPOSE 8000
 
 # Command to run the app
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# --proxy-headers + --forwarded-allow-ips "*" trust X-Forwarded-Proto/-For from the
+# TLS-terminating load balancer so request.url.scheme reflects the real https scheme.
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--proxy-headers", "--forwarded-allow-ips", "*"]
 
 ##############
 # Dask image #

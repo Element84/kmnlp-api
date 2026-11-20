@@ -102,6 +102,7 @@ class SQLAlchemyDB:
                 Column("messages_json", Text, nullable=False, default="[]"),
                 Column("agent_conversation_json", Text, nullable=False, default="[]"),
                 Column("plan_manager_json", Text, nullable=False, default="[]"),
+                Column("data_refs_json", Text, nullable=False, default="[]"),
                 Column("created_at", TIMESTAMP(timezone=True), nullable=False),
                 Index("idx_chats_user_id", "user_id"),
                 keep_existing=True,
@@ -124,6 +125,27 @@ class SQLAlchemyDB:
             )
 
             metadata.create_all(engine, checkfirst=True)
+
+            self._add_missing_columns()
+
+    def _add_missing_columns(self) -> None:
+        """Add columns that may not exist in an already-created table.
+
+        Uses ALTER TABLE ADD COLUMN for each column that is not yet present.
+        SQLite (and most backends) will raise an OperationalError if the column
+        already exists, which we silently ignore.
+        """
+        new_columns: list[tuple[str, str]] = [
+            ("chats", "data_refs_json TEXT NOT NULL DEFAULT '[]'"),
+        ]
+
+        with self.get_connection() as conn:
+            for table_name, col_def in new_columns:
+                try:
+                    conn.execute(text(f"ALTER TABLE {table_name} ADD COLUMN {col_def}"))
+                    conn.commit()
+                except Exception:  # noqa: BLE001
+                    conn.rollback()
 
     def _enable_fks_sqlite(self) -> None:
         with self.get_connection() as conn:

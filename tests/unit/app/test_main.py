@@ -5,33 +5,43 @@ import pytest
 from fastapi.testclient import TestClient
 
 from app.dao.aois_dao import AOIsDAO
+from app.db.sqlalchemy_db import SQLAlchemyDB
 from app.dependencies import get_app_state
 from app.main import app
-from app.providers import db_provider
+from app.providers import aois_dao_provider, db_provider, users_dao_provider
 from app.types.geojson import GeoJSONGeometry
 from app.types.input import AOI as IAOI
 from app.types.input import UserCreateRequest
 from app.types.output import AOISummary, Chat, ChatRequest
-from tests.utils.dependencies import override_app_state
+from app.utils.app_state import AppState
 from tests.utils.fixtures.aoi_fixture import AOIFixture
-from tests.utils.providers import feature_test_db_provider
 
 
 class TestAPI:
+    """Test API endpoints.
+
+    NOTE: While these tests aren't setup quite like our feature tests, they're
+    logically more feature tests than unit tests. It might make sense for a
+    future developer to rewrite these tests as feature tests. Do you wish these
+    tests were feature tests? Make them feature tests!
+    """
+
     @classmethod
     def setup_class(cls) -> None:
-        app.dependency_overrides[get_app_state] = override_app_state
-        app.dependency_overrides[db_provider] = feature_test_db_provider
         cls.client = TestClient(app)
 
     @pytest.fixture(autouse=True)
-    def clear_caches(self):
+    def clear_caches(self, sqlalchemy_db: SQLAlchemyDB, app_state: AppState):
         """Clear provider caches after each test."""
+        app.dependency_overrides[get_app_state] = lambda: app_state
+        app.dependency_overrides[db_provider] = lambda: sqlalchemy_db
+
         # Run test
         yield
 
         # Clear caches
-        feature_test_db_provider.cache_clear()
+        users_dao_provider.cache_clear()
+        aois_dao_provider.cache_clear()
 
     def test_create_user(self):
         user_data = UserCreateRequest(user_id="xyz")
@@ -88,14 +98,14 @@ class TestAPI:
         assert isinstance(response.json(), dict)
         assert response.json().keys() == {"uuid"}
 
-    def test_get_aoi(self):
+    def test_get_aoi(self, sqlalchemy_db: SQLAlchemyDB):
         # Create User
         headers = {"x-user-id": "test"}
         user_data = UserCreateRequest(user_id="test")
         _ = self.client.post("/users", json=user_data.model_dump())
 
         # Create AOI through DAO
-        aois_dao = AOIsDAO(feature_test_db_provider())
+        aois_dao = AOIsDAO(sqlalchemy_db)
         created_aoi = aois_dao.create_aoi(
             "test", "AOI", GeoJSONGeometry(type="Point", coordinates=(0, 0), bbox=None)
         )
@@ -110,19 +120,30 @@ class TestAPI:
         assert response_dict["uuid"] == str(created_aoi.uuid)
         assert response_dict["name"] == "AOI"
         assert response_dict["geojson"] == {
-            "bbox": None,
-            "coordinates": [
-                0.0,
-                0.0,
+            "type": "FeatureCollection",
+            "features": [
+                {
+                    "type": "Feature",
+                    "geometry": {
+                        "bbox": None,
+                        "coordinates": [
+                            0.0,
+                            0.0,
+                        ],
+                        "type": "Point",
+                    },
+                    "bbox": None,
+                    "properties": None,
+                }
             ],
-            "type": "Point",
+            "bbox": None,
         }
 
         # NOTE: Ideally, we'd compare the strings here but the ISO formatters
         # differ: One uses 'Z' while the other uses +00:00.
         assert datetime.fromisoformat(response_dict["created_at"]) == created_aoi.created_at
 
-    def test_get_aoi_with_wrong_user(self):
+    def test_get_aoi_with_wrong_user(self, sqlalchemy_db: SQLAlchemyDB):
         # Create Users
         user_data = UserCreateRequest(user_id="test")
         _ = self.client.post("/users", json=user_data.model_dump())
@@ -132,7 +153,7 @@ class TestAPI:
         _ = self.client.post("/users", json=user_data.model_dump())
 
         # Create AOI through DAO
-        aois_dao = AOIsDAO(feature_test_db_provider())
+        aois_dao = AOIsDAO(sqlalchemy_db)
         created_aoi = aois_dao.create_aoi(
             "test", "AOI", GeoJSONGeometry(type="Point", coordinates=(0, 0), bbox=None)
         )
@@ -143,14 +164,14 @@ class TestAPI:
         assert response.status_code == 404
         assert response.json() == {"detail": "AOI not found"}
 
-    def test_list_aois_with_pagination(self):
+    def test_list_aois_with_pagination(self, sqlalchemy_db: SQLAlchemyDB):
         # Create User
         headers = {"x-user-id": "test"}
         user_data = UserCreateRequest(user_id="test")
         _ = self.client.post("/users", json=user_data.model_dump())
 
         # Create 16 AOI with differing `created_at`s
-        fixture = AOIFixture(feature_test_db_provider())
+        fixture = AOIFixture(sqlalchemy_db)
         for i in range(16):
             created_at = datetime(2026, 1, i + 1, tzinfo=UTC)
             fixture.create_aoi(user_id="test", created_at=created_at)

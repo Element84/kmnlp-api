@@ -12,6 +12,6 @@ logging.getLogger("s3fs").setLevel(logging.INFO)
 logging.getLogger("numcodecs").setLevel(logging.INFO)
 logging.getLogger("fastapi").setLevel(logging.INFO)
 
-# Set debug level of llm-agent to DEBUG
-logging.getLogger("llm_agent").setLevel(logging.DEBUG)
-logging.getLogger("app").setLevel(logging.DEBUG)
+# Set debug level of llm-agent to INFO
+logging.getLogger("llm_agent").setLevel(logging.INFO)
+logging.getLogger("app").setLevel(logging.INFO)

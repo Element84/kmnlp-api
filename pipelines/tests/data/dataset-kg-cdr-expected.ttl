@@ -1,0 +1,1448 @@
+@prefix : <http://kmnlp-demo.noaa.gov/> .
+@prefix cf: <http://mmisw.org/ont/cf/parameter/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix qb: <http://purl.org/linked-data/cube#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <https://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:cf_standard_name a rdf:Property ;
+    rdfs:label "Matching entry in the CF Standard Names table." ;
+    rdfs:range cf:Standard_Name .
+
+:field_name a rdf:Property ;
+    rdfs:label "Field name in the dataset." ;
+    rdfs:range xsd:string .
+
+:noaa-cdr-aerosol-optical-thickness-pds_daily a qb:DataSet,
+        dcat:Dataset,
+        schema:Dataset ;
+    rdfs:label "Daily AVHRR Aerosol Optical Thickness over Global Oceans, Version 4.0" ;
+    dcterms:description "The product is the aerosol optical thickness (AOT) at 0.65 micron, which is retrieved from NOAA PATMOS-x and JPSS level-2B orbital radinace and cloud CDR products. The retrieval is performed for selected spatial(0.1 by 0.1 degree) and temporal (1 time per day per satellite) resolution in cloud free condition during daytime. The final product is daily avergaed from all satellite retrivals and in a 0.1 by 0.1 degree equal angle grid (total 1800x3600 grids over the globe). Due to the relatively large uncertainties associated with surface reflectance over water glint area and land surface as well as limited AVHRR retrieval channels, the current algorithm only performs retrieval over none-glint water surface (specifically at the anti-solar side of the orbit and viewing angle is larger than 40 degree away from the specular ray). The final CDR AOT products include daily and monthly products" ;
+    dcterms:title "Daily AVHRR Aerosol Optical Thickness over Global Oceans, Version 4.0" ;
+    qb:structure [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ qb:measure :atmosphere_optical_thickness_due_to_ambient_aerosol_noaa-cdr-aerosol-optical-thickness-pds_daily ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ] ] ;
+    rdfs:comment "The product is the aerosol optical thickness (AOT) at 0.65 micron, which is retrieved from NOAA PATMOS-x and JPSS level-2B orbital radinace and cloud CDR products. The retrieval is performed for selected spatial(0.1 by 0.1 degree) and temporal (1 time per day per satellite) resolution in cloud free condition during daytime. The final product is daily avergaed from all satellite retrivals and in a 0.1 by 0.1 degree equal angle grid (total 1800x3600 grids over the globe). Due to the relatively large uncertainties associated with surface reflectance over water glint area and land surface as well as limited AVHRR retrieval channels, the current algorithm only performs retrieval over none-glint water surface (specifically at the anti-solar side of the orbit and viewing angle is larger than 40 degree away from the specular ray). The final CDR AOT products include daily and monthly products" ;
+    dcat:distribution [ a dcat:Distribution ;
+            dcat:accessURL <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/noaa-cdr-aerosol-optical-thickness-pds/daily> ;
+            dcat:mediaType "application/icechunk-zarr" ] ;
+    dcat:endDate "2026-06-30T00:00:00+00:00"^^xsd:dateTime ;
+    dcat:startDate "1982-01-01T00:00:00+00:00"^^xsd:dateTime ;
+    schema:contentUrl <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/noaa-cdr-aerosol-optical-thickness-pds/daily> ;
+    schema:description "The product is the aerosol optical thickness (AOT) at 0.65 micron, which is retrieved from NOAA PATMOS-x and JPSS level-2B orbital radinace and cloud CDR products. The retrieval is performed for selected spatial(0.1 by 0.1 degree) and temporal (1 time per day per satellite) resolution in cloud free condition during daytime. The final product is daily avergaed from all satellite retrivals and in a 0.1 by 0.1 degree equal angle grid (total 1800x3600 grids over the globe). Due to the relatively large uncertainties associated with surface reflectance over water glint area and land surface as well as limited AVHRR retrieval channels, the current algorithm only performs retrieval over none-glint water surface (specifically at the anti-solar side of the orbit and viewing angle is larger than 40 degree away from the specular ray). The final CDR AOT products include daily and monthly products" ;
+    schema:isAccessibleForFree true ;
+    schema:keywords "" ;
+    schema:name "Daily AVHRR Aerosol Optical Thickness over Global Oceans, Version 4.0" ;
+    schema:url <https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ncdc:C01678> ;
+    schema:variableMeasured :atmosphere_optical_thickness_due_to_ambient_aerosol_noaa-cdr-aerosol-optical-thickness-pds_daily,
+        :latitude,
+        :longitude,
+        :time ;
+    schema:version "2" .
+
+:noaa-cdr-aerosol-optical-thickness-pds_monthly a qb:DataSet,
+        dcat:Dataset,
+        schema:Dataset ;
+    rdfs:label "Monthly AVHRR Aerosol Optical Thickness over Global Oceans, Version 4.0" ;
+    dcterms:description "The product is the aerosol optical thickness (AOT) at 0.65 micron, which is retrieved from NOAA PATMOS-x level-2B orbital radinace and cloud CDR products. The retrieval is performed for selected spatial(0.1 by 0.1 degree) and temporal (1 time per day per satellite) resolution in cloud free condition during daytime. The final product is daily averaged from all satellite retrivals and in a 0.1 by 0.1 degree equal angle grid (total 1800x3600 grids over the globe). Due to the relatively large uncertainties associated with surface reflectance over water glint area and land surface as well as limited AVHRR retrieval channels, the current algorithm only performs retrieval over none-glint water surface (specifically at the anti-solar side of the orbit and viewing angle is larger than 40 degree away from the specular ray). The final CDR AOT products include daily and monthly products" ;
+    dcterms:title "Monthly AVHRR Aerosol Optical Thickness over Global Oceans, Version 4.0" ;
+    qb:structure [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ qb:measure :atmosphere_optical_thickness_due_to_aerosol_noaa-cdr-aerosol-optical-thickness-pds_monthly ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ] ] ;
+    rdfs:comment "The product is the aerosol optical thickness (AOT) at 0.65 micron, which is retrieved from NOAA PATMOS-x level-2B orbital radinace and cloud CDR products. The retrieval is performed for selected spatial(0.1 by 0.1 degree) and temporal (1 time per day per satellite) resolution in cloud free condition during daytime. The final product is daily averaged from all satellite retrivals and in a 0.1 by 0.1 degree equal angle grid (total 1800x3600 grids over the globe). Due to the relatively large uncertainties associated with surface reflectance over water glint area and land surface as well as limited AVHRR retrieval channels, the current algorithm only performs retrieval over none-glint water surface (specifically at the anti-solar side of the orbit and viewing angle is larger than 40 degree away from the specular ray). The final CDR AOT products include daily and monthly products" ;
+    dcat:distribution [ a dcat:Distribution ;
+            dcat:accessURL <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/noaa-cdr-aerosol-optical-thickness-pds/monthly> ;
+            dcat:mediaType "application/icechunk-zarr" ] ;
+    dcat:endDate "2022-12-01T00:00:00+00:00"^^xsd:dateTime ;
+    dcat:startDate "2023-01-01T00:00:00+00:00"^^xsd:dateTime ;
+    schema:contentUrl <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/noaa-cdr-aerosol-optical-thickness-pds/monthly> ;
+    schema:description "The product is the aerosol optical thickness (AOT) at 0.65 micron, which is retrieved from NOAA PATMOS-x level-2B orbital radinace and cloud CDR products. The retrieval is performed for selected spatial(0.1 by 0.1 degree) and temporal (1 time per day per satellite) resolution in cloud free condition during daytime. The final product is daily averaged from all satellite retrivals and in a 0.1 by 0.1 degree equal angle grid (total 1800x3600 grids over the globe). Due to the relatively large uncertainties associated with surface reflectance over water glint area and land surface as well as limited AVHRR retrieval channels, the current algorithm only performs retrieval over none-glint water surface (specifically at the anti-solar side of the orbit and viewing angle is larger than 40 degree away from the specular ray). The final CDR AOT products include daily and monthly products" ;
+    schema:isAccessibleForFree true ;
+    schema:keywords "" ;
+    schema:name "Monthly AVHRR Aerosol Optical Thickness over Global Oceans, Version 4.0" ;
+    schema:url <https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ncdc:C01678> ;
+    schema:variableMeasured :atmosphere_optical_thickness_due_to_aerosol_noaa-cdr-aerosol-optical-thickness-pds_monthly,
+        :latitude,
+        :longitude,
+        :time ;
+    schema:version "2" .
+
+:noaa-cdr-leaf-area-index-fapar-pds_daily a qb:DataSet,
+        dcat:Dataset,
+        schema:Dataset ;
+    rdfs:label "Leaf Area and Fraction of Absorbed Photosynthetically Active Radiation parameters derived from NOAA-20 data for day 2026/225" ;
+    dcterms:description "VIIRS data from NOAA-20 for 2026, days 225 to 225, processed by the Long-Term Land Data Record (LTDR) project (v002) into Leaf Area, Fraction of Absorbed Photosynthetically Active Radiation and quality-control flags. " ;
+    dcterms:title "Leaf Area and Fraction of Absorbed Photosynthetically Active Radiation parameters derived from NOAA-20 data for day 2026/225" ;
+    qb:structure [ a qb:DataStructureDefinition ;
+            qb:component [ qb:measure :fraction_of_surface_downwelling_photosynthetic_radiative_flux_absorbed_by_vegetation_noaa-cdr-leaf-area-index-fapar-pds_daily ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ qb:measure :leaf_area_index_noaa-cdr-leaf-area-index-fapar-pds_daily ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ] ] ;
+    rdfs:comment "VIIRS data from NOAA-20 for 2026, days 225 to 225, processed by the Long-Term Land Data Record (LTDR) project (v002) into Leaf Area, Fraction of Absorbed Photosynthetically Active Radiation and quality-control flags. " ;
+    dcat:distribution [ a dcat:Distribution ;
+            dcat:accessURL <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/noaa-cdr-leaf-area-index-fapar-pds> ;
+            dcat:mediaType "application/icechunk-zarr" ] ;
+    dcat:endDate "2026-08-13T00:00:00+00:00"^^xsd:dateTime ;
+    dcat:startDate "1981-06-24T00:00:00+00:00"^^xsd:dateTime ;
+    schema:contentUrl <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/noaa-cdr-leaf-area-index-fapar-pds> ;
+    schema:description "VIIRS data from NOAA-20 for 2026, days 225 to 225, processed by the Long-Term Land Data Record (LTDR) project (v002) into Leaf Area, Fraction of Absorbed Photosynthetically Active Radiation and quality-control flags. " ;
+    schema:isAccessibleForFree true ;
+    schema:keywords "EARTH SCIENCE > BIOSPHERE > VEGETATION > PHOTOSYNTHETICALLY ACTIVE RADIATION",
+        "EARTH SCIENCE > BIOSPHERE > VEGETATION > VEGETATION INDEX" ;
+    schema:name "Leaf Area and Fraction of Absorbed Photosynthetically Active Radiation parameters derived from NOAA-20 data for day 2026/225" ;
+    schema:url <https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ncei:C00898> ;
+    schema:variableMeasured :fraction_of_surface_downwelling_photosynthetic_radiative_flux_absorbed_by_vegetation_noaa-cdr-leaf-area-index-fapar-pds_daily,
+        :latitude,
+        :leaf_area_index_noaa-cdr-leaf-area-index-fapar-pds_daily,
+        :longitude,
+        :time ;
+    schema:version "2" .
+
+:noaa-cdr-ndvi-pds_daily a qb:DataSet,
+        dcat:Dataset,
+        schema:Dataset ;
+    rdfs:label "Normalized Difference Vegetation Index parameters derived from NOAA-20 CMG data for day 2026/225" ;
+    dcterms:description "NOAA-20 CMG data for 2026, days 225 to 225, processed by the Long-Term Land Data Record (LTDR) project (v2) into normalized difference vegetation index (NDVI) and quality-control flags. " ;
+    dcterms:title "Normalized Difference Vegetation Index parameters derived from NOAA-20 CMG data for day 2026/225" ;
+    qb:structure [ a qb:DataStructureDefinition ;
+            qb:component [ qb:measure :normalized_difference_vegetation_index_noaa-cdr-ndvi-pds_daily ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ] ] ;
+    rdfs:comment "NOAA-20 CMG data for 2026, days 225 to 225, processed by the Long-Term Land Data Record (LTDR) project (v2) into normalized difference vegetation index (NDVI) and quality-control flags. " ;
+    dcat:distribution [ a dcat:Distribution ;
+            dcat:accessURL <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/noaa-cdr-ndvi-pds> ;
+            dcat:mediaType "application/icechunk-zarr" ] ;
+    dcat:endDate "2026-08-13T00:00:00+00:00"^^xsd:dateTime ;
+    dcat:startDate "1981-06-24T00:00:00+00:00"^^xsd:dateTime ;
+    schema:contentUrl <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/noaa-cdr-ndvi-pds> ;
+    schema:description "NOAA-20 CMG data for 2026, days 225 to 225, processed by the Long-Term Land Data Record (LTDR) project (v2) into normalized difference vegetation index (NDVI) and quality-control flags. " ;
+    schema:isAccessibleForFree true ;
+    schema:keywords "EARTH SCIENCE > BIOSPHERE > VEGETATION > VEGETATION INDEX" ;
+    schema:name "Normalized Difference Vegetation Index parameters derived from NOAA-20 CMG data for day 2026/225" ;
+    schema:url <https://doi.org/10.7289/V5ZG6QH9> ;
+    schema:variableMeasured :latitude,
+        :longitude,
+        :normalized_difference_vegetation_index_noaa-cdr-ndvi-pds_daily,
+        :time ;
+    schema:version "2" .
+
+:noaa-cdr-ocean-heatflux-pds_daily a qb:DataSet,
+        dcat:Dataset,
+        schema:Dataset ;
+    rdfs:label "NOAA Climate Data Record of Ocean Heat Fluxes" ;
+    dcterms:description "SeaFlux Ocean Surface Bundle (OSB) Climate Data Record (CDR) of Ocean Heat Fluxes" ;
+    dcterms:title "NOAA Climate Data Record of Ocean Heat Fluxes" ;
+    qb:structure [ a qb:DataStructureDefinition ;
+            qb:component [ qb:measure :surface_upward_sensible_heat_flux_noaa-cdr-ocean-heatflux-pds_daily ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lat" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lon" ;
+                    qb:dimension :longitude ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "lat" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lon" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ qb:measure :surface_upward_latent_heat_flux_noaa-cdr-ocean-heatflux-pds_daily ] ] ;
+    rdfs:comment "SeaFlux Ocean Surface Bundle (OSB) Climate Data Record (CDR) of Ocean Heat Fluxes" ;
+    dcat:distribution [ a dcat:Distribution ;
+            dcat:accessURL <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/noaa-cdr-ocean-heatflux-pds/daily> ;
+            dcat:mediaType "application/icechunk-zarr" ] ;
+    dcat:endDate "2021-08-31T22:30:00+00:00"^^xsd:dateTime ;
+    dcat:startDate "1988-01-01T01:30:00+00:00"^^xsd:dateTime ;
+    dcat:temporalResolution "PT3H"^^xsd:duration ;
+    schema:contentUrl <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/noaa-cdr-ocean-heatflux-pds/daily> ;
+    schema:description "SeaFlux Ocean Surface Bundle (OSB) Climate Data Record (CDR) of Ocean Heat Fluxes" ;
+    schema:isAccessibleForFree true ;
+    schema:keywords "EARTH SCIENCE > OCEANS > OCEAN HEAT BUDGET > HEAT FLUX" ;
+    schema:name "NOAA Climate Data Record of Ocean Heat Fluxes" ;
+    schema:url <https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ncdc:C00973> ;
+    schema:variableMeasured :latitude,
+        :longitude,
+        :surface_upward_latent_heat_flux_noaa-cdr-ocean-heatflux-pds_daily,
+        :surface_upward_sensible_heat_flux_noaa-cdr-ocean-heatflux-pds_daily,
+        :time ;
+    schema:version "2" .
+
+:noaa-cdr-ocean-nearsurface-atmos-profiles-pds_daily a qb:DataSet,
+        dcat:Dataset,
+        schema:Dataset ;
+    rdfs:label "NOAA Climate Data Record of Ocean Near-Surface Properties" ;
+    dcterms:description "SeaFlux Ocean Surface Bundle (OSB) Climate Data Record (CDR) of Ocean Near-Surface Properties" ;
+    dcterms:title "NOAA Climate Data Record of Ocean Near-Surface Properties" ;
+    qb:structure [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "lon" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lat" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ qb:measure :specific_humidity_noaa-cdr-ocean-nearsurface-atmos-profiles-pds_daily ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ qb:measure :air_temperature_noaa-cdr-ocean-nearsurface-atmos-profiles-pds_daily ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lon" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lat" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ qb:measure :wind_speed_noaa-cdr-ocean-nearsurface-atmos-profiles-pds_daily ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lat" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lon" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ] ] ;
+    rdfs:comment "SeaFlux Ocean Surface Bundle (OSB) Climate Data Record (CDR) of Ocean Near-Surface Properties" ;
+    dcat:distribution [ a dcat:Distribution ;
+            dcat:accessURL <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/noaa-cdr-ocean-nearsurface-atmos-profiles-pds/daily> ;
+            dcat:mediaType "application/icechunk-zarr" ] ;
+    dcat:endDate "2021-08-31T22:30:00+00:00"^^xsd:dateTime ;
+    dcat:startDate "1988-01-01T01:30:00+00:00"^^xsd:dateTime ;
+    dcat:temporalResolution "PT3H"^^xsd:duration ;
+    schema:contentUrl <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/noaa-cdr-ocean-nearsurface-atmos-profiles-pds/daily> ;
+    schema:description "SeaFlux Ocean Surface Bundle (OSB) Climate Data Record (CDR) of Ocean Near-Surface Properties" ;
+    schema:isAccessibleForFree true ;
+    schema:keywords "EARTH SCIENCE > ATMOSPHERE > ATMOSPHERIC TEMPERATURE > SURFACE AIR TEMPERATURE",
+        "EARTH SCIENCE > ATMOSPHERE > ATMOSPHERIC WATER VAPOR > HUMIDITY",
+        "EARTH SCIENCE > ATMOSPHERE > ATMOSPHERIC WINDS" ;
+    schema:name "NOAA Climate Data Record of Ocean Near-Surface Properties" ;
+    schema:url <https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ncdc:C00974> ;
+    schema:variableMeasured :air_temperature_noaa-cdr-ocean-nearsurface-atmos-profiles-pds_daily,
+        :latitude,
+        :longitude,
+        :specific_humidity_noaa-cdr-ocean-nearsurface-atmos-profiles-pds_daily,
+        :time,
+        :wind_speed_noaa-cdr-ocean-nearsurface-atmos-profiles-pds_daily ;
+    schema:version "2" .
+
+:noaa-cdr-precip-cmorph-pds_daily a qb:DataSet,
+        dcat:Dataset,
+        schema:Dataset ;
+    rdfs:label "NOAA Climate Data Record (CDR) of CPC Morphing Technique (CMORPH) High-Resolution Global Precipitation Estimates" ;
+    dcterms:description "The CMORPH CDR is a reprocessed and bias-corrected global precipitation product created on an 8kmx8km grid over the globe (60S-60N) and in a 30-minute temporal resolution for an 18-year period from January 1998 to the present. First, the purely satellite based CMORPH precipitation estimates (raw CMORPH) are reprocessed. The integration algorithm is fixed and the input Level 2 passive microwave (PMW) retrievals of instantaneous precipitation rates are from identical versions throughout the entire data period. Bias correction is then performed for the raw CMORPH through probability density function (PDF) matching against the CPC daily gauge analysis over land and through adjustment against the Global Precipitation Climatology Program (GPCP) pentad merged analysis of precipitation over ocean. The reprocessed, bias-corrected CMORPH exhibits improved performance in representing the magnitude, spatial distribution patterns and temporal variations of precipitation over the global domain from 60S to 60N. Bias in the CMORPH satellite precipitation estimates is almost completely removed over land during warm seasons (May – September), while during co seasons (October - April) CMORPH tends to under-estimate the precipitation due to the less-than-desirable performance of the current generation PMW retrievals in detecting and quantifying snowfall and cold season rainfall. Details of the CMORPH CDR may be found in Xie et al. (2017)." ;
+    dcterms:title "NOAA Climate Data Record (CDR) of CPC Morphing Technique (CMORPH) High-Resolution Global Precipitation Estimates" ;
+    qb:structure [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "lon" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lat" ;
+                    qb:dimension :latitude ],
+                [ qb:measure :lwe_precipitation_rate_noaa-cdr-precip-cmorph-pds_daily ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ] ] ;
+    rdfs:comment "The CMORPH CDR is a reprocessed and bias-corrected global precipitation product created on an 8kmx8km grid over the globe (60S-60N) and in a 30-minute temporal resolution for an 18-year period from January 1998 to the present. First, the purely satellite based CMORPH precipitation estimates (raw CMORPH) are reprocessed. The integration algorithm is fixed and the input Level 2 passive microwave (PMW) retrievals of instantaneous precipitation rates are from identical versions throughout the entire data period. Bias correction is then performed for the raw CMORPH through probability density function (PDF) matching against the CPC daily gauge analysis over land and through adjustment against the Global Precipitation Climatology Program (GPCP) pentad merged analysis of precipitation over ocean. The reprocessed, bias-corrected CMORPH exhibits improved performance in representing the magnitude, spatial distribution patterns and temporal variations of precipitation over the global domain from 60S to 60N. Bias in the CMORPH satellite precipitation estimates is almost completely removed over land during warm seasons (May – September), while during co seasons (October - April) CMORPH tends to under-estimate the precipitation due to the less-than-desirable performance of the current generation PMW retrievals in detecting and quantifying snowfall and cold season rainfall. Details of the CMORPH CDR may be found in Xie et al. (2017)." ;
+    dcat:distribution [ a dcat:Distribution ;
+            dcat:accessURL <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/noaa-cdr-precip-cmorph-pds/daily> ;
+            dcat:mediaType "application/icechunk-zarr" ] ;
+    dcat:endDate "2026-03-31T00:00:00+00:00"^^xsd:dateTime ;
+    dcat:startDate "1998-01-01T00:00:00+00:00"^^xsd:dateTime ;
+    dcat:temporalResolution "P1D"^^xsd:duration ;
+    schema:contentUrl <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/noaa-cdr-precip-cmorph-pds/daily> ;
+    schema:description "The CMORPH CDR is a reprocessed and bias-corrected global precipitation product created on an 8kmx8km grid over the globe (60S-60N) and in a 30-minute temporal resolution for an 18-year period from January 1998 to the present. First, the purely satellite based CMORPH precipitation estimates (raw CMORPH) are reprocessed. The integration algorithm is fixed and the input Level 2 passive microwave (PMW) retrievals of instantaneous precipitation rates are from identical versions throughout the entire data period. Bias correction is then performed for the raw CMORPH through probability density function (PDF) matching against the CPC daily gauge analysis over land and through adjustment against the Global Precipitation Climatology Program (GPCP) pentad merged analysis of precipitation over ocean. The reprocessed, bias-corrected CMORPH exhibits improved performance in representing the magnitude, spatial distribution patterns and temporal variations of precipitation over the global domain from 60S to 60N. Bias in the CMORPH satellite precipitation estimates is almost completely removed over land during warm seasons (May – September), while during co seasons (October - April) CMORPH tends to under-estimate the precipitation due to the less-than-desirable performance of the current generation PMW retrievals in detecting and quantifying snowfall and cold season rainfall. Details of the CMORPH CDR may be found in Xie et al. (2017)." ;
+    schema:isAccessibleForFree true ;
+    schema:keywords "Global",
+        "High-Resolution",
+        "Precipitation",
+        "Satellite" ;
+    schema:name "NOAA Climate Data Record (CDR) of CPC Morphing Technique (CMORPH) High-Resolution Global Precipitation Estimates" ;
+    schema:url <https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ncdc:C00948> ;
+    schema:variableMeasured :latitude,
+        :longitude,
+        :lwe_precipitation_rate_noaa-cdr-precip-cmorph-pds_daily,
+        :time ;
+    schema:version "2" .
+
+:noaa-cdr-precip-cmorph-pds_hourly a qb:DataSet,
+        dcat:Dataset,
+        schema:Dataset ;
+    rdfs:label "NOAA Climate Data Record (CDR) of CPC Morphing Technique (CMORPH) High-Resolution Global Precipitation Estimates" ;
+    dcterms:description "The CMORPH CDR is a reprocessed and bias-corrected global precipitation product created on an 8kmx8km grid over the globe (60S-60N) and in a 30-minute temporal resolution for an 18-year period from January 1998 to the present. First, the purely satellite based CMORPH precipitation estimates (raw CMORPH) are reprocessed. The integration algorithm is fixed and the input Level 2 passive microwave (PMW) retrievals of instantaneous precipitation rates are from identical versions throughout the entire data period. Bias correction is then performed for the raw CMORPH through probability density function (PDF) matching against the CPC daily gauge analysis over land and through adjustment against the Global Precipitation Climatology Program (GPCP) pentad merged analysis of precipitation over ocean. The reprocessed, bias-corrected CMORPH exhibits improved performance in representing the magnitude, spatial distribution patterns and temporal variations of precipitation over the global domain from 60S to 60N. Bias in the CMORPH satellite precipitation estimates is almost completely removed over land during warm seasons (May – September), while during co seasons (October - April) CMORPH tends to under-estimate the precipitation due to the less-than-desirable performance of the current generation PMW retrievals in detecting and quantifying snowfall and cold season rainfall. Details of the CMORPH CDR may be found in Xie et al. (2017)." ;
+    dcterms:title "NOAA Climate Data Record (CDR) of CPC Morphing Technique (CMORPH) High-Resolution Global Precipitation Estimates" ;
+    qb:structure [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "lon" ;
+                    qb:dimension :longitude ],
+                [ qb:measure :lwe_precipitation_rate_noaa-cdr-precip-cmorph-pds_hourly ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lat" ;
+                    qb:dimension :latitude ] ] ;
+    rdfs:comment "The CMORPH CDR is a reprocessed and bias-corrected global precipitation product created on an 8kmx8km grid over the globe (60S-60N) and in a 30-minute temporal resolution for an 18-year period from January 1998 to the present. First, the purely satellite based CMORPH precipitation estimates (raw CMORPH) are reprocessed. The integration algorithm is fixed and the input Level 2 passive microwave (PMW) retrievals of instantaneous precipitation rates are from identical versions throughout the entire data period. Bias correction is then performed for the raw CMORPH through probability density function (PDF) matching against the CPC daily gauge analysis over land and through adjustment against the Global Precipitation Climatology Program (GPCP) pentad merged analysis of precipitation over ocean. The reprocessed, bias-corrected CMORPH exhibits improved performance in representing the magnitude, spatial distribution patterns and temporal variations of precipitation over the global domain from 60S to 60N. Bias in the CMORPH satellite precipitation estimates is almost completely removed over land during warm seasons (May – September), while during co seasons (October - April) CMORPH tends to under-estimate the precipitation due to the less-than-desirable performance of the current generation PMW retrievals in detecting and quantifying snowfall and cold season rainfall. Details of the CMORPH CDR may be found in Xie et al. (2017)." ;
+    dcat:distribution [ a dcat:Distribution ;
+            dcat:accessURL <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/noaa-cdr-precip-cmorph-pds/hourly> ;
+            dcat:mediaType "application/icechunk-zarr" ] ;
+    dcat:endDate "2026-03-31T23:00:00+00:00"^^xsd:dateTime ;
+    dcat:startDate "1998-01-01T00:00:00+00:00"^^xsd:dateTime ;
+    dcat:temporalResolution "PT1H"^^xsd:duration ;
+    schema:contentUrl <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/noaa-cdr-precip-cmorph-pds/hourly> ;
+    schema:description "The CMORPH CDR is a reprocessed and bias-corrected global precipitation product created on an 8kmx8km grid over the globe (60S-60N) and in a 30-minute temporal resolution for an 18-year period from January 1998 to the present. First, the purely satellite based CMORPH precipitation estimates (raw CMORPH) are reprocessed. The integration algorithm is fixed and the input Level 2 passive microwave (PMW) retrievals of instantaneous precipitation rates are from identical versions throughout the entire data period. Bias correction is then performed for the raw CMORPH through probability density function (PDF) matching against the CPC daily gauge analysis over land and through adjustment against the Global Precipitation Climatology Program (GPCP) pentad merged analysis of precipitation over ocean. The reprocessed, bias-corrected CMORPH exhibits improved performance in representing the magnitude, spatial distribution patterns and temporal variations of precipitation over the global domain from 60S to 60N. Bias in the CMORPH satellite precipitation estimates is almost completely removed over land during warm seasons (May – September), while during co seasons (October - April) CMORPH tends to under-estimate the precipitation due to the less-than-desirable performance of the current generation PMW retrievals in detecting and quantifying snowfall and cold season rainfall. Details of the CMORPH CDR may be found in Xie et al. (2017)." ;
+    schema:isAccessibleForFree true ;
+    schema:keywords "Global",
+        "High-Resolution",
+        "Precipitation",
+        "Satellite" ;
+    schema:name "NOAA Climate Data Record (CDR) of CPC Morphing Technique (CMORPH) High-Resolution Global Precipitation Estimates" ;
+    schema:url <https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ncdc:C00948> ;
+    schema:variableMeasured :latitude,
+        :longitude,
+        :lwe_precipitation_rate_noaa-cdr-precip-cmorph-pds_hourly,
+        :time ;
+    schema:version "2" .
+
+:noaa-cdr-precip-gpcp-daily-pds_daily a qb:DataSet,
+        dcat:Dataset,
+        schema:Dataset ;
+    rdfs:label "Global Precipitation Climatatology Project (GPCP) Climate Data Record (CDR), Daily V1.3" ;
+    dcterms:description "Global Precipitation Climatology Project (GPCP) Daily Version 1.3 gridded, merged satellite/gauge precipitation Climate data Record (CDR) from 1996 to present." ;
+    dcterms:title "Global Precipitation Climatatology Project (GPCP) Climate Data Record (CDR), Daily V1.3" ;
+    qb:structure [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ qb:measure :lwe_precipitation_rate_noaa-cdr-precip-gpcp-daily-pds_daily ] ] ;
+    rdfs:comment "Global Precipitation Climatology Project (GPCP) Daily Version 1.3 gridded, merged satellite/gauge precipitation Climate data Record (CDR) from 1996 to present." ;
+    dcat:distribution [ a dcat:Distribution ;
+            dcat:accessURL <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/noaa-cdr-precip-gpcp-daily-pds/daily> ;
+            dcat:mediaType "application/icechunk-zarr" ] ;
+    dcat:endDate "2026-04-30T00:00:00+00:00"^^xsd:dateTime ;
+    dcat:startDate "1996-10-01T00:00:00+00:00"^^xsd:dateTime ;
+    schema:contentUrl <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/noaa-cdr-precip-gpcp-daily-pds/daily> ;
+    schema:description "Global Precipitation Climatology Project (GPCP) Daily Version 1.3 gridded, merged satellite/gauge precipitation Climate data Record (CDR) from 1996 to present." ;
+    schema:isAccessibleForFree true ;
+    schema:keywords "EARTH SCIENCE > ATMOSPHERE > PRECIPITATION > PRECIPITATION AMOUNT" ;
+    schema:name "Global Precipitation Climatatology Project (GPCP) Climate Data Record (CDR), Daily V1.3" ;
+    schema:url <https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ncdc:C00999> ;
+    schema:variableMeasured :latitude,
+        :longitude,
+        :lwe_precipitation_rate_noaa-cdr-precip-gpcp-daily-pds_daily,
+        :time ;
+    schema:version "2" .
+
+:noaa-cdr-precip-persiann-pds_daily a qb:DataSet,
+        dcat:Dataset,
+        schema:Dataset ;
+    rdfs:label "NOAA Climate Data Record (CDR) of Precipitation Estimation from Remotely Sensed Information using Artificial Neural Networks (PERSIANN-CDR), Version 1 Revision 1" ;
+    dcterms:description "Daily near global precipitation estimates at 0.25 deg resolution over 30-year record. [NOTE: v01r01 replaces v01r00]" ;
+    dcterms:title "NOAA Climate Data Record (CDR) of Precipitation Estimation from Remotely Sensed Information using Artificial Neural Networks (PERSIANN-CDR), Version 1 Revision 1" ;
+    qb:structure [ a qb:DataStructureDefinition ;
+            qb:component [ qb:measure :precipitation_amount_noaa-cdr-precip-persiann-pds_daily ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lon" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lat" ;
+                    qb:dimension :latitude ] ] ;
+    rdfs:comment "Daily near global precipitation estimates at 0.25 deg resolution over 30-year record. [NOTE: v01r01 replaces v01r00]" ;
+    dcat:distribution [ a dcat:Distribution ;
+            dcat:accessURL <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/noaa-cdr-precip-persiann-pds> ;
+            dcat:mediaType "application/icechunk-zarr" ] ;
+    dcat:endDate "2026-03-31T00:00:00+00:00"^^xsd:dateTime ;
+    dcat:startDate "1983-01-01T00:00:00+00:00"^^xsd:dateTime ;
+    schema:contentUrl <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/noaa-cdr-precip-persiann-pds> ;
+    schema:description "Daily near global precipitation estimates at 0.25 deg resolution over 30-year record. [NOTE: v01r01 replaces v01r00]" ;
+    schema:isAccessibleForFree true ;
+    schema:keywords "EARTH SCIENCE > ATMOSPHERE > PRECIPITATION" ;
+    schema:name "NOAA Climate Data Record (CDR) of Precipitation Estimation from Remotely Sensed Information using Artificial Neural Networks (PERSIANN-CDR), Version 1 Revision 1" ;
+    schema:url <https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ncdc:C00854> ;
+    schema:variableMeasured :latitude,
+        :longitude,
+        :precipitation_amount_noaa-cdr-precip-persiann-pds_daily,
+        :time ;
+    schema:version "2" .
+
+:noaa-cdr-sea-surface-temp-whoi-pds_daily a qb:DataSet,
+        dcat:Dataset,
+        schema:Dataset ;
+    rdfs:label "NOAA Climate Data Record of Sea Surface Temperature - WHOI" ;
+    dcterms:description "SeaFlux Ocean Surface Bundle (OSB) Climate Data Record (CDR) of Sea Surface Temperature" ;
+    dcterms:title "NOAA Climate Data Record of Sea Surface Temperature - WHOI" ;
+    qb:structure [ a qb:DataStructureDefinition ;
+            qb:component [ qb:measure :sea_surface_temperature_noaa-cdr-sea-surface-temp-whoi-pds_daily ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lat" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lon" ;
+                    qb:dimension :longitude ] ] ;
+    rdfs:comment "SeaFlux Ocean Surface Bundle (OSB) Climate Data Record (CDR) of Sea Surface Temperature" ;
+    dcat:distribution [ a dcat:Distribution ;
+            dcat:accessURL <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/noaa-cdr-sea-surface-temp-whoi-pds> ;
+            dcat:mediaType "application/icechunk-zarr" ] ;
+    dcat:endDate "2021-08-31T22:30:00+00:00"^^xsd:dateTime ;
+    dcat:startDate "1988-01-01T01:30:00+00:00"^^xsd:dateTime ;
+    dcat:temporalResolution "PT3H"^^xsd:duration ;
+    schema:contentUrl <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/noaa-cdr-sea-surface-temp-whoi-pds> ;
+    schema:description "SeaFlux Ocean Surface Bundle (OSB) Climate Data Record (CDR) of Sea Surface Temperature" ;
+    schema:isAccessibleForFree true ;
+    schema:keywords "EARTH SCIENCE > OCEANS > OCEAN TEMPERATURE > SEA SURFACE TEMPERATURE" ;
+    schema:name "NOAA Climate Data Record of Sea Surface Temperature - WHOI" ;
+    schema:url <https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ncdc:C00972> ;
+    schema:variableMeasured :latitude,
+        :longitude,
+        :sea_surface_temperature_noaa-cdr-sea-surface-temp-whoi-pds_daily,
+        :time ;
+    schema:version "2" .
+
+:noaa-cdr-solar-spectral-irradiance-pds_daily a qb:DataSet,
+        dcat:Dataset,
+        schema:Dataset ;
+    rdfs:label "Daily SSI calculated using NRL2 solar irradiance model. Includes spectrally integrated (total) TSI value" ;
+    dcterms:description "This dataset contains spectral solar irradiance as a function of time and wavelength created with the Naval Research Laboratory model for spectral and total irradiance. Spectral solar irradiance is the wavelength-dependent energy input to the top of the Earth’s atmosphere, at a standard distance of one Astronomical Unit from the Sun. Its units are W per m2 per nm. Also included is the value of total (spectrally integrated) solar irradiance in units W per m2. The dataset is created by Judith Lean (Space Science Division, Naval Research Laboratory), and Odele Coddington, Peter Pilewskie, Martin Snow, Chris Lindholm, and Doug Lindholm (Laboratory for Atmospheric and Space Science, University of Colorado), and NOAA CDR Program." ;
+    dcterms:title "Daily SSI calculated using NRL2 solar irradiance model. Includes spectrally integrated (total) TSI value" ;
+    qb:structure [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ qb:measure :solar_irradiance_noaa-cdr-solar-spectral-irradiance-pds_daily ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "wavelength" ;
+                    qb:dimension :radiation_wavelength ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ qb:measure :solar_irradiance_per_unit_wavelength_noaa-cdr-solar-spectral-irradiance-pds_daily ] ] ;
+    rdfs:comment "This dataset contains spectral solar irradiance as a function of time and wavelength created with the Naval Research Laboratory model for spectral and total irradiance. Spectral solar irradiance is the wavelength-dependent energy input to the top of the Earth’s atmosphere, at a standard distance of one Astronomical Unit from the Sun. Its units are W per m2 per nm. Also included is the value of total (spectrally integrated) solar irradiance in units W per m2. The dataset is created by Judith Lean (Space Science Division, Naval Research Laboratory), and Odele Coddington, Peter Pilewskie, Martin Snow, Chris Lindholm, and Doug Lindholm (Laboratory for Atmospheric and Space Science, University of Colorado), and NOAA CDR Program." ;
+    dcat:distribution [ a dcat:Distribution ;
+            dcat:accessURL <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/noaa-cdr-solar-spectral-irradiance-pds/daily> ;
+            dcat:mediaType "application/icechunk-zarr" ] ;
+    dcat:endDate "2023-12-31T00:00:00+00:00"^^xsd:dateTime ;
+    dcat:startDate "1882-01-01T00:00:00+00:00"^^xsd:dateTime ;
+    schema:contentUrl <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/noaa-cdr-solar-spectral-irradiance-pds/daily> ;
+    schema:description "This dataset contains spectral solar irradiance as a function of time and wavelength created with the Naval Research Laboratory model for spectral and total irradiance. Spectral solar irradiance is the wavelength-dependent energy input to the top of the Earth’s atmosphere, at a standard distance of one Astronomical Unit from the Sun. Its units are W per m2 per nm. Also included is the value of total (spectrally integrated) solar irradiance in units W per m2. The dataset is created by Judith Lean (Space Science Division, Naval Research Laboratory), and Odele Coddington, Peter Pilewskie, Martin Snow, Chris Lindholm, and Doug Lindholm (Laboratory for Atmospheric and Space Science, University of Colorado), and NOAA CDR Program." ;
+    schema:isAccessibleForFree true ;
+    schema:keywords "Earth Science &gt; Atmosphere &gt; Atmospheric Radiation &gt; Incoming Solar Radiation",
+        "Earth Science &gt; Atmosphere &gt; Atmospheric Radiation &gt; Solar Irradiance",
+        "Earth Science &gt; Atmosphere &gt; Atmospheric Radiation &gt; Solar Radiation",
+        "Earth Science &gt; Climate Indicators &gt; Paleoclimate Indicators &gt; Paleoclimate Reconstructions &gt; Solar Forcing/Insolation Reconstruction",
+        "Earth Science &gt; Climate Indicators &gt; Sun-Earth Interactions &gt; Solar Activity &gt; Solar Irradiance",
+        "Earth Science &gt; Climate Indicators &gt; Sun-Earth Interactions &gt; Sunspot Activity &gt; Solar Flux",
+        "Earth Science &gt; Paleoclimate &gt; Paleoclimate Reconstructions &gt; Solar Forcing/Insolation Reconstruction",
+        "Earth Science &gt; Sun-Earth Interactions &gt; Solar Activity &gt; Solar Irradiance" ;
+    schema:name "Daily SSI calculated using NRL2 solar irradiance model. Includes spectrally integrated (total) TSI value" ;
+    schema:url <http://doi.org/10.7289/V53776SW> ;
+    schema:variableMeasured :radiation_wavelength,
+        :solar_irradiance_noaa-cdr-solar-spectral-irradiance-pds_daily,
+        :solar_irradiance_per_unit_wavelength_noaa-cdr-solar-spectral-irradiance-pds_daily,
+        :time ;
+    schema:version "2" .
+
+:noaa-cdr-solar-spectral-irradiance-pds_high-resolution-daily a qb:DataSet,
+        dcat:Dataset,
+        schema:Dataset ;
+    rdfs:label "Daily high resolution SSI calculated using NNL1 solar irradiance model" ;
+    dcterms:description "This Climate Data Record (CDR) contains solar spectral irradiance (SSI) as a function of time and wavelength created with the NASA NOAA LASP (NNL) Version 1 model for total, spectral and high-resolution spectral solar irradiance. The CDR Version 3 improves the scientific quality of the earlier version, version 2.1, based on new research from several NASA Solar Irradiance Science Team activities, from improved accuracy, precision and stability of solar irradiance observations made by the TSIS-1 mission, and from operational and improved sources for facular brightening and sunspot darkening proxies. Solar spectral irradiance is the wavelength-dependent energy input to the top of the Earth's atmosphere, at a standard distance of one Astronomical Unit from the Sun. Its units are W per m2 per nm. Also included is the value of total (spectrally integrated) solar irradiance in units W per m2. The high-resolution spectral solar irradiance dataset, from 115-500 nm spectral range, is consistent in magnitude and variability with the binned SSI product from ~0 nm to 200,000 nm. The dataset was created by Odele Coddington, Judith Lean, Chris Lindholm, and Peter Pilewskie (Laboratory for Atmospheric and Space Science, University of Colorado). The daily- and monthly-averaged SSI and high-resolution SSI data products range from 1874 to the present, and annual-averaged SSI and high-resolution SSI data products begin in 1610. The data file formats are netCDF-4 following CF metadata conventions. The datasets are accompanied by algorithm documentation, data flow diagram and source code for the NOAA CDR Program." ;
+    dcterms:title "Daily high resolution SSI calculated using NNL1 solar irradiance model" ;
+    qb:structure [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "wavelength" ;
+                    qb:dimension :radiation_wavelength ],
+                [ qb:measure :solar_irradiance_per_unit_wavelength_noaa-cdr-solar-spectral-irradiance-pds_high-resolution-daily ] ] ;
+    rdfs:comment "This Climate Data Record (CDR) contains solar spectral irradiance (SSI) as a function of time and wavelength created with the NASA NOAA LASP (NNL) Version 1 model for total, spectral and high-resolution spectral solar irradiance. The CDR Version 3 improves the scientific quality of the earlier version, version 2.1, based on new research from several NASA Solar Irradiance Science Team activities, from improved accuracy, precision and stability of solar irradiance observations made by the TSIS-1 mission, and from operational and improved sources for facular brightening and sunspot darkening proxies. Solar spectral irradiance is the wavelength-dependent energy input to the top of the Earth's atmosphere, at a standard distance of one Astronomical Unit from the Sun. Its units are W per m2 per nm. Also included is the value of total (spectrally integrated) solar irradiance in units W per m2. The high-resolution spectral solar irradiance dataset, from 115-500 nm spectral range, is consistent in magnitude and variability with the binned SSI product from ~0 nm to 200,000 nm. The dataset was created by Odele Coddington, Judith Lean, Chris Lindholm, and Peter Pilewskie (Laboratory for Atmospheric and Space Science, University of Colorado). The daily- and monthly-averaged SSI and high-resolution SSI data products range from 1874 to the present, and annual-averaged SSI and high-resolution SSI data products begin in 1610. The data file formats are netCDF-4 following CF metadata conventions. The datasets are accompanied by algorithm documentation, data flow diagram and source code for the NOAA CDR Program." ;
+    dcat:distribution [ a dcat:Distribution ;
+            dcat:accessURL <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/noaa-cdr-solar-spectral-irradiance-pds/high-resolution-daily> ;
+            dcat:mediaType "application/icechunk-zarr" ] ;
+    dcat:endDate "2025-12-31T00:00:00+00:00"^^xsd:dateTime ;
+    dcat:startDate "2024-01-01T00:00:00+00:00"^^xsd:dateTime ;
+    schema:contentUrl <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/noaa-cdr-solar-spectral-irradiance-pds/high-resolution-daily> ;
+    schema:description "This Climate Data Record (CDR) contains solar spectral irradiance (SSI) as a function of time and wavelength created with the NASA NOAA LASP (NNL) Version 1 model for total, spectral and high-resolution spectral solar irradiance. The CDR Version 3 improves the scientific quality of the earlier version, version 2.1, based on new research from several NASA Solar Irradiance Science Team activities, from improved accuracy, precision and stability of solar irradiance observations made by the TSIS-1 mission, and from operational and improved sources for facular brightening and sunspot darkening proxies. Solar spectral irradiance is the wavelength-dependent energy input to the top of the Earth's atmosphere, at a standard distance of one Astronomical Unit from the Sun. Its units are W per m2 per nm. Also included is the value of total (spectrally integrated) solar irradiance in units W per m2. The high-resolution spectral solar irradiance dataset, from 115-500 nm spectral range, is consistent in magnitude and variability with the binned SSI product from ~0 nm to 200,000 nm. The dataset was created by Odele Coddington, Judith Lean, Chris Lindholm, and Peter Pilewskie (Laboratory for Atmospheric and Space Science, University of Colorado). The daily- and monthly-averaged SSI and high-resolution SSI data products range from 1874 to the present, and annual-averaged SSI and high-resolution SSI data products begin in 1610. The data file formats are netCDF-4 following CF metadata conventions. The datasets are accompanied by algorithm documentation, data flow diagram and source code for the NOAA CDR Program." ;
+    schema:isAccessibleForFree true ;
+    schema:keywords "Earth Science &gt; Atmosphere &gt; Atmospheric Radiation &gt; Incoming Solar Radiation",
+        "Earth Science &gt; Atmosphere &gt; Atmospheric Radiation &gt; Solar Irradiance",
+        "Earth Science &gt; Atmosphere &gt; Atmospheric Radiation &gt; Solar Radiation",
+        "Earth Science &gt; Climate Indicators &gt; Paleoclimate Indicators &gt; Paleoclimate Reconstructions &gt; Solar Forcing/Insolation Reconstruction",
+        "Earth Science &gt; Climate Indicators &gt; Sun-Earth Interactions &gt; Solar Activity &gt; Solar Irradiance",
+        "Earth Science &gt; Climate Indicators &gt; Sun-Earth Interactions &gt; Sunspot Activity &gt; Solar Flux",
+        "Earth Science &gt; Paleoclimate &gt; Paleoclimate Reconstructions &gt; Solar Forcing/Insolation Reconstruction",
+        "Earth Science &gt; Sun-Earth Interactions &gt; Solar Activity &gt; Solar Irradiance" ;
+    schema:name "Daily high resolution SSI calculated using NNL1 solar irradiance model" ;
+    schema:variableMeasured :radiation_wavelength,
+        :solar_irradiance_per_unit_wavelength_noaa-cdr-solar-spectral-irradiance-pds_high-resolution-daily,
+        :time ;
+    schema:version "2" .
+
+:noaa-cdr-solar-spectral-irradiance-pds_high-resolution-monthly a qb:DataSet,
+        dcat:Dataset,
+        schema:Dataset ;
+    rdfs:label "Monthly high resolution SSI calculated using NNL1 solar irradiance model" ;
+    dcterms:description "This Climate Data Record (CDR) contains solar spectral irradiance (SSI) as a function of time and wavelength created with the NASA NOAA LASP (NNL) Version 1 model for total, spectral and high-resolution spectral solar irradiance. The CDR Version 3 improves the scientific quality of the earlier version, version 2.1, based on new research from several NASA Solar Irradiance Science Team activities, from improved accuracy, precision and stability of solar irradiance observations made by the TSIS-1 mission, and from operational and improved sources for facular brightening and sunspot darkening proxies. Solar spectral irradiance is the wavelength-dependent energy input to the top of the Earth's atmosphere, at a standard distance of one Astronomical Unit from the Sun. Its units are W per m2 per nm. Also included is the value of total (spectrally integrated) solar irradiance in units W per m2. The high-resolution spectral solar irradiance dataset, from 115-500 nm spectral range, is consistent in magnitude and variability with the binned SSI product from ~0 nm to 200,000 nm. The dataset was created by Odele Coddington, Judith Lean, Chris Lindholm, and Peter Pilewskie (Laboratory for Atmospheric and Space Science, University of Colorado). The daily- and monthly-averaged SSI and high-resolution SSI data products range from 1874 to the present, and annual-averaged SSI and high-resolution SSI data products begin in 1610. The data file formats are netCDF-4 following CF metadata conventions. The datasets are accompanied by algorithm documentation, data flow diagram and source code for the NOAA CDR Program." ;
+    dcterms:title "Monthly high resolution SSI calculated using NNL1 solar irradiance model" ;
+    qb:structure [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ qb:measure :solar_irradiance_per_unit_wavelength_noaa-cdr-solar-spectral-irradiance-pds_high-resolution-monthly ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "wavelength" ;
+                    qb:dimension :radiation_wavelength ] ] ;
+    rdfs:comment "This Climate Data Record (CDR) contains solar spectral irradiance (SSI) as a function of time and wavelength created with the NASA NOAA LASP (NNL) Version 1 model for total, spectral and high-resolution spectral solar irradiance. The CDR Version 3 improves the scientific quality of the earlier version, version 2.1, based on new research from several NASA Solar Irradiance Science Team activities, from improved accuracy, precision and stability of solar irradiance observations made by the TSIS-1 mission, and from operational and improved sources for facular brightening and sunspot darkening proxies. Solar spectral irradiance is the wavelength-dependent energy input to the top of the Earth's atmosphere, at a standard distance of one Astronomical Unit from the Sun. Its units are W per m2 per nm. Also included is the value of total (spectrally integrated) solar irradiance in units W per m2. The high-resolution spectral solar irradiance dataset, from 115-500 nm spectral range, is consistent in magnitude and variability with the binned SSI product from ~0 nm to 200,000 nm. The dataset was created by Odele Coddington, Judith Lean, Chris Lindholm, and Peter Pilewskie (Laboratory for Atmospheric and Space Science, University of Colorado). The daily- and monthly-averaged SSI and high-resolution SSI data products range from 1874 to the present, and annual-averaged SSI and high-resolution SSI data products begin in 1610. The data file formats are netCDF-4 following CF metadata conventions. The datasets are accompanied by algorithm documentation, data flow diagram and source code for the NOAA CDR Program." ;
+    dcat:distribution [ a dcat:Distribution ;
+            dcat:accessURL <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/noaa-cdr-solar-spectral-irradiance-pds/high-resolution-monthly> ;
+            dcat:mediaType "application/icechunk-zarr" ] ;
+    dcat:endDate "2025-12-31T00:00:00+00:00"^^xsd:dateTime ;
+    dcat:startDate "2024-01-01T00:00:00+00:00"^^xsd:dateTime ;
+    schema:contentUrl <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/noaa-cdr-solar-spectral-irradiance-pds/high-resolution-monthly> ;
+    schema:description "This Climate Data Record (CDR) contains solar spectral irradiance (SSI) as a function of time and wavelength created with the NASA NOAA LASP (NNL) Version 1 model for total, spectral and high-resolution spectral solar irradiance. The CDR Version 3 improves the scientific quality of the earlier version, version 2.1, based on new research from several NASA Solar Irradiance Science Team activities, from improved accuracy, precision and stability of solar irradiance observations made by the TSIS-1 mission, and from operational and improved sources for facular brightening and sunspot darkening proxies. Solar spectral irradiance is the wavelength-dependent energy input to the top of the Earth's atmosphere, at a standard distance of one Astronomical Unit from the Sun. Its units are W per m2 per nm. Also included is the value of total (spectrally integrated) solar irradiance in units W per m2. The high-resolution spectral solar irradiance dataset, from 115-500 nm spectral range, is consistent in magnitude and variability with the binned SSI product from ~0 nm to 200,000 nm. The dataset was created by Odele Coddington, Judith Lean, Chris Lindholm, and Peter Pilewskie (Laboratory for Atmospheric and Space Science, University of Colorado). The daily- and monthly-averaged SSI and high-resolution SSI data products range from 1874 to the present, and annual-averaged SSI and high-resolution SSI data products begin in 1610. The data file formats are netCDF-4 following CF metadata conventions. The datasets are accompanied by algorithm documentation, data flow diagram and source code for the NOAA CDR Program." ;
+    schema:isAccessibleForFree true ;
+    schema:keywords "Earth Science &gt; Atmosphere &gt; Atmospheric Radiation &gt; Incoming Solar Radiation",
+        "Earth Science &gt; Atmosphere &gt; Atmospheric Radiation &gt; Solar Irradiance",
+        "Earth Science &gt; Atmosphere &gt; Atmospheric Radiation &gt; Solar Radiation",
+        "Earth Science &gt; Climate Indicators &gt; Paleoclimate Indicators &gt; Paleoclimate Reconstructions &gt; Solar Forcing/Insolation Reconstruction",
+        "Earth Science &gt; Climate Indicators &gt; Sun-Earth Interactions &gt; Solar Activity &gt; Solar Irradiance",
+        "Earth Science &gt; Climate Indicators &gt; Sun-Earth Interactions &gt; Sunspot Activity &gt; Solar Flux",
+        "Earth Science &gt; Paleoclimate &gt; Paleoclimate Reconstructions &gt; Solar Forcing/Insolation Reconstruction",
+        "Earth Science &gt; Sun-Earth Interactions &gt; Solar Activity &gt; Solar Irradiance" ;
+    schema:name "Monthly high resolution SSI calculated using NNL1 solar irradiance model" ;
+    schema:variableMeasured :radiation_wavelength,
+        :solar_irradiance_per_unit_wavelength_noaa-cdr-solar-spectral-irradiance-pds_high-resolution-monthly,
+        :time ;
+    schema:version "2" .
+
+:noaa-cdr-solar-spectral-irradiance-pds_high-resolution-yearly a qb:DataSet,
+        dcat:Dataset,
+        schema:Dataset ;
+    rdfs:label "Yearly high resolution SSI calculated using NNL1 solar irradiance model" ;
+    dcterms:description "This Climate Data Record (CDR) contains solar spectral irradiance (SSI) as a function of time and wavelength created with the NASA NOAA LASP (NNL) Version 1 model for total, spectral and high-resolution spectral solar irradiance. The CDR Version 3 improves the scientific quality of the earlier version, version 2.1, based on new research from several NASA Solar Irradiance Science Team activities, from improved accuracy, precision and stability of solar irradiance observations made by the TSIS-1 mission, and from operational and improved sources for facular brightening and sunspot darkening proxies. Solar spectral irradiance is the wavelength-dependent energy input to the top of the Earth's atmosphere, at a standard distance of one Astronomical Unit from the Sun. Its units are W per m2 per nm. Also included is the value of total (spectrally integrated) solar irradiance in units W per m2. The high-resolution spectral solar irradiance dataset, from 115-500 nm spectral range, is consistent in magnitude and variability with the binned SSI product from ~0 nm to 200,000 nm. The dataset was created by Odele Coddington, Judith Lean, Chris Lindholm, and Peter Pilewskie (Laboratory for Atmospheric and Space Science, University of Colorado). The daily- and monthly-averaged SSI and high-resolution SSI data products range from 1874 to the present, and annual-averaged SSI and high-resolution SSI data products begin in 1610. The data file formats are netCDF-4 following CF metadata conventions. The datasets are accompanied by algorithm documentation, data flow diagram and source code for the NOAA CDR Program." ;
+    dcterms:title "Yearly high resolution SSI calculated using NNL1 solar irradiance model" ;
+    qb:structure [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ qb:measure :solar_irradiance_per_unit_wavelength_noaa-cdr-solar-spectral-irradiance-pds_high-resolution-yearly ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "wavelength" ;
+                    qb:dimension :radiation_wavelength ] ] ;
+    rdfs:comment "This Climate Data Record (CDR) contains solar spectral irradiance (SSI) as a function of time and wavelength created with the NASA NOAA LASP (NNL) Version 1 model for total, spectral and high-resolution spectral solar irradiance. The CDR Version 3 improves the scientific quality of the earlier version, version 2.1, based on new research from several NASA Solar Irradiance Science Team activities, from improved accuracy, precision and stability of solar irradiance observations made by the TSIS-1 mission, and from operational and improved sources for facular brightening and sunspot darkening proxies. Solar spectral irradiance is the wavelength-dependent energy input to the top of the Earth's atmosphere, at a standard distance of one Astronomical Unit from the Sun. Its units are W per m2 per nm. Also included is the value of total (spectrally integrated) solar irradiance in units W per m2. The high-resolution spectral solar irradiance dataset, from 115-500 nm spectral range, is consistent in magnitude and variability with the binned SSI product from ~0 nm to 200,000 nm. The dataset was created by Odele Coddington, Judith Lean, Chris Lindholm, and Peter Pilewskie (Laboratory for Atmospheric and Space Science, University of Colorado). The daily- and monthly-averaged SSI and high-resolution SSI data products range from 1874 to the present, and annual-averaged SSI and high-resolution SSI data products begin in 1610. The data file formats are netCDF-4 following CF metadata conventions. The datasets are accompanied by algorithm documentation, data flow diagram and source code for the NOAA CDR Program." ;
+    dcat:distribution [ a dcat:Distribution ;
+            dcat:accessURL <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/noaa-cdr-solar-spectral-irradiance-pds/high-resolution-yearly> ;
+            dcat:mediaType "application/icechunk-zarr" ] ;
+    dcat:endDate "2025-12-31T00:00:00+00:00"^^xsd:dateTime ;
+    dcat:startDate "1610-01-01T00:00:00+00:00"^^xsd:dateTime ;
+    schema:contentUrl <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/noaa-cdr-solar-spectral-irradiance-pds/high-resolution-yearly> ;
+    schema:description "This Climate Data Record (CDR) contains solar spectral irradiance (SSI) as a function of time and wavelength created with the NASA NOAA LASP (NNL) Version 1 model for total, spectral and high-resolution spectral solar irradiance. The CDR Version 3 improves the scientific quality of the earlier version, version 2.1, based on new research from several NASA Solar Irradiance Science Team activities, from improved accuracy, precision and stability of solar irradiance observations made by the TSIS-1 mission, and from operational and improved sources for facular brightening and sunspot darkening proxies. Solar spectral irradiance is the wavelength-dependent energy input to the top of the Earth's atmosphere, at a standard distance of one Astronomical Unit from the Sun. Its units are W per m2 per nm. Also included is the value of total (spectrally integrated) solar irradiance in units W per m2. The high-resolution spectral solar irradiance dataset, from 115-500 nm spectral range, is consistent in magnitude and variability with the binned SSI product from ~0 nm to 200,000 nm. The dataset was created by Odele Coddington, Judith Lean, Chris Lindholm, and Peter Pilewskie (Laboratory for Atmospheric and Space Science, University of Colorado). The daily- and monthly-averaged SSI and high-resolution SSI data products range from 1874 to the present, and annual-averaged SSI and high-resolution SSI data products begin in 1610. The data file formats are netCDF-4 following CF metadata conventions. The datasets are accompanied by algorithm documentation, data flow diagram and source code for the NOAA CDR Program." ;
+    schema:isAccessibleForFree true ;
+    schema:keywords "Earth Science &gt; Atmosphere &gt; Atmospheric Radiation &gt; Incoming Solar Radiation",
+        "Earth Science &gt; Atmosphere &gt; Atmospheric Radiation &gt; Solar Irradiance",
+        "Earth Science &gt; Atmosphere &gt; Atmospheric Radiation &gt; Solar Radiation",
+        "Earth Science &gt; Climate Indicators &gt; Paleoclimate Indicators &gt; Paleoclimate Reconstructions &gt; Solar Forcing/Insolation Reconstruction",
+        "Earth Science &gt; Climate Indicators &gt; Sun-Earth Interactions &gt; Solar Activity &gt; Solar Irradiance",
+        "Earth Science &gt; Climate Indicators &gt; Sun-Earth Interactions &gt; Sunspot Activity &gt; Solar Flux",
+        "Earth Science &gt; Paleoclimate &gt; Paleoclimate Reconstructions &gt; Solar Forcing/Insolation Reconstruction",
+        "Earth Science &gt; Sun-Earth Interactions &gt; Solar Activity &gt; Solar Irradiance" ;
+    schema:name "Yearly high resolution SSI calculated using NNL1 solar irradiance model" ;
+    schema:variableMeasured :radiation_wavelength,
+        :solar_irradiance_per_unit_wavelength_noaa-cdr-solar-spectral-irradiance-pds_high-resolution-yearly,
+        :time ;
+    schema:version "2" .
+
+:noaa-cdr-solar-spectral-irradiance-pds_monthly a qb:DataSet,
+        dcat:Dataset,
+        schema:Dataset ;
+    rdfs:label "Monthly SSI calculated using NRL2 solar irradiance model. Includes spectrally integrated (total) TSI value" ;
+    dcterms:description "This dataset contains spectral solar irradiance as a function of time and wavelength created with the Naval Research Laboratory model for spectral and total irradiance. Spectral solar irradiance is the wavelength-dependent energy input to the top of the Earth’s atmosphere, at a standard distance of one Astronomical Unit from the Sun. Its units are W per m2 per nm. Also included is the value of total (spectrally integrated) solar irradiance in units W per m2. The dataset is created by Judith Lean (Space Science Division, Naval Research Laboratory), and Odele Coddington, Peter Pilewskie, Martin Snow, Chris Lindholm, and Doug Lindholm (Laboratory for Atmospheric and Space Science, University of Colorado), and NOAA CDR Program." ;
+    dcterms:title "Monthly SSI calculated using NRL2 solar irradiance model. Includes spectrally integrated (total) TSI value" ;
+    qb:structure [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "wavelength" ;
+                    qb:dimension :radiation_wavelength ],
+                [ qb:measure :solar_irradiance_per_unit_wavelength_noaa-cdr-solar-spectral-irradiance-pds_monthly ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ qb:measure :solar_irradiance_noaa-cdr-solar-spectral-irradiance-pds_monthly ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ] ] ;
+    rdfs:comment "This dataset contains spectral solar irradiance as a function of time and wavelength created with the Naval Research Laboratory model for spectral and total irradiance. Spectral solar irradiance is the wavelength-dependent energy input to the top of the Earth’s atmosphere, at a standard distance of one Astronomical Unit from the Sun. Its units are W per m2 per nm. Also included is the value of total (spectrally integrated) solar irradiance in units W per m2. The dataset is created by Judith Lean (Space Science Division, Naval Research Laboratory), and Odele Coddington, Peter Pilewskie, Martin Snow, Chris Lindholm, and Doug Lindholm (Laboratory for Atmospheric and Space Science, University of Colorado), and NOAA CDR Program." ;
+    dcat:distribution [ a dcat:Distribution ;
+            dcat:accessURL <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/noaa-cdr-solar-spectral-irradiance-pds/monthly> ;
+            dcat:mediaType "application/icechunk-zarr" ] ;
+    dcat:endDate "2023-12-31T00:00:00+00:00"^^xsd:dateTime ;
+    dcat:startDate "1882-01-01T00:00:00+00:00"^^xsd:dateTime ;
+    schema:contentUrl <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/noaa-cdr-solar-spectral-irradiance-pds/monthly> ;
+    schema:description "This dataset contains spectral solar irradiance as a function of time and wavelength created with the Naval Research Laboratory model for spectral and total irradiance. Spectral solar irradiance is the wavelength-dependent energy input to the top of the Earth’s atmosphere, at a standard distance of one Astronomical Unit from the Sun. Its units are W per m2 per nm. Also included is the value of total (spectrally integrated) solar irradiance in units W per m2. The dataset is created by Judith Lean (Space Science Division, Naval Research Laboratory), and Odele Coddington, Peter Pilewskie, Martin Snow, Chris Lindholm, and Doug Lindholm (Laboratory for Atmospheric and Space Science, University of Colorado), and NOAA CDR Program." ;
+    schema:isAccessibleForFree true ;
+    schema:keywords "Earth Science &gt; Atmosphere &gt; Atmospheric Radiation &gt; Incoming Solar Radiation",
+        "Earth Science &gt; Atmosphere &gt; Atmospheric Radiation &gt; Solar Irradiance",
+        "Earth Science &gt; Atmosphere &gt; Atmospheric Radiation &gt; Solar Radiation",
+        "Earth Science &gt; Climate Indicators &gt; Paleoclimate Indicators &gt; Paleoclimate Reconstructions &gt; Solar Forcing/Insolation Reconstruction",
+        "Earth Science &gt; Climate Indicators &gt; Sun-Earth Interactions &gt; Solar Activity &gt; Solar Irradiance",
+        "Earth Science &gt; Climate Indicators &gt; Sun-Earth Interactions &gt; Sunspot Activity &gt; Solar Flux",
+        "Earth Science &gt; Paleoclimate &gt; Paleoclimate Reconstructions &gt; Solar Forcing/Insolation Reconstruction",
+        "Earth Science &gt; Sun-Earth Interactions &gt; Solar Activity &gt; Solar Irradiance" ;
+    schema:name "Monthly SSI calculated using NRL2 solar irradiance model. Includes spectrally integrated (total) TSI value" ;
+    schema:url <http://doi.org/10.7289/V53776SW> ;
+    schema:variableMeasured :radiation_wavelength,
+        :solar_irradiance_noaa-cdr-solar-spectral-irradiance-pds_monthly,
+        :solar_irradiance_per_unit_wavelength_noaa-cdr-solar-spectral-irradiance-pds_monthly,
+        :time ;
+    schema:version "2" .
+
+:noaa-cdr-solar-spectral-irradiance-pds_standard-resolution-daily a qb:DataSet,
+        dcat:Dataset,
+        schema:Dataset ;
+    rdfs:label "Daily SSI calculated using NNL1 solar irradiance model. Includes spectrally integrated (total) TSI value" ;
+    dcterms:description "This Climate Data Record (CDR) contains solar spectral irradiance (SSI) as a function of time and wavelength created with the NASA NOAA LASP (NNL) Version 1 model for total, spectral and high-resolution spectral solar irradiance. The CDR Version 3 improves the scientific quality of the earlier version, version 2.1, based on new research from several NASA Solar Irradiance Science Team activities, from improved accuracy, precision and stability of solar irradiance observations made by the TSIS-1 mission, and from operational and improved sources for facular brightening and sunspot darkening proxies. Solar spectral irradiance is the wavelength-dependent energy input to the top of the Earth's atmosphere, at a standard distance of one Astronomical Unit from the Sun. Its units are W per m2 per nm. Also included is the value of total (spectrally integrated) solar irradiance in units W per m2. The high-resolution spectral solar irradiance dataset, from 115-500 nm spectral range, is consistent in magnitude and variability with the binned SSI product from ~0 nm to 200,000 nm. The dataset was created by Odele Coddington, Judith Lean, Chris Lindholm, and Peter Pilewskie (Laboratory for Atmospheric and Space Science, University of Colorado). The daily- and monthly-averaged SSI and high-resolution SSI data products range from 1874 to the present, and annual-averaged SSI and high-resolution SSI data products begin in 1610. The data file formats are netCDF-4 following CF metadata conventions. The datasets are accompanied by algorithm documentation, data flow diagram and source code for the NOAA CDR Program." ;
+    dcterms:title "Daily SSI calculated using NNL1 solar irradiance model. Includes spectrally integrated (total) TSI value" ;
+    qb:structure [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "wavelength" ;
+                    qb:dimension :radiation_wavelength ],
+                [ qb:measure :solar_irradiance_per_unit_wavelength_noaa-cdr-solar-spectral-irradiance-pds_standard-resolution-daily ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ qb:measure :solar_irradiance_noaa-cdr-solar-spectral-irradiance-pds_standard-resolution-daily ] ] ;
+    rdfs:comment "This Climate Data Record (CDR) contains solar spectral irradiance (SSI) as a function of time and wavelength created with the NASA NOAA LASP (NNL) Version 1 model for total, spectral and high-resolution spectral solar irradiance. The CDR Version 3 improves the scientific quality of the earlier version, version 2.1, based on new research from several NASA Solar Irradiance Science Team activities, from improved accuracy, precision and stability of solar irradiance observations made by the TSIS-1 mission, and from operational and improved sources for facular brightening and sunspot darkening proxies. Solar spectral irradiance is the wavelength-dependent energy input to the top of the Earth's atmosphere, at a standard distance of one Astronomical Unit from the Sun. Its units are W per m2 per nm. Also included is the value of total (spectrally integrated) solar irradiance in units W per m2. The high-resolution spectral solar irradiance dataset, from 115-500 nm spectral range, is consistent in magnitude and variability with the binned SSI product from ~0 nm to 200,000 nm. The dataset was created by Odele Coddington, Judith Lean, Chris Lindholm, and Peter Pilewskie (Laboratory for Atmospheric and Space Science, University of Colorado). The daily- and monthly-averaged SSI and high-resolution SSI data products range from 1874 to the present, and annual-averaged SSI and high-resolution SSI data products begin in 1610. The data file formats are netCDF-4 following CF metadata conventions. The datasets are accompanied by algorithm documentation, data flow diagram and source code for the NOAA CDR Program." ;
+    dcat:distribution [ a dcat:Distribution ;
+            dcat:accessURL <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/noaa-cdr-solar-spectral-irradiance-pds/standard-resolution-daily> ;
+            dcat:mediaType "application/icechunk-zarr" ] ;
+    dcat:endDate "2025-12-31T00:00:00+00:00"^^xsd:dateTime ;
+    dcat:startDate "2024-01-01T00:00:00+00:00"^^xsd:dateTime ;
+    schema:contentUrl <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/noaa-cdr-solar-spectral-irradiance-pds/standard-resolution-daily> ;
+    schema:description "This Climate Data Record (CDR) contains solar spectral irradiance (SSI) as a function of time and wavelength created with the NASA NOAA LASP (NNL) Version 1 model for total, spectral and high-resolution spectral solar irradiance. The CDR Version 3 improves the scientific quality of the earlier version, version 2.1, based on new research from several NASA Solar Irradiance Science Team activities, from improved accuracy, precision and stability of solar irradiance observations made by the TSIS-1 mission, and from operational and improved sources for facular brightening and sunspot darkening proxies. Solar spectral irradiance is the wavelength-dependent energy input to the top of the Earth's atmosphere, at a standard distance of one Astronomical Unit from the Sun. Its units are W per m2 per nm. Also included is the value of total (spectrally integrated) solar irradiance in units W per m2. The high-resolution spectral solar irradiance dataset, from 115-500 nm spectral range, is consistent in magnitude and variability with the binned SSI product from ~0 nm to 200,000 nm. The dataset was created by Odele Coddington, Judith Lean, Chris Lindholm, and Peter Pilewskie (Laboratory for Atmospheric and Space Science, University of Colorado). The daily- and monthly-averaged SSI and high-resolution SSI data products range from 1874 to the present, and annual-averaged SSI and high-resolution SSI data products begin in 1610. The data file formats are netCDF-4 following CF metadata conventions. The datasets are accompanied by algorithm documentation, data flow diagram and source code for the NOAA CDR Program." ;
+    schema:isAccessibleForFree true ;
+    schema:keywords "Earth Science &gt; Atmosphere &gt; Atmospheric Radiation &gt; Incoming Solar Radiation",
+        "Earth Science &gt; Atmosphere &gt; Atmospheric Radiation &gt; Solar Irradiance",
+        "Earth Science &gt; Atmosphere &gt; Atmospheric Radiation &gt; Solar Radiation",
+        "Earth Science &gt; Climate Indicators &gt; Paleoclimate Indicators &gt; Paleoclimate Reconstructions &gt; Solar Forcing/Insolation Reconstruction",
+        "Earth Science &gt; Climate Indicators &gt; Sun-Earth Interactions &gt; Solar Activity &gt; Solar Irradiance",
+        "Earth Science &gt; Climate Indicators &gt; Sun-Earth Interactions &gt; Sunspot Activity &gt; Solar Flux",
+        "Earth Science &gt; Paleoclimate &gt; Paleoclimate Reconstructions &gt; Solar Forcing/Insolation Reconstruction",
+        "Earth Science &gt; Sun-Earth Interactions &gt; Solar Activity &gt; Solar Irradiance" ;
+    schema:name "Daily SSI calculated using NNL1 solar irradiance model. Includes spectrally integrated (total) TSI value" ;
+    schema:variableMeasured :radiation_wavelength,
+        :solar_irradiance_noaa-cdr-solar-spectral-irradiance-pds_standard-resolution-daily,
+        :solar_irradiance_per_unit_wavelength_noaa-cdr-solar-spectral-irradiance-pds_standard-resolution-daily,
+        :time ;
+    schema:version "2" .
+
+:noaa-cdr-solar-spectral-irradiance-pds_standard-resolution-monthly a qb:DataSet,
+        dcat:Dataset,
+        schema:Dataset ;
+    rdfs:label "Monthly SSI calculated using NNL1 solar irradiance model. Includes spectrally integrated (total) TSI value" ;
+    dcterms:description "This Climate Data Record (CDR) contains solar spectral irradiance (SSI) as a function of time and wavelength created with the NASA NOAA LASP (NNL) Version 1 model for total, spectral and high-resolution spectral solar irradiance. The CDR Version 3 improves the scientific quality of the earlier version, version 2.1, based on new research from several NASA Solar Irradiance Science Team activities, from improved accuracy, precision and stability of solar irradiance observations made by the TSIS-1 mission, and from operational and improved sources for facular brightening and sunspot darkening proxies. Solar spectral irradiance is the wavelength-dependent energy input to the top of the Earth's atmosphere, at a standard distance of one Astronomical Unit from the Sun. Its units are W per m2 per nm. Also included is the value of total (spectrally integrated) solar irradiance in units W per m2. The high-resolution spectral solar irradiance dataset, from 115-500 nm spectral range, is consistent in magnitude and variability with the binned SSI product from ~0 nm to 200,000 nm. The dataset was created by Odele Coddington, Judith Lean, Chris Lindholm, and Peter Pilewskie (Laboratory for Atmospheric and Space Science, University of Colorado). The daily- and monthly-averaged SSI and high-resolution SSI data products range from 1874 to the present, and annual-averaged SSI and high-resolution SSI data products begin in 1610. The data file formats are netCDF-4 following CF metadata conventions. The datasets are accompanied by algorithm documentation, data flow diagram and source code for the NOAA CDR Program." ;
+    dcterms:title "Monthly SSI calculated using NNL1 solar irradiance model. Includes spectrally integrated (total) TSI value" ;
+    qb:structure [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ qb:measure :solar_irradiance_noaa-cdr-solar-spectral-irradiance-pds_standard-resolution-monthly ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "wavelength" ;
+                    qb:dimension :radiation_wavelength ],
+                [ qb:measure :solar_irradiance_per_unit_wavelength_noaa-cdr-solar-spectral-irradiance-pds_standard-resolution-monthly ] ] ;
+    rdfs:comment "This Climate Data Record (CDR) contains solar spectral irradiance (SSI) as a function of time and wavelength created with the NASA NOAA LASP (NNL) Version 1 model for total, spectral and high-resolution spectral solar irradiance. The CDR Version 3 improves the scientific quality of the earlier version, version 2.1, based on new research from several NASA Solar Irradiance Science Team activities, from improved accuracy, precision and stability of solar irradiance observations made by the TSIS-1 mission, and from operational and improved sources for facular brightening and sunspot darkening proxies. Solar spectral irradiance is the wavelength-dependent energy input to the top of the Earth's atmosphere, at a standard distance of one Astronomical Unit from the Sun. Its units are W per m2 per nm. Also included is the value of total (spectrally integrated) solar irradiance in units W per m2. The high-resolution spectral solar irradiance dataset, from 115-500 nm spectral range, is consistent in magnitude and variability with the binned SSI product from ~0 nm to 200,000 nm. The dataset was created by Odele Coddington, Judith Lean, Chris Lindholm, and Peter Pilewskie (Laboratory for Atmospheric and Space Science, University of Colorado). The daily- and monthly-averaged SSI and high-resolution SSI data products range from 1874 to the present, and annual-averaged SSI and high-resolution SSI data products begin in 1610. The data file formats are netCDF-4 following CF metadata conventions. The datasets are accompanied by algorithm documentation, data flow diagram and source code for the NOAA CDR Program." ;
+    dcat:distribution [ a dcat:Distribution ;
+            dcat:accessURL <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/noaa-cdr-solar-spectral-irradiance-pds/standard-resolution-monthly> ;
+            dcat:mediaType "application/icechunk-zarr" ] ;
+    dcat:endDate "2025-12-31T00:00:00+00:00"^^xsd:dateTime ;
+    dcat:startDate "2024-01-01T00:00:00+00:00"^^xsd:dateTime ;
+    schema:contentUrl <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/noaa-cdr-solar-spectral-irradiance-pds/standard-resolution-monthly> ;
+    schema:description "This Climate Data Record (CDR) contains solar spectral irradiance (SSI) as a function of time and wavelength created with the NASA NOAA LASP (NNL) Version 1 model for total, spectral and high-resolution spectral solar irradiance. The CDR Version 3 improves the scientific quality of the earlier version, version 2.1, based on new research from several NASA Solar Irradiance Science Team activities, from improved accuracy, precision and stability of solar irradiance observations made by the TSIS-1 mission, and from operational and improved sources for facular brightening and sunspot darkening proxies. Solar spectral irradiance is the wavelength-dependent energy input to the top of the Earth's atmosphere, at a standard distance of one Astronomical Unit from the Sun. Its units are W per m2 per nm. Also included is the value of total (spectrally integrated) solar irradiance in units W per m2. The high-resolution spectral solar irradiance dataset, from 115-500 nm spectral range, is consistent in magnitude and variability with the binned SSI product from ~0 nm to 200,000 nm. The dataset was created by Odele Coddington, Judith Lean, Chris Lindholm, and Peter Pilewskie (Laboratory for Atmospheric and Space Science, University of Colorado). The daily- and monthly-averaged SSI and high-resolution SSI data products range from 1874 to the present, and annual-averaged SSI and high-resolution SSI data products begin in 1610. The data file formats are netCDF-4 following CF metadata conventions. The datasets are accompanied by algorithm documentation, data flow diagram and source code for the NOAA CDR Program." ;
+    schema:isAccessibleForFree true ;
+    schema:keywords "Earth Science &gt; Atmosphere &gt; Atmospheric Radiation &gt; Incoming Solar Radiation",
+        "Earth Science &gt; Atmosphere &gt; Atmospheric Radiation &gt; Solar Irradiance",
+        "Earth Science &gt; Atmosphere &gt; Atmospheric Radiation &gt; Solar Radiation",
+        "Earth Science &gt; Climate Indicators &gt; Paleoclimate Indicators &gt; Paleoclimate Reconstructions &gt; Solar Forcing/Insolation Reconstruction",
+        "Earth Science &gt; Climate Indicators &gt; Sun-Earth Interactions &gt; Solar Activity &gt; Solar Irradiance",
+        "Earth Science &gt; Climate Indicators &gt; Sun-Earth Interactions &gt; Sunspot Activity &gt; Solar Flux",
+        "Earth Science &gt; Paleoclimate &gt; Paleoclimate Reconstructions &gt; Solar Forcing/Insolation Reconstruction",
+        "Earth Science &gt; Sun-Earth Interactions &gt; Solar Activity &gt; Solar Irradiance" ;
+    schema:name "Monthly SSI calculated using NNL1 solar irradiance model. Includes spectrally integrated (total) TSI value" ;
+    schema:variableMeasured :radiation_wavelength,
+        :solar_irradiance_noaa-cdr-solar-spectral-irradiance-pds_standard-resolution-monthly,
+        :solar_irradiance_per_unit_wavelength_noaa-cdr-solar-spectral-irradiance-pds_standard-resolution-monthly,
+        :time ;
+    schema:version "2" .
+
+:noaa-cdr-solar-spectral-irradiance-pds_standard-resolution-yearly a qb:DataSet,
+        dcat:Dataset,
+        schema:Dataset ;
+    rdfs:label "Yearly SSI calculated using NNL1 solar irradiance model. Includes spectrally integrated (total) TSI value" ;
+    dcterms:description "This Climate Data Record (CDR) contains solar spectral irradiance (SSI) as a function of time and wavelength created with the NASA NOAA LASP (NNL) Version 1 model for total, spectral and high-resolution spectral solar irradiance. The CDR Version 3 improves the scientific quality of the earlier version, version 2.1, based on new research from several NASA Solar Irradiance Science Team activities, from improved accuracy, precision and stability of solar irradiance observations made by the TSIS-1 mission, and from operational and improved sources for facular brightening and sunspot darkening proxies. Solar spectral irradiance is the wavelength-dependent energy input to the top of the Earth's atmosphere, at a standard distance of one Astronomical Unit from the Sun. Its units are W per m2 per nm. Also included is the value of total (spectrally integrated) solar irradiance in units W per m2. The high-resolution spectral solar irradiance dataset, from 115-500 nm spectral range, is consistent in magnitude and variability with the binned SSI product from ~0 nm to 200,000 nm. The dataset was created by Odele Coddington, Judith Lean, Chris Lindholm, and Peter Pilewskie (Laboratory for Atmospheric and Space Science, University of Colorado). The daily- and monthly-averaged SSI and high-resolution SSI data products range from 1874 to the present, and annual-averaged SSI and high-resolution SSI data products begin in 1610. The data file formats are netCDF-4 following CF metadata conventions. The datasets are accompanied by algorithm documentation, data flow diagram and source code for the NOAA CDR Program." ;
+    dcterms:title "Yearly SSI calculated using NNL1 solar irradiance model. Includes spectrally integrated (total) TSI value" ;
+    qb:structure [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ qb:measure :solar_irradiance_noaa-cdr-solar-spectral-irradiance-pds_standard-resolution-yearly ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "wavelength" ;
+                    qb:dimension :radiation_wavelength ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ qb:measure :solar_irradiance_per_unit_wavelength_noaa-cdr-solar-spectral-irradiance-pds_standard-resolution-yearly ] ] ;
+    rdfs:comment "This Climate Data Record (CDR) contains solar spectral irradiance (SSI) as a function of time and wavelength created with the NASA NOAA LASP (NNL) Version 1 model for total, spectral and high-resolution spectral solar irradiance. The CDR Version 3 improves the scientific quality of the earlier version, version 2.1, based on new research from several NASA Solar Irradiance Science Team activities, from improved accuracy, precision and stability of solar irradiance observations made by the TSIS-1 mission, and from operational and improved sources for facular brightening and sunspot darkening proxies. Solar spectral irradiance is the wavelength-dependent energy input to the top of the Earth's atmosphere, at a standard distance of one Astronomical Unit from the Sun. Its units are W per m2 per nm. Also included is the value of total (spectrally integrated) solar irradiance in units W per m2. The high-resolution spectral solar irradiance dataset, from 115-500 nm spectral range, is consistent in magnitude and variability with the binned SSI product from ~0 nm to 200,000 nm. The dataset was created by Odele Coddington, Judith Lean, Chris Lindholm, and Peter Pilewskie (Laboratory for Atmospheric and Space Science, University of Colorado). The daily- and monthly-averaged SSI and high-resolution SSI data products range from 1874 to the present, and annual-averaged SSI and high-resolution SSI data products begin in 1610. The data file formats are netCDF-4 following CF metadata conventions. The datasets are accompanied by algorithm documentation, data flow diagram and source code for the NOAA CDR Program." ;
+    dcat:distribution [ a dcat:Distribution ;
+            dcat:accessURL <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/noaa-cdr-solar-spectral-irradiance-pds/standard-resolution-yearly> ;
+            dcat:mediaType "application/icechunk-zarr" ] ;
+    dcat:endDate "2025-12-31T00:00:00+00:00"^^xsd:dateTime ;
+    dcat:startDate "1610-01-01T00:00:00+00:00"^^xsd:dateTime ;
+    schema:contentUrl <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/noaa-cdr-solar-spectral-irradiance-pds/standard-resolution-yearly> ;
+    schema:description "This Climate Data Record (CDR) contains solar spectral irradiance (SSI) as a function of time and wavelength created with the NASA NOAA LASP (NNL) Version 1 model for total, spectral and high-resolution spectral solar irradiance. The CDR Version 3 improves the scientific quality of the earlier version, version 2.1, based on new research from several NASA Solar Irradiance Science Team activities, from improved accuracy, precision and stability of solar irradiance observations made by the TSIS-1 mission, and from operational and improved sources for facular brightening and sunspot darkening proxies. Solar spectral irradiance is the wavelength-dependent energy input to the top of the Earth's atmosphere, at a standard distance of one Astronomical Unit from the Sun. Its units are W per m2 per nm. Also included is the value of total (spectrally integrated) solar irradiance in units W per m2. The high-resolution spectral solar irradiance dataset, from 115-500 nm spectral range, is consistent in magnitude and variability with the binned SSI product from ~0 nm to 200,000 nm. The dataset was created by Odele Coddington, Judith Lean, Chris Lindholm, and Peter Pilewskie (Laboratory for Atmospheric and Space Science, University of Colorado). The daily- and monthly-averaged SSI and high-resolution SSI data products range from 1874 to the present, and annual-averaged SSI and high-resolution SSI data products begin in 1610. The data file formats are netCDF-4 following CF metadata conventions. The datasets are accompanied by algorithm documentation, data flow diagram and source code for the NOAA CDR Program." ;
+    schema:isAccessibleForFree true ;
+    schema:keywords "Earth Science &gt; Atmosphere &gt; Atmospheric Radiation &gt; Incoming Solar Radiation",
+        "Earth Science &gt; Atmosphere &gt; Atmospheric Radiation &gt; Solar Irradiance",
+        "Earth Science &gt; Atmosphere &gt; Atmospheric Radiation &gt; Solar Radiation",
+        "Earth Science &gt; Climate Indicators &gt; Paleoclimate Indicators &gt; Paleoclimate Reconstructions &gt; Solar Forcing/Insolation Reconstruction",
+        "Earth Science &gt; Climate Indicators &gt; Sun-Earth Interactions &gt; Solar Activity &gt; Solar Irradiance",
+        "Earth Science &gt; Climate Indicators &gt; Sun-Earth Interactions &gt; Sunspot Activity &gt; Solar Flux",
+        "Earth Science &gt; Paleoclimate &gt; Paleoclimate Reconstructions &gt; Solar Forcing/Insolation Reconstruction",
+        "Earth Science &gt; Sun-Earth Interactions &gt; Solar Activity &gt; Solar Irradiance" ;
+    schema:name "Yearly SSI calculated using NNL1 solar irradiance model. Includes spectrally integrated (total) TSI value" ;
+    schema:variableMeasured :radiation_wavelength,
+        :solar_irradiance_noaa-cdr-solar-spectral-irradiance-pds_standard-resolution-yearly,
+        :solar_irradiance_per_unit_wavelength_noaa-cdr-solar-spectral-irradiance-pds_standard-resolution-yearly,
+        :time ;
+    schema:version "2" .
+
+:noaa-cdr-solar-spectral-irradiance-pds_yearly a qb:DataSet,
+        dcat:Dataset,
+        schema:Dataset ;
+    rdfs:label "Yearly SSI calculated using NRL2 solar irradiance model. Includes spectrally integrated (total) TSI value" ;
+    dcterms:description "This dataset contains spectral solar irradiance as a function of time and wavelength created with the Naval Research Laboratory model for spectral and total irradiance. Spectral solar irradiance is the wavelength-dependent energy input to the top of the Earth’s atmosphere, at a standard distance of one Astronomical Unit from the Sun. Its units are W per m2 per nm. Also included is the value of total (spectrally integrated) solar irradiance in units W per m2. The dataset is created by Judith Lean (Space Science Division, Naval Research Laboratory), and Odele Coddington, Peter Pilewskie, Martin Snow, Chris Lindholm, and Doug Lindholm (Laboratory for Atmospheric and Space Science, University of Colorado), and NOAA CDR Program." ;
+    dcterms:title "Yearly SSI calculated using NRL2 solar irradiance model. Includes spectrally integrated (total) TSI value" ;
+    qb:structure [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ qb:measure :solar_irradiance_noaa-cdr-solar-spectral-irradiance-pds_yearly ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ qb:measure :solar_irradiance_per_unit_wavelength_noaa-cdr-solar-spectral-irradiance-pds_yearly ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "wavelength" ;
+                    qb:dimension :radiation_wavelength ] ] ;
+    rdfs:comment "This dataset contains spectral solar irradiance as a function of time and wavelength created with the Naval Research Laboratory model for spectral and total irradiance. Spectral solar irradiance is the wavelength-dependent energy input to the top of the Earth’s atmosphere, at a standard distance of one Astronomical Unit from the Sun. Its units are W per m2 per nm. Also included is the value of total (spectrally integrated) solar irradiance in units W per m2. The dataset is created by Judith Lean (Space Science Division, Naval Research Laboratory), and Odele Coddington, Peter Pilewskie, Martin Snow, Chris Lindholm, and Doug Lindholm (Laboratory for Atmospheric and Space Science, University of Colorado), and NOAA CDR Program." ;
+    dcat:distribution [ a dcat:Distribution ;
+            dcat:accessURL <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/noaa-cdr-solar-spectral-irradiance-pds/yearly> ;
+            dcat:mediaType "application/icechunk-zarr" ] ;
+    dcat:endDate "2023-12-31T00:00:00+00:00"^^xsd:dateTime ;
+    dcat:startDate "1610-01-01T00:00:00+00:00"^^xsd:dateTime ;
+    schema:contentUrl <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/noaa-cdr-solar-spectral-irradiance-pds/yearly> ;
+    schema:description "This dataset contains spectral solar irradiance as a function of time and wavelength created with the Naval Research Laboratory model for spectral and total irradiance. Spectral solar irradiance is the wavelength-dependent energy input to the top of the Earth’s atmosphere, at a standard distance of one Astronomical Unit from the Sun. Its units are W per m2 per nm. Also included is the value of total (spectrally integrated) solar irradiance in units W per m2. The dataset is created by Judith Lean (Space Science Division, Naval Research Laboratory), and Odele Coddington, Peter Pilewskie, Martin Snow, Chris Lindholm, and Doug Lindholm (Laboratory for Atmospheric and Space Science, University of Colorado), and NOAA CDR Program." ;
+    schema:isAccessibleForFree true ;
+    schema:keywords "Earth Science &gt; Atmosphere &gt; Atmospheric Radiation &gt; Incoming Solar Radiation",
+        "Earth Science &gt; Atmosphere &gt; Atmospheric Radiation &gt; Solar Irradiance",
+        "Earth Science &gt; Atmosphere &gt; Atmospheric Radiation &gt; Solar Radiation",
+        "Earth Science &gt; Climate Indicators &gt; Paleoclimate Indicators &gt; Paleoclimate Reconstructions &gt; Solar Forcing/Insolation Reconstruction",
+        "Earth Science &gt; Climate Indicators &gt; Sun-Earth Interactions &gt; Solar Activity &gt; Solar Irradiance",
+        "Earth Science &gt; Climate Indicators &gt; Sun-Earth Interactions &gt; Sunspot Activity &gt; Solar Flux",
+        "Earth Science &gt; Paleoclimate &gt; Paleoclimate Reconstructions &gt; Solar Forcing/Insolation Reconstruction",
+        "Earth Science &gt; Sun-Earth Interactions &gt; Solar Activity &gt; Solar Irradiance" ;
+    schema:name "Yearly SSI calculated using NRL2 solar irradiance model. Includes spectrally integrated (total) TSI value" ;
+    schema:url <http://doi.org/10.7289/V53776SW> ;
+    schema:variableMeasured :radiation_wavelength,
+        :solar_irradiance_noaa-cdr-solar-spectral-irradiance-pds_yearly,
+        :solar_irradiance_per_unit_wavelength_noaa-cdr-solar-spectral-irradiance-pds_yearly,
+        :time ;
+    schema:version "2" .
+
+:noaa-cdr-total-solar-irradiance-pds_daily a qb:DataSet,
+        dcat:Dataset,
+        schema:Dataset ;
+    rdfs:label "Daily TSI calculated using NNL1 solar irradiance model" ;
+    dcterms:description "This Climate Data Record (CDR) contains total solar irradiance (TSI) as a function of time created with the NASA NOAA LASP (NNL) Version 1 model for total, spectral and high-resolution spectral solar irradiance. The CDR Version 3 improves the scientific quality of the earlier version, version 2.1, based on new research from several NASA Solar Irradiance Science Team activities, from improved accuracy, precision and stability of solar irradiance observations made by the TSIS-1 mission, and from operational and improved sources for facular brightening and sunspot darkening proxies. Total solar irradiance is the total, spectrally integrated energy input to the top of the Earth's atmosphere, at a standard distance of one Astronomical Unit from the Sun. Its units are W per m2. The dataset was created by Odele Coddington, Judith Lean, Chris Lindholm, and Peter Pilewskie (Laboratory for Atmospheric and Space Science, University of Colorado). The daily- and monthly-averaged TSI data range from 1874 to the present, and annual-averaged TSI data begin in 1610. The data file format is netCDF-4 following CF metadata conventions. The dataset is accompanied by algorithm documentation, data flow diagram and source code for the NOAA CDR Program." ;
+    dcterms:title "Daily TSI calculated using NNL1 solar irradiance model" ;
+    qb:structure [ a qb:DataStructureDefinition ;
+            qb:component [ qb:measure :solar_irradiance_noaa-cdr-total-solar-irradiance-pds_daily ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ] ] ;
+    rdfs:comment "This Climate Data Record (CDR) contains total solar irradiance (TSI) as a function of time created with the NASA NOAA LASP (NNL) Version 1 model for total, spectral and high-resolution spectral solar irradiance. The CDR Version 3 improves the scientific quality of the earlier version, version 2.1, based on new research from several NASA Solar Irradiance Science Team activities, from improved accuracy, precision and stability of solar irradiance observations made by the TSIS-1 mission, and from operational and improved sources for facular brightening and sunspot darkening proxies. Total solar irradiance is the total, spectrally integrated energy input to the top of the Earth's atmosphere, at a standard distance of one Astronomical Unit from the Sun. Its units are W per m2. The dataset was created by Odele Coddington, Judith Lean, Chris Lindholm, and Peter Pilewskie (Laboratory for Atmospheric and Space Science, University of Colorado). The daily- and monthly-averaged TSI data range from 1874 to the present, and annual-averaged TSI data begin in 1610. The data file format is netCDF-4 following CF metadata conventions. The dataset is accompanied by algorithm documentation, data flow diagram and source code for the NOAA CDR Program." ;
+    dcat:distribution [ a dcat:Distribution ;
+            dcat:accessURL <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/noaa-cdr-total-solar-irradiance-pds/daily> ;
+            dcat:mediaType "application/icechunk-zarr" ] ;
+    dcat:endDate "2025-12-31T00:00:00+00:00"^^xsd:dateTime ;
+    dcat:startDate "1882-01-01T00:00:00+00:00"^^xsd:dateTime ;
+    schema:contentUrl <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/noaa-cdr-total-solar-irradiance-pds/daily> ;
+    schema:description "This Climate Data Record (CDR) contains total solar irradiance (TSI) as a function of time created with the NASA NOAA LASP (NNL) Version 1 model for total, spectral and high-resolution spectral solar irradiance. The CDR Version 3 improves the scientific quality of the earlier version, version 2.1, based on new research from several NASA Solar Irradiance Science Team activities, from improved accuracy, precision and stability of solar irradiance observations made by the TSIS-1 mission, and from operational and improved sources for facular brightening and sunspot darkening proxies. Total solar irradiance is the total, spectrally integrated energy input to the top of the Earth's atmosphere, at a standard distance of one Astronomical Unit from the Sun. Its units are W per m2. The dataset was created by Odele Coddington, Judith Lean, Chris Lindholm, and Peter Pilewskie (Laboratory for Atmospheric and Space Science, University of Colorado). The daily- and monthly-averaged TSI data range from 1874 to the present, and annual-averaged TSI data begin in 1610. The data file format is netCDF-4 following CF metadata conventions. The dataset is accompanied by algorithm documentation, data flow diagram and source code for the NOAA CDR Program." ;
+    schema:isAccessibleForFree true ;
+    schema:keywords "Earth Science &gt; Atmosphere &gt; Atmospheric Radiation &gt; Incoming Solar Radiation",
+        "Earth Science &gt; Atmosphere &gt; Atmospheric Radiation &gt; Solar Irradiance",
+        "Earth Science &gt; Atmosphere &gt; Atmospheric Radiation &gt; Solar Radiation",
+        "Earth Science &gt; Climate Indicators &gt; Paleoclimate Indicators &gt; Paleoclimate Reconstructions &gt; Solar Forcing/Insolation Reconstruction",
+        "Earth Science &gt; Climate Indicators &gt; Sun-Earth Interactions &gt; Solar Activity &gt; Solar Irradiance",
+        "Earth Science &gt; Climate Indicators &gt; Sun-Earth Interactions &gt; Sunspot Activity &gt; Solar Flux",
+        "Earth Science &gt; Paleoclimate &gt; Paleoclimate Reconstructions &gt; Solar Forcing/Insolation Reconstruction",
+        "Earth Science &gt; Sun-Earth Interactions &gt; Solar Activity &gt; Solar Irradiance" ;
+    schema:name "Daily TSI calculated using NNL1 solar irradiance model" ;
+    schema:url <http://doi.org/10.7289/V56W985W> ;
+    schema:variableMeasured :solar_irradiance_noaa-cdr-total-solar-irradiance-pds_daily,
+        :time ;
+    schema:version "2" .
+
+:noaa-cdr-total-solar-irradiance-pds_monthly a qb:DataSet,
+        dcat:Dataset,
+        schema:Dataset ;
+    rdfs:label "Monthly TSI calculated using NNL1 solar irradiance model" ;
+    dcterms:description "This Climate Data Record (CDR) contains total solar irradiance (TSI) as a function of time created with the NASA NOAA LASP (NNL) Version 1 model for total, spectral and high-resolution spectral solar irradiance. The CDR Version 3 improves the scientific quality of the earlier version, version 2.1, based on new research from several NASA Solar Irradiance Science Team activities, from improved accuracy, precision and stability of solar irradiance observations made by the TSIS-1 mission, and from operational and improved sources for facular brightening and sunspot darkening proxies. Total solar irradiance is the total, spectrally integrated energy input to the top of the Earth's atmosphere, at a standard distance of one Astronomical Unit from the Sun. Its units are W per m2. The dataset was created by Odele Coddington, Judith Lean, Chris Lindholm, and Peter Pilewskie (Laboratory for Atmospheric and Space Science, University of Colorado). The daily- and monthly-averaged TSI data range from 1874 to the present, and annual-averaged TSI data begin in 1610. The data file format is netCDF-4 following CF metadata conventions. The dataset is accompanied by algorithm documentation, data flow diagram and source code for the NOAA CDR Program." ;
+    dcterms:title "Monthly TSI calculated using NNL1 solar irradiance model" ;
+    qb:structure [ a qb:DataStructureDefinition ;
+            qb:component [ qb:measure :solar_irradiance_noaa-cdr-total-solar-irradiance-pds_monthly ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ] ] ;
+    rdfs:comment "This Climate Data Record (CDR) contains total solar irradiance (TSI) as a function of time created with the NASA NOAA LASP (NNL) Version 1 model for total, spectral and high-resolution spectral solar irradiance. The CDR Version 3 improves the scientific quality of the earlier version, version 2.1, based on new research from several NASA Solar Irradiance Science Team activities, from improved accuracy, precision and stability of solar irradiance observations made by the TSIS-1 mission, and from operational and improved sources for facular brightening and sunspot darkening proxies. Total solar irradiance is the total, spectrally integrated energy input to the top of the Earth's atmosphere, at a standard distance of one Astronomical Unit from the Sun. Its units are W per m2. The dataset was created by Odele Coddington, Judith Lean, Chris Lindholm, and Peter Pilewskie (Laboratory for Atmospheric and Space Science, University of Colorado). The daily- and monthly-averaged TSI data range from 1874 to the present, and annual-averaged TSI data begin in 1610. The data file format is netCDF-4 following CF metadata conventions. The dataset is accompanied by algorithm documentation, data flow diagram and source code for the NOAA CDR Program." ;
+    dcat:distribution [ a dcat:Distribution ;
+            dcat:accessURL <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/noaa-cdr-total-solar-irradiance-pds/monthly> ;
+            dcat:mediaType "application/icechunk-zarr" ] ;
+    dcat:endDate "2025-12-31T00:00:00+00:00"^^xsd:dateTime ;
+    dcat:startDate "1882-01-01T00:00:00+00:00"^^xsd:dateTime ;
+    schema:contentUrl <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/noaa-cdr-total-solar-irradiance-pds/monthly> ;
+    schema:description "This Climate Data Record (CDR) contains total solar irradiance (TSI) as a function of time created with the NASA NOAA LASP (NNL) Version 1 model for total, spectral and high-resolution spectral solar irradiance. The CDR Version 3 improves the scientific quality of the earlier version, version 2.1, based on new research from several NASA Solar Irradiance Science Team activities, from improved accuracy, precision and stability of solar irradiance observations made by the TSIS-1 mission, and from operational and improved sources for facular brightening and sunspot darkening proxies. Total solar irradiance is the total, spectrally integrated energy input to the top of the Earth's atmosphere, at a standard distance of one Astronomical Unit from the Sun. Its units are W per m2. The dataset was created by Odele Coddington, Judith Lean, Chris Lindholm, and Peter Pilewskie (Laboratory for Atmospheric and Space Science, University of Colorado). The daily- and monthly-averaged TSI data range from 1874 to the present, and annual-averaged TSI data begin in 1610. The data file format is netCDF-4 following CF metadata conventions. The dataset is accompanied by algorithm documentation, data flow diagram and source code for the NOAA CDR Program." ;
+    schema:isAccessibleForFree true ;
+    schema:keywords "Earth Science &gt; Atmosphere &gt; Atmospheric Radiation &gt; Incoming Solar Radiation",
+        "Earth Science &gt; Atmosphere &gt; Atmospheric Radiation &gt; Solar Irradiance",
+        "Earth Science &gt; Atmosphere &gt; Atmospheric Radiation &gt; Solar Radiation",
+        "Earth Science &gt; Climate Indicators &gt; Paleoclimate Indicators &gt; Paleoclimate Reconstructions &gt; Solar Forcing/Insolation Reconstruction",
+        "Earth Science &gt; Climate Indicators &gt; Sun-Earth Interactions &gt; Solar Activity &gt; Solar Irradiance",
+        "Earth Science &gt; Climate Indicators &gt; Sun-Earth Interactions &gt; Sunspot Activity &gt; Solar Flux",
+        "Earth Science &gt; Paleoclimate &gt; Paleoclimate Reconstructions &gt; Solar Forcing/Insolation Reconstruction",
+        "Earth Science &gt; Sun-Earth Interactions &gt; Solar Activity &gt; Solar Irradiance" ;
+    schema:name "Monthly TSI calculated using NNL1 solar irradiance model" ;
+    schema:url <http://doi.org/10.7289/V56W985W> ;
+    schema:variableMeasured :solar_irradiance_noaa-cdr-total-solar-irradiance-pds_monthly,
+        :time ;
+    schema:version "2" .
+
+:noaa-cdr-total-solar-irradiance-pds_yearly a qb:DataSet,
+        dcat:Dataset,
+        schema:Dataset ;
+    rdfs:label "Yearly TSI calculated using NNL1 solar irradiance model" ;
+    dcterms:description "This Climate Data Record (CDR) contains total solar irradiance (TSI) as a function of time created with the NASA NOAA LASP (NNL) Version 1 model for total, spectral and high-resolution spectral solar irradiance. The CDR Version 3 improves the scientific quality of the earlier version, version 2.1, based on new research from several NASA Solar Irradiance Science Team activities, from improved accuracy, precision and stability of solar irradiance observations made by the TSIS-1 mission, and from operational and improved sources for facular brightening and sunspot darkening proxies. Total solar irradiance is the total, spectrally integrated energy input to the top of the Earth's atmosphere, at a standard distance of one Astronomical Unit from the Sun. Its units are W per m2. The dataset was created by Odele Coddington, Judith Lean, Chris Lindholm, and Peter Pilewskie (Laboratory for Atmospheric and Space Science, University of Colorado). The daily- and monthly-averaged TSI data range from 1874 to the present, and annual-averaged TSI data begin in 1610. The data file format is netCDF-4 following CF metadata conventions. The dataset is accompanied by algorithm documentation, data flow diagram and source code for the NOAA CDR Program." ;
+    dcterms:title "Yearly TSI calculated using NNL1 solar irradiance model" ;
+    qb:structure [ a qb:DataStructureDefinition ;
+            qb:component [ qb:measure :solar_irradiance_noaa-cdr-total-solar-irradiance-pds_yearly ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ] ] ;
+    rdfs:comment "This Climate Data Record (CDR) contains total solar irradiance (TSI) as a function of time created with the NASA NOAA LASP (NNL) Version 1 model for total, spectral and high-resolution spectral solar irradiance. The CDR Version 3 improves the scientific quality of the earlier version, version 2.1, based on new research from several NASA Solar Irradiance Science Team activities, from improved accuracy, precision and stability of solar irradiance observations made by the TSIS-1 mission, and from operational and improved sources for facular brightening and sunspot darkening proxies. Total solar irradiance is the total, spectrally integrated energy input to the top of the Earth's atmosphere, at a standard distance of one Astronomical Unit from the Sun. Its units are W per m2. The dataset was created by Odele Coddington, Judith Lean, Chris Lindholm, and Peter Pilewskie (Laboratory for Atmospheric and Space Science, University of Colorado). The daily- and monthly-averaged TSI data range from 1874 to the present, and annual-averaged TSI data begin in 1610. The data file format is netCDF-4 following CF metadata conventions. The dataset is accompanied by algorithm documentation, data flow diagram and source code for the NOAA CDR Program." ;
+    dcat:distribution [ a dcat:Distribution ;
+            dcat:accessURL <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/noaa-cdr-total-solar-irradiance-pds/yearly> ;
+            dcat:mediaType "application/icechunk-zarr" ] ;
+    dcat:endDate "2025-12-31T00:00:00+00:00"^^xsd:dateTime ;
+    dcat:startDate "1610-01-01T00:00:00+00:00"^^xsd:dateTime ;
+    schema:contentUrl <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/noaa-cdr-total-solar-irradiance-pds/yearly> ;
+    schema:description "This Climate Data Record (CDR) contains total solar irradiance (TSI) as a function of time created with the NASA NOAA LASP (NNL) Version 1 model for total, spectral and high-resolution spectral solar irradiance. The CDR Version 3 improves the scientific quality of the earlier version, version 2.1, based on new research from several NASA Solar Irradiance Science Team activities, from improved accuracy, precision and stability of solar irradiance observations made by the TSIS-1 mission, and from operational and improved sources for facular brightening and sunspot darkening proxies. Total solar irradiance is the total, spectrally integrated energy input to the top of the Earth's atmosphere, at a standard distance of one Astronomical Unit from the Sun. Its units are W per m2. The dataset was created by Odele Coddington, Judith Lean, Chris Lindholm, and Peter Pilewskie (Laboratory for Atmospheric and Space Science, University of Colorado). The daily- and monthly-averaged TSI data range from 1874 to the present, and annual-averaged TSI data begin in 1610. The data file format is netCDF-4 following CF metadata conventions. The dataset is accompanied by algorithm documentation, data flow diagram and source code for the NOAA CDR Program." ;
+    schema:isAccessibleForFree true ;
+    schema:keywords "Earth Science &gt; Atmosphere &gt; Atmospheric Radiation &gt; Incoming Solar Radiation",
+        "Earth Science &gt; Atmosphere &gt; Atmospheric Radiation &gt; Solar Irradiance",
+        "Earth Science &gt; Atmosphere &gt; Atmospheric Radiation &gt; Solar Radiation",
+        "Earth Science &gt; Climate Indicators &gt; Paleoclimate Indicators &gt; Paleoclimate Reconstructions &gt; Solar Forcing/Insolation Reconstruction",
+        "Earth Science &gt; Climate Indicators &gt; Sun-Earth Interactions &gt; Solar Activity &gt; Solar Irradiance",
+        "Earth Science &gt; Climate Indicators &gt; Sun-Earth Interactions &gt; Sunspot Activity &gt; Solar Flux",
+        "Earth Science &gt; Paleoclimate &gt; Paleoclimate Reconstructions &gt; Solar Forcing/Insolation Reconstruction",
+        "Earth Science &gt; Sun-Earth Interactions &gt; Solar Activity &gt; Solar Irradiance" ;
+    schema:name "Yearly TSI calculated using NNL1 solar irradiance model" ;
+    schema:url <http://doi.org/10.7289/V56W985W> ;
+    schema:variableMeasured :solar_irradiance_noaa-cdr-total-solar-irradiance-pds_yearly,
+        :time ;
+    schema:version "2" .
+
+:air_temperature_noaa-cdr-ocean-nearsurface-atmos-profiles-pds_daily a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "NOAA CDR of near-surface air temperature" ;
+    :cf_standard_name cf:air_temperature ;
+    :field_name "air_temperature" ;
+    schema:alternateName "air_temperature" ;
+    schema:description """Other metadata:
+coordinates: time lat lon
+long_name: NOAA CDR of near-surface air temperature
+valid_range: [-10.0, 37.0]""" ;
+    schema:name "air_temperature" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "degree_Celsius" .
+
+:atmosphere_optical_thickness_due_to_aerosol_noaa-cdr-aerosol-optical-thickness-pds_monthly a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "NOAA Climate Data Record (CDR) of monthly aerosol optical thickness over global oceans derived from PATMOS-x AVHRR channel 1 (0.65 micron) level2b orbital clear-sky radiance" ;
+    :field_name "aot1" ;
+    schema:alternateName "aot1" ;
+    schema:description """Other metadata:
+coordinates: latitude longitude
+long_name: NOAA Climate Data Record (CDR) of monthly aerosol optical thickness over global oceans derived from PATMOS-x AVHRR channel 1 (0.65 micron) level2b orbital clear-sky radiance""" ;
+    schema:name "atmosphere_optical_thickness_due_to_aerosol" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "1" .
+
+:atmosphere_optical_thickness_due_to_ambient_aerosol_noaa-cdr-aerosol-optical-thickness-pds_daily a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "NOAA Climate Data Record (CDR) of daily aerosol optical thickness over global oceans derived from PATMOS-x AVHRR channel 1 (0.65 micron) level2b orbital clear-sky radiance" ;
+    :field_name "aot1" ;
+    schema:alternateName "aot1" ;
+    schema:description """Other metadata:
+coordinates: latitude longitude
+long_name: NOAA Climate Data Record (CDR) of daily aerosol optical thickness over global oceans derived from PATMOS-x AVHRR channel 1 (0.65 micron) level2b orbital clear-sky radiance""" ;
+    schema:name "atmosphere_optical_thickness_due_to_ambient_aerosol" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "1" .
+
+:fraction_of_surface_downwelling_photosynthetic_radiative_flux_absorbed_by_vegetation_noaa-cdr-leaf-area-index-fapar-pds_daily a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Fraction of Absorbed Photosynthetically Active Radiation" ;
+    :cf_standard_name cf:fraction_of_surface_downwelling_photosynthetic_radiative_flux_absorbed_by_vegetation ;
+    :field_name "FAPAR" ;
+    schema:alternateName "FAPAR" ;
+    schema:description """Other metadata:
+grid_mapping: crs
+long_name: Fraction of Absorbed Photosynthetically Active Radiation
+valid_range: [0, 1000]""" ;
+    schema:name "fraction_of_surface_downwelling_photosynthetic_radiative_flux_absorbed_by_vegetation" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "1" .
+
+:leaf_area_index_noaa-cdr-leaf-area-index-fapar-pds_daily a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Leaf Area Index" ;
+    :cf_standard_name cf:leaf_area_index ;
+    :field_name "LAI" ;
+    schema:alternateName "LAI" ;
+    schema:description """Other metadata:
+grid_mapping: crs
+long_name: Leaf Area Index
+valid_range: [0, 7000]""" ;
+    schema:name "leaf_area_index" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "1" .
+
+:lwe_precipitation_rate_noaa-cdr-precip-cmorph-pds_daily a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "NOAA Climate Data Record (CDR) of CPC Morphing Technique (CMORPH) High Resolution Global Precipitation Estimates" ;
+    :cf_standard_name cf:lwe_precipitation_rate ;
+    :field_name "cmorph" ;
+    schema:alternateName "cmorph" ;
+    schema:description """Other metadata:
+comment: !!! CMORPH estimate is rainrate !!!
+coordinates: time lat lon
+long_name: NOAA Climate Data Record (CDR) of CPC Morphing Technique (CMORPH) High Resolution Global Precipitation Estimates
+missing_value: -999""" ;
+    schema:name "lwe_precipitation_rate" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "mm/day" .
+
+:lwe_precipitation_rate_noaa-cdr-precip-cmorph-pds_hourly a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "NOAA Climate Data Record (CDR) of CPC Morphing Technique (CMORPH) High Resolution Global Precipitation Estimates" ;
+    :cf_standard_name cf:lwe_precipitation_rate ;
+    :field_name "cmorph" ;
+    schema:alternateName "cmorph" ;
+    schema:description """Other metadata:
+comment: !!! CMORPH estimate is rainrate !!!
+coordinates: time lat lon
+long_name: NOAA Climate Data Record (CDR) of CPC Morphing Technique (CMORPH) High Resolution Global Precipitation Estimates
+missing_value: -999""" ;
+    schema:name "lwe_precipitation_rate" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "mm/hr" .
+
+:lwe_precipitation_rate_noaa-cdr-precip-gpcp-daily-pds_daily a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "NOAA Climate Data Record (CDR) of Daily GPCP Satellite-Gauge Combined Precipitation" ;
+    :cf_standard_name cf:lwe_precipitation_rate ;
+    :field_name "precip" ;
+    schema:alternateName "precip" ;
+    schema:description """Other metadata:
+cell_methods: area: mean time: mean
+coordinates: time latitude longitude
+long_name: NOAA Climate Data Record (CDR) of Daily GPCP Satellite-Gauge Combined Precipitation
+missing_value: -9999.0
+valid_range: [0.0, 100.0]""" ;
+    schema:name "lwe_precipitation_rate" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "mm/day" .
+
+:normalized_difference_vegetation_index_noaa-cdr-ndvi-pds_daily a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "NOAA Climate Data Record of Normalized Difference Vegetation Index" ;
+    :cf_standard_name cf:normalized_difference_vegetation_index ;
+    :field_name "NDVI" ;
+    schema:alternateName "NDVI" ;
+    schema:description """Other metadata:
+grid_mapping: crs
+long_name: NOAA Climate Data Record of Normalized Difference Vegetation Index
+valid_range: [-1000, 10000]""" ;
+    schema:name "normalized_difference_vegetation_index" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "1" .
+
+:precipitation_amount_noaa-cdr-precip-persiann-pds_daily a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "NOAA Climate Data Record of PERSIANN-CDR daily precipitation" ;
+    :cf_standard_name cf:precipitation_amount ;
+    :field_name "precipitation" ;
+    schema:alternateName "precipitation" ;
+    schema:description """Other metadata:
+cell_method: sum
+long_name: NOAA Climate Data Record of PERSIANN-CDR daily precipitation
+missing_value: -9999.0""" ;
+    schema:name "precipitation_amount" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "mm" .
+
+:sea_surface_temperature_noaa-cdr-sea-surface-temp-whoi-pds_daily a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "NOAA CDR of sea surface temperature" ;
+    :cf_standard_name cf:sea_surface_temperature ;
+    :field_name "sea_surface_temperature" ;
+    schema:alternateName "sea_surface_temperature" ;
+    schema:description """Other metadata:
+coordinates: time lat lon
+long_name: NOAA CDR of sea surface temperature
+valid_range: [-2.0, 34.0]""" ;
+    schema:name "sea_surface_temperature" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "degree_Celsius" .
+
+:solar_irradiance_noaa-cdr-solar-spectral-irradiance-pds_daily a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "NOAA Climate Data Record of Daily Total Solar Irradiance (W m-2)" ;
+    :cf_standard_name cf:solar_irradiance ;
+    :field_name "TSI" ;
+    schema:alternateName "TSI" ;
+    schema:description """Other metadata:
+ancillary_variables: TSI_UNC
+cell_methods: time: mean
+long_name: NOAA Climate Data Record of Daily Total Solar Irradiance (W m-2)
+missing_value: -99.0""" ;
+    schema:name "solar_irradiance" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "W m-2" .
+
+:solar_irradiance_noaa-cdr-solar-spectral-irradiance-pds_monthly a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "NOAA Climate Data Record of Monthly Total Solar Irradiance (W m-2)" ;
+    :cf_standard_name cf:solar_irradiance ;
+    :field_name "TSI" ;
+    schema:alternateName "TSI" ;
+    schema:description """Other metadata:
+ancillary_variables: TSI_UNC
+cell_methods: time: mean
+long_name: NOAA Climate Data Record of Monthly Total Solar Irradiance (W m-2)
+missing_value: -99.0""" ;
+    schema:name "solar_irradiance" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "W m-2" .
+
+:solar_irradiance_noaa-cdr-solar-spectral-irradiance-pds_standard-resolution-daily a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "NOAA Climate Data Record of Daily Total Solar Irradiance (W m-2)" ;
+    :cf_standard_name cf:solar_irradiance ;
+    :field_name "TSI" ;
+    schema:alternateName "TSI" ;
+    schema:description """Other metadata:
+ancillary_variables: TSI_UNC
+cell_methods: time: mean
+long_name: NOAA Climate Data Record of Daily Total Solar Irradiance (W m-2)
+missing_value: -99.0""" ;
+    schema:name "solar_irradiance" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "W m-2" .
+
+:solar_irradiance_noaa-cdr-solar-spectral-irradiance-pds_standard-resolution-monthly a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "NOAA Climate Data Record of Monthly Total Solar Irradiance (W m-2)" ;
+    :cf_standard_name cf:solar_irradiance ;
+    :field_name "TSI" ;
+    schema:alternateName "TSI" ;
+    schema:description """Other metadata:
+ancillary_variables: TSI_UNC
+cell_methods: time: mean
+long_name: NOAA Climate Data Record of Monthly Total Solar Irradiance (W m-2)
+missing_value: -99.0""" ;
+    schema:name "solar_irradiance" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "W m-2" .
+
+:solar_irradiance_noaa-cdr-solar-spectral-irradiance-pds_standard-resolution-yearly a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "NOAA Climate Data Record of Yearly Total Solar Irradiance (W m-2)" ;
+    :cf_standard_name cf:solar_irradiance ;
+    :field_name "TSI" ;
+    schema:alternateName "TSI" ;
+    schema:description """Other metadata:
+ancillary_variables: TSI_UNC
+cell_methods: time: mean
+long_name: NOAA Climate Data Record of Yearly Total Solar Irradiance (W m-2)
+missing_value: -99.0""" ;
+    schema:name "solar_irradiance" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "W m-2" .
+
+:solar_irradiance_noaa-cdr-solar-spectral-irradiance-pds_yearly a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "NOAA Climate Data Record of Yearly Total Solar Irradiance (W m-2)" ;
+    :cf_standard_name cf:solar_irradiance ;
+    :field_name "TSI" ;
+    schema:alternateName "TSI" ;
+    schema:description """Other metadata:
+ancillary_variables: TSI_UNC
+cell_methods: time: mean
+long_name: NOAA Climate Data Record of Yearly Total Solar Irradiance (W m-2)
+missing_value: -99.0""" ;
+    schema:name "solar_irradiance" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "W m-2" .
+
+:solar_irradiance_noaa-cdr-total-solar-irradiance-pds_daily a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "NOAA Climate Data Record of Daily Total Solar Irradiance (W m-2)" ;
+    :cf_standard_name cf:solar_irradiance ;
+    :field_name "TSI" ;
+    schema:alternateName "TSI" ;
+    schema:description """Other metadata:
+ancillary_variables: TSI_UNC
+cell_methods: time: mean
+long_name: NOAA Climate Data Record of Daily Total Solar Irradiance (W m-2)
+missing_value: -99.0""" ;
+    schema:name "solar_irradiance" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "W m-2" .
+
+:solar_irradiance_noaa-cdr-total-solar-irradiance-pds_monthly a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "NOAA Climate Data Record of Monthly Total Solar Irradiance (W m-2)" ;
+    :cf_standard_name cf:solar_irradiance ;
+    :field_name "TSI" ;
+    schema:alternateName "TSI" ;
+    schema:description """Other metadata:
+ancillary_variables: TSI_UNC
+cell_methods: time: mean
+long_name: NOAA Climate Data Record of Monthly Total Solar Irradiance (W m-2)
+missing_value: -99.0""" ;
+    schema:name "solar_irradiance" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "W m-2" .
+
+:solar_irradiance_noaa-cdr-total-solar-irradiance-pds_yearly a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "NOAA Climate Data Record of Yearly Total Solar Irradiance (W m-2)" ;
+    :cf_standard_name cf:solar_irradiance ;
+    :field_name "TSI" ;
+    schema:alternateName "TSI" ;
+    schema:description """Other metadata:
+ancillary_variables: TSI_UNC
+cell_methods: time: mean
+long_name: NOAA Climate Data Record of Yearly Total Solar Irradiance (W m-2)
+missing_value: -99.0""" ;
+    schema:name "solar_irradiance" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "W m-2" .
+
+:solar_irradiance_per_unit_wavelength_noaa-cdr-solar-spectral-irradiance-pds_daily a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "NOAA Climate Data Record of Daily Solar Spectral Irradiance (W m-2 nm-1)" ;
+    :cf_standard_name cf:solar_irradiance_per_unit_wavelength ;
+    :field_name "SSI" ;
+    schema:alternateName "SSI" ;
+    schema:description """Other metadata:
+ancillary_variables: SSI_UNC
+cell_methods: time: mean
+long_name: NOAA Climate Data Record of Daily Solar Spectral Irradiance (W m-2 nm-1)
+missing_value: -99.0""" ;
+    schema:name "solar_irradiance_per_unit_wavelength" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "W m-2 nm-1" .
+
+:solar_irradiance_per_unit_wavelength_noaa-cdr-solar-spectral-irradiance-pds_high-resolution-daily a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "NOAA Climate Data Record of Daily Solar Spectral Irradiance (W m-2 nm-1)" ;
+    :cf_standard_name cf:solar_irradiance_per_unit_wavelength ;
+    :field_name "SSI" ;
+    schema:alternateName "SSI" ;
+    schema:description """Other metadata:
+cell_methods: time: mean
+long_name: NOAA Climate Data Record of Daily Solar Spectral Irradiance (W m-2 nm-1)
+missing_value: -99.0""" ;
+    schema:name "solar_irradiance_per_unit_wavelength" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "W m-2 nm-1" .
+
+:solar_irradiance_per_unit_wavelength_noaa-cdr-solar-spectral-irradiance-pds_high-resolution-monthly a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "NOAA Climate Data Record of Monthly Solar Spectral Irradiance (W m-2 nm-1)" ;
+    :cf_standard_name cf:solar_irradiance_per_unit_wavelength ;
+    :field_name "SSI" ;
+    schema:alternateName "SSI" ;
+    schema:description """Other metadata:
+cell_methods: time: mean
+long_name: NOAA Climate Data Record of Monthly Solar Spectral Irradiance (W m-2 nm-1)
+missing_value: -99.0""" ;
+    schema:name "solar_irradiance_per_unit_wavelength" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "W m-2 nm-1" .
+
+:solar_irradiance_per_unit_wavelength_noaa-cdr-solar-spectral-irradiance-pds_high-resolution-yearly a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "NOAA Climate Data Record of Yearly Solar Spectral Irradiance (W m-2 nm-1)" ;
+    :cf_standard_name cf:solar_irradiance_per_unit_wavelength ;
+    :field_name "SSI" ;
+    schema:alternateName "SSI" ;
+    schema:description """Other metadata:
+cell_methods: time: mean
+long_name: NOAA Climate Data Record of Yearly Solar Spectral Irradiance (W m-2 nm-1)
+missing_value: -99.0""" ;
+    schema:name "solar_irradiance_per_unit_wavelength" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "W m-2 nm-1" .
+
+:solar_irradiance_per_unit_wavelength_noaa-cdr-solar-spectral-irradiance-pds_monthly a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "NOAA Climate Data Record of Monthly Solar Spectral Irradiance (W m-2 nm-1)" ;
+    :cf_standard_name cf:solar_irradiance_per_unit_wavelength ;
+    :field_name "SSI" ;
+    schema:alternateName "SSI" ;
+    schema:description """Other metadata:
+ancillary_variables: SSI_UNC
+cell_methods: time: mean
+long_name: NOAA Climate Data Record of Monthly Solar Spectral Irradiance (W m-2 nm-1)
+missing_value: -99.0""" ;
+    schema:name "solar_irradiance_per_unit_wavelength" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "W m-2 nm-1" .
+
+:solar_irradiance_per_unit_wavelength_noaa-cdr-solar-spectral-irradiance-pds_standard-resolution-daily a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "NOAA Climate Data Record of Daily Solar Spectral Irradiance (W m-2 nm-1)" ;
+    :cf_standard_name cf:solar_irradiance_per_unit_wavelength ;
+    :field_name "SSI" ;
+    schema:alternateName "SSI" ;
+    schema:description """Other metadata:
+ancillary_variables: SSI_UNC
+cell_methods: time: mean
+long_name: NOAA Climate Data Record of Daily Solar Spectral Irradiance (W m-2 nm-1)
+missing_value: -99.0""" ;
+    schema:name "solar_irradiance_per_unit_wavelength" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "W m-2 nm-1" .
+
+:solar_irradiance_per_unit_wavelength_noaa-cdr-solar-spectral-irradiance-pds_standard-resolution-monthly a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "NOAA Climate Data Record of Monthly Solar Spectral Irradiance (W m-2 nm-1)" ;
+    :cf_standard_name cf:solar_irradiance_per_unit_wavelength ;
+    :field_name "SSI" ;
+    schema:alternateName "SSI" ;
+    schema:description """Other metadata:
+ancillary_variables: SSI_UNC
+cell_methods: time: mean
+long_name: NOAA Climate Data Record of Monthly Solar Spectral Irradiance (W m-2 nm-1)
+missing_value: -99.0""" ;
+    schema:name "solar_irradiance_per_unit_wavelength" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "W m-2 nm-1" .
+
+:solar_irradiance_per_unit_wavelength_noaa-cdr-solar-spectral-irradiance-pds_standard-resolution-yearly a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "NOAA Climate Data Record of Yearly Solar Spectral Irradiance (W m-2 nm-1)" ;
+    :cf_standard_name cf:solar_irradiance_per_unit_wavelength ;
+    :field_name "SSI" ;
+    schema:alternateName "SSI" ;
+    schema:description """Other metadata:
+ancillary_variables: SSI_UNC
+cell_methods: time: mean
+long_name: NOAA Climate Data Record of Yearly Solar Spectral Irradiance (W m-2 nm-1)
+missing_value: -99.0""" ;
+    schema:name "solar_irradiance_per_unit_wavelength" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "W m-2 nm-1" .
+
+:solar_irradiance_per_unit_wavelength_noaa-cdr-solar-spectral-irradiance-pds_yearly a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "NOAA Climate Data Record of Yearly Solar Spectral Irradiance (W m-2 nm-1)" ;
+    :cf_standard_name cf:solar_irradiance_per_unit_wavelength ;
+    :field_name "SSI" ;
+    schema:alternateName "SSI" ;
+    schema:description """Other metadata:
+ancillary_variables: SSI_UNC
+cell_methods: time: mean
+long_name: NOAA Climate Data Record of Yearly Solar Spectral Irradiance (W m-2 nm-1)
+missing_value: -99.0""" ;
+    schema:name "solar_irradiance_per_unit_wavelength" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "W m-2 nm-1" .
+
+:specific_humidity_noaa-cdr-ocean-nearsurface-atmos-profiles-pds_daily a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "NOAA FCDR of near-surface specific humidity" ;
+    :cf_standard_name cf:specific_humidity ;
+    :field_name "specific_humidity" ;
+    schema:alternateName "specific_humidity" ;
+    schema:description """Other metadata:
+coordinates: time lat lon
+long_name: NOAA FCDR of near-surface specific humidity
+valid_range: [0.0, 27.0]""" ;
+    schema:name "specific_humidity" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "g kg-1" .
+
+:surface_upward_latent_heat_flux_noaa-cdr-ocean-heatflux-pds_daily a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "NOAA CDR of latent heat flux" ;
+    :cf_standard_name cf:surface_upward_latent_heat_flux ;
+    :field_name "surface_upward_latent_heat_flux" ;
+    schema:alternateName "surface_upward_latent_heat_flux" ;
+    schema:description """Other metadata:
+Note: Positive values represent heat gain to the atmosphere.
+coordinates: time lat lon
+long_name: NOAA CDR of latent heat flux
+valid_range: [-50.0, 500.0]""" ;
+    schema:name "surface_upward_latent_heat_flux" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "W m-2" .
+
+:surface_upward_sensible_heat_flux_noaa-cdr-ocean-heatflux-pds_daily a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "NOAA CDR of sensible heat flux" ;
+    :cf_standard_name cf:surface_upward_sensible_heat_flux ;
+    :field_name "surface_upward_sensible_heat_flux" ;
+    schema:alternateName "surface_upward_sensible_heat_flux" ;
+    schema:description """Other metadata:
+Note: Positive values represent heat gain to the atmosphere.
+coordinates: time lat lon
+long_name: NOAA CDR of sensible heat flux
+valid_range: [-298.0, 613.0]""" ;
+    schema:name "surface_upward_sensible_heat_flux" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "W m-2" .
+
+:wind_speed_noaa-cdr-ocean-nearsurface-atmos-profiles-pds_daily a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "NOAA FCDR of near-surface wind speed" ;
+    :cf_standard_name cf:wind_speed ;
+    :field_name "wind_speed" ;
+    schema:alternateName "wind_speed" ;
+    schema:description """Other metadata:
+coordinates: time lat lon
+long_name: NOAA FCDR of near-surface wind speed
+valid_range: [0.0, 42.0]""" ;
+    schema:name "wind_speed" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "m s-1" .
+
+:radiation_wavelength a qb:DimensionProperty,
+        schema:PropertyValue ;
+    rdfs:label "radiation_wavelength" ;
+    :cf_standard_name cf:radiation_wavelength ;
+    schema:alternateName "wavelength" ;
+    schema:name "radiation_wavelength" ;
+    schema:propertyID qb:measureDimension .
+
+:latitude a qb:DimensionProperty,
+        schema:PropertyValue ;
+    rdfs:label "latitude" ;
+    :cf_standard_name cf:latitude ;
+    schema:alternateName "lat" ;
+    schema:name "latitude" ;
+    schema:propertyID qb:measureDimension .
+
+:longitude a qb:DimensionProperty,
+        schema:PropertyValue ;
+    rdfs:label "longitude" ;
+    :cf_standard_name cf:longitude ;
+    schema:alternateName "lon" ;
+    schema:name "longitude" ;
+    schema:propertyID qb:measureDimension .
+
+:time a qb:DimensionProperty,
+        schema:PropertyValue ;
+    rdfs:label "time" ;
+    :cf_standard_name cf:time ;
+    schema:name "time" ;
+    schema:propertyID qb:measureDimension .

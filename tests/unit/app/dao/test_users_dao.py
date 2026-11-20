@@ -3,10 +3,9 @@ import tempfile
 from datetime import UTC, datetime
 
 import pytest
-from e84_geoai_common.llm.core import LLMAssistantMessage, LLMUserMessage, TextContent
-from llm_agent.tools.response_shaping_tools.agent_plan_tool import AgentPlan, AgentStep
+from llm_agent.tools.agent_plan_tool import AgentPlan, AgentStep
 from pydantic import TypeAdapter
-from sqlalchemy import MetaData, create_engine
+from pydantic_ai.messages import ModelRequest, ModelResponse, TextPart, UserPromptPart
 
 from app.dao.users_dao import ChatNotFoundError, UserAlreadyExistsError, UserNotFoundError, UsersDAO
 from app.db.sqlalchemy_db import SQLAlchemyDB
@@ -17,11 +16,6 @@ from app.utils.plan_manager import PlanManager
 
 
 class TestUsersDAO:
-    @pytest.fixture
-    def sqlalchemy_db(self) -> SQLAlchemyDB:
-        # Set echo to True to get statement logging.
-        return SQLAlchemyDB(create_engine("sqlite+pysqlite:///:memory:", echo=False), MetaData())
-
     def test_create_user(self, sqlalchemy_db: SQLAlchemyDB) -> None:
         """Test creating a new user."""
         dao = UsersDAO(sqlalchemy_db)
@@ -136,8 +130,8 @@ class TestUsersDAO:
         chat = InternalChat(id="chat1", title="Test Chat", messages=[request, response])
 
         # Add some agent conversation
-        user_msg = LLMUserMessage(content=[TextContent(text="Hello")])
-        assistant_msg = LLMAssistantMessage(content=[TextContent(text="Hi there")])
+        user_msg = ModelRequest(parts=[UserPromptPart(content="Hello")])
+        assistant_msg = ModelResponse(parts=[TextPart(content="Hi there")])
         chat.agent_conversation = [user_msg, assistant_msg]  # pyright: ignore[reportPrivateUsage]
 
         result = dao.create_chat("test_user", chat)
@@ -195,8 +189,8 @@ class TestUsersDAO:
         chat = InternalChat(id="chat1", title="Test Chat", messages=[request, response])
 
         # Add agent conversation
-        user_msg = LLMUserMessage(content=[TextContent(text="Hello")])
-        assistant_msg = LLMAssistantMessage(content=[TextContent(text="Hi there")])
+        user_msg = ModelRequest(parts=[UserPromptPart(content="Hello")])
+        assistant_msg = ModelResponse(parts=[TextPart(content="Hi there")])
         chat.agent_conversation = [user_msg, assistant_msg]  # pyright: ignore[reportPrivateUsage]
 
         dao.create_chat("test_user", chat)
@@ -213,8 +207,8 @@ class TestUsersDAO:
 
         # Check agent conversation
         assert len(retrieved_chat.agent_conversation) == 2  # pyright: ignore[reportPrivateUsage]
-        assert isinstance(retrieved_chat.agent_conversation[0], LLMUserMessage)  # pyright: ignore[reportPrivateUsage]
-        assert isinstance(retrieved_chat.agent_conversation[1], LLMAssistantMessage)  # pyright: ignore[reportPrivateUsage]
+        assert isinstance(retrieved_chat.agent_conversation[0], ModelRequest)  # pyright: ignore[reportPrivateUsage]
+        assert isinstance(retrieved_chat.agent_conversation[1], ModelResponse)  # pyright: ignore[reportPrivateUsage]
 
     def test_get_user_chats(self, sqlalchemy_db: SQLAlchemyDB) -> None:
         """Test getting all chat IDs for a user."""
@@ -266,7 +260,7 @@ class TestUsersDAO:
         updated_chat = InternalChat(id="chat1", title="Updated Chat", messages=[request, response])
 
         # Add agent conversation
-        user_msg = LLMUserMessage(content=[TextContent(text="Updated message")])
+        user_msg = ModelRequest(parts=[UserPromptPart(content="Updated message")])
         updated_chat.agent_conversation = [user_msg]  # pyright: ignore[reportPrivateUsage]
 
         result = dao.update_chat("test_user", updated_chat)
@@ -281,10 +275,10 @@ class TestUsersDAO:
 
         # Verify agent conversation was also updated
         assert len(retrieved_chat.agent_conversation) == 1  # pyright: ignore[reportPrivateUsage]
-        assert isinstance(retrieved_chat.agent_conversation[0], LLMUserMessage)  # pyright: ignore[reportPrivateUsage]
-        agent_content = retrieved_chat.agent_conversation[0].content[0]  # pyright: ignore[reportPrivateUsage]
-        assert isinstance(agent_content, TextContent)
-        assert agent_content.text == "Updated message"
+        assert isinstance(retrieved_chat.agent_conversation[0], ModelRequest)  # pyright: ignore[reportPrivateUsage]
+        agent_content = retrieved_chat.agent_conversation[0].parts[0]  # pyright: ignore[reportPrivateUsage]
+        assert isinstance(agent_content, UserPromptPart)
+        assert agent_content.content == "Updated message"
 
     def test_update_chat_user_not_found(self, sqlalchemy_db: SQLAlchemyDB) -> None:
         """Test updating chat for non-existent user raises error."""
@@ -612,10 +606,6 @@ class TestUsersDAO:
 class TestSQLiteUserDatabaseEdgeCases:
     """Test edge cases and error conditions."""
 
-    @pytest.fixture
-    def sqlalchemy_db(self) -> SQLAlchemyDB:
-        return SQLAlchemyDB(create_engine("sqlite+pysqlite:///:memory:", echo=True), MetaData())
-
     def test_special_characters_in_ids(self, sqlalchemy_db: SQLAlchemyDB) -> None:
         """Test handling of special characters in user and chat IDs."""
         dao = UsersDAO(sqlalchemy_db)
@@ -636,9 +626,9 @@ class TestSQLiteUserDatabaseEdgeCases:
         """Test handling of very long user and chat IDs."""
         dao = UsersDAO(sqlalchemy_db)
 
-        # Create very long IDs
-        long_user_id = "u" + "x" * 1000
-        long_chat_id = "c" + "x" * 1000
+        # Create very long IDs (but not so long the are longer than the max column size)
+        long_user_id = "u" + "x" * 200
+        long_chat_id = "c" + "x" * 200
 
         dao.create_user(long_user_id)
         dao.create_chat(long_user_id, InternalChat(id=long_chat_id, title="Long ID Chat"))
@@ -694,7 +684,7 @@ class TestSQLiteUserDatabaseEdgeCases:
         # NOTE: In principle, we could also verify the ids are right, but we
         # sort on the timestamp, which only has millisecond granularity. A
         # better test would use a fixture to set distinct times.
-        assert len(user_chats) == 15
+        assert len(user_chats) == 25
 
     def test_update_chat_preserves_id(self, sqlalchemy_db: SQLAlchemyDB) -> None:
         """Test that updating a chat preserves its ID."""

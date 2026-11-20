@@ -1,10 +1,7 @@
+from contextlib import nullcontext as does_not_raise
+
 import pytest
-from llm_agent.tools.response_shaping_tools.agent_plan_tool import (
-    AgentPlan,
-    AgentPlanUpdate,
-    AgentStep,
-    AgentStepUpdate,
-)
+from llm_agent.tools.agent_plan_tool import AgentPlan, AgentPlanUpdate, AgentStep, AgentStepUpdate
 
 from app.types.output import (
     DataAnalysisDetails,
@@ -112,6 +109,29 @@ class TestSinglePlanManager:
         )
         with pytest.raises(UnknownStepIDError):
             mgr.update(agent_plan_update)
+
+    def test_cancel(self):
+        agent_plan = AgentPlan(
+            content_type="plan",
+            id="plan-1",
+            title="The Plan",
+            goal="Carry out the plan.",
+            steps=[
+                AgentStep(id="step-0", title="The zeroth step", status="failure"),
+                AgentStep(id="step-1", title="The first step", status="success"),
+                AgentStep(id="step-2", title="The second step", status="in_progress"),
+                AgentStep(id="step-3", title="The third step", status="pending"),
+                AgentStep(id="step-4", title="The fourth step", status="pending"),
+            ],
+        )
+        mgr = SinglePlanManager.from_agent_plan(agent_plan)
+        cancelled_any = mgr.cancel()
+        assert cancelled_any is True
+        assert mgr.plan.steps[0].status == "failure"
+        assert mgr.plan.steps[1].status == "success"
+        assert mgr.plan.steps[2].status == "cancelled"
+        assert mgr.plan.steps[3].status == "cancelled"
+        assert mgr.plan.steps[4].status == "cancelled"
 
 
 class TestPlanManager:
@@ -700,7 +720,7 @@ class TestPlanManager:
             outputs_requested=[Variable(name="mean_sst", type="scalar_float", description="")],
         )
         solution = DataAnalysisSolution(
-            thoughts="Sum all values and divide by count",
+            analysis="Sum all values and divide by count",
             pseudocode="avg = sum(temps) / len(temps)",
             explanation="Simple arithmetic mean calculation",
         )
@@ -739,7 +759,8 @@ class TestPlanManager:
                 },
                 "solution": {
                     "content_type": "DataAnalysisSolution",
-                    "thoughts": "Sum all values and divide by count",
+                    "reasoning": None,
+                    "analysis": "Sum all values and divide by count",
                     "pseudocode": "avg = sum(temps) / len(temps)",
                     "explanation": "Simple arithmetic mean calculation",
                 },
@@ -913,3 +934,85 @@ class TestPlanManager:
         assert original_details is not None
         assert isinstance(original_details.content, DatasetSearchDetails)
         assert original_details.content.query == "test query"
+
+    def test_tool_call_before_plan_creation(self):
+        """Handle the case where a tool call is registered before the plan is created."""
+        mgr = PlanManager()
+        mgr.register_tool_call("tool-call-1", "plan-1", "step-1")
+
+        # Updating step progress should not raise an error
+        progress_update = ProgressUpdate(title="Test update")
+        with does_not_raise():
+            mgr.update_step_progress("plan-1", "step-1", progress_update)
+
+        # Now create the plan
+        agent_plan = AgentPlan(
+            content_type="plan",
+            id="plan-1",
+            title="The Plan",
+            goal="Carry out the plan.",
+            steps=[AgentStep(id="step-1", title="The first step", status="pending")],
+        )
+        mgr.add_plan(agent_plan)
+
+        assert mgr.get_plan("plan-1").model_dump(mode="json") == {
+            "content_type": "Plan",
+            "id": "plan-1",
+            "title": "The Plan",
+            "steps": [
+                {
+                    "id": "step-1",
+                    "title": "The first step",
+                    "status": "in_progress",
+                    "outcome_summary": None,
+                    "details": None,
+                    "progress_updates": [
+                        {"content_type": "ProgressUpdate", "title": "Test update"}
+                    ],
+                }
+            ],
+        }
+
+    def test_cancel_all(self):
+        """Test cancelling all incomplete steps in a plan."""
+        mgr = PlanManager()
+
+        agent_plan1 = AgentPlan(
+            content_type="plan",
+            id="plan-1",
+            title="The Plan",
+            goal="Carry out the plan.",
+            steps=[
+                AgentStep(id="step-1", title="The first step", status="failure"),
+                AgentStep(id="step-2", title="The second step", status="success"),
+                AgentStep(id="step-3", title="The third step", status="in_progress"),
+                AgentStep(id="step-4", title="The fourth step", status="pending"),
+            ],
+        )
+        agent_plan2 = AgentPlan(
+            content_type="plan",
+            id="plan-2",
+            title="The Second Plan",
+            goal="Carry out the second plan.",
+            steps=[
+                AgentStep(id="step-1", title="The first step", status="in_progress"),
+                AgentStep(id="step-2", title="The second step", status="pending"),
+            ],
+        )
+        mgr.add_plan(agent_plan1)
+        mgr.add_plan(agent_plan2)
+
+        cancelled_plans = mgr.cancel_all()
+        assert len(cancelled_plans) == 2
+        assert cancelled_plans[0].id == "plan-1"
+        assert cancelled_plans[1].id == "plan-2"
+
+        plan = mgr.get_plan("plan-1")
+        assert plan.steps[0].status == "failure"
+        assert plan.steps[1].status == "success"
+        assert plan.steps[2].status == "cancelled"
+        assert plan.steps[3].status == "cancelled"
+
+        plan = mgr.get_plan("plan-2")
+        assert plan.steps[0].status == "cancelled"
+        assert plan.steps[1].status == "cancelled"

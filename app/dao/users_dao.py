@@ -1,13 +1,18 @@
 import json
 from datetime import UTC
-from typing import Any
 
-from e84_geoai_common.llm.core import LLMAssistantMessage, LLMMessage, LLMUserMessage
+from langfuse import observe  # pyright: ignore[reportUnknownVariableType]
 from sqlalchemy import Table, desc, insert, select, update
 
 from app.db.sqlalchemy_db import SQLAlchemyDB
 from app.types.input import ChatRequest
-from app.types.internal import InternalChat, User
+from app.types.internal import (
+    InternalChat,
+    InternalDataRef,
+    User,
+    deserialize_agent_conversation,
+    serialize_agent_conversation,
+)
 from app.types.output import ChatHeader, ChatResponse
 from app.utils.plan_manager import PlanManager
 
@@ -103,8 +108,9 @@ class UsersDAO:
             raise UserNotFoundError(user_id)
 
         messages_json = json.dumps([msg.model_dump(mode="json") for msg in chat.messages])
-        agent_conversation_json = json.dumps(
-            [msg.model_dump(mode="json") for msg in chat.agent_conversation]
+        agent_conversation_json = serialize_agent_conversation(chat.agent_conversation)
+        data_refs_json = json.dumps(
+            [data_ref.model_dump(mode="json") for data_ref in chat.data_refs]
         )
 
         stmt = insert(self._chats_table).values(
@@ -114,6 +120,7 @@ class UsersDAO:
             messages_json=messages_json,
             agent_conversation_json=agent_conversation_json,
             plan_manager_json=chat.plan_manager.model_dump_json(),
+            data_refs_json=data_refs_json,
             created_at=chat.date_created,
         )
 
@@ -121,6 +128,7 @@ class UsersDAO:
 
         return chat
 
+    @observe(as_type="chain", name="UsersDAO.get_chat", capture_output=False)
     def get_chat(self, user_id: str, chat_id: str) -> InternalChat:
         """Get a chat by user ID and chat ID."""
         if not self.user_exists(user_id):
@@ -128,7 +136,7 @@ class UsersDAO:
 
         return self._get_chat_from_db(user_id, chat_id)
 
-    def get_user_chats(self, user_id: str) -> list[ChatHeader]:
+    def get_user_chats(self, user_id: str, limit: int = 25, offset: int = 0) -> list[ChatHeader]:
         """Get all chat headers for a user."""
         if not self.user_exists(user_id):
             raise UserNotFoundError(user_id)
@@ -138,7 +146,8 @@ class UsersDAO:
             select(columns.id, columns.title, columns.created_at)
             .where(columns.user_id == user_id)
             .order_by(desc(columns.created_at))
-            .limit(15)
+            .limit(limit)
+            .offset(offset)
         )
 
         rows = self.db.select_many(stmt)
@@ -148,6 +157,9 @@ class UsersDAO:
             for row in rows
         ]
 
+    @observe(
+        as_type="chain", name="UsersDAO.update_chat", capture_input=False, capture_output=False
+    )
     def update_chat(self, user_id: str, chat: InternalChat) -> InternalChat:
         """Update an existing chat."""
         if not self.user_exists(user_id):
@@ -159,13 +171,11 @@ class UsersDAO:
             .values(
                 title=chat.title,
                 messages_json=json.dumps([msg.model_dump(mode="json") for msg in chat.messages]),
-                agent_conversation_json=json.dumps(
-                    [
-                        msg.model_dump(mode="json")
-                        for msg in chat.agent_conversation  # pyright: ignore[reportPrivateUsage]
-                    ]
-                ),
+                agent_conversation_json=serialize_agent_conversation(chat.agent_conversation),
                 plan_manager_json=chat.plan_manager.model_dump_json(),
+                data_refs_json=json.dumps(
+                    [data_ref.model_dump(mode="json") for data_ref in chat.data_refs]
+                ),
             )
             .where(columns.id == chat.id)
             .where(columns.user_id == user_id)
@@ -192,10 +202,8 @@ class UsersDAO:
         if result is None:
             raise ChatNotFoundError(chat_id)
 
-        messages_data = json.loads(result.messages_json)
-        agent_conversation_data = json.loads(result.agent_conversation_json)
-
         # Reconstruct messages from JSON
+        messages_data = json.loads(result.messages_json)
         messages: list[ChatRequest | ChatResponse] = []
         for msg_data in messages_data:
             if "content" in msg_data and isinstance(msg_data["content"], str):
@@ -205,29 +213,18 @@ class UsersDAO:
                 # This is a ChatResponse
                 messages.append(ChatResponse.model_validate(msg_data))
 
-        # Reconstruct agent conversation from JSON
-        agent_conversation = [
-            deserialize_llm_message(msg_data) for msg_data in agent_conversation_data
-        ]
-
         plan_manager = PlanManager.model_validate_json(result.plan_manager_json)
+        data_refs = [
+            InternalDataRef.model_validate(data_ref)
+            for data_ref in json.loads(result.data_refs_json)
+        ]
 
         return InternalChat(
             id=result.id,
             title=result.title,
             messages=messages,
-            agent_conversation=agent_conversation,
+            agent_conversation=deserialize_agent_conversation(result.agent_conversation_json),
             plan_manager=plan_manager,
+            data_refs=data_refs,
             date_created=result.created_at.replace(tzinfo=UTC),
         )
-
-
-def deserialize_llm_message(data: dict[str, Any]) -> LLMMessage:
-    """Deserialize a dictionary into an LLMMessage."""
-    match data.get("role"):
-        case "user":
-            return LLMUserMessage.model_validate(data)
-        case "assistant":
-            return LLMAssistantMessage.model_validate(data)
-        case _:
-            raise ValueError

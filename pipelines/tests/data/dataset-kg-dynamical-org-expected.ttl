@@ -1,0 +1,3359 @@
+@prefix : <http://kmnlp-demo.noaa.gov/> .
+@prefix cf: <http://mmisw.org/ont/cf/parameter/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix qb: <http://purl.org/linked-data/cube#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <https://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:cf_standard_name a rdf:Property ;
+    rdfs:label "Matching entry in the CF Standard Names table." ;
+    rdfs:range cf:Standard_Name .
+
+:ecmwf-ifs-ens-forecast-15-day-0-25-degree a qb:DataSet,
+        dcat:Dataset,
+        schema:Dataset ;
+    rdfs:label "ECMWF IFS ENS forecast, 15 day, 0.25 degree" ;
+    dcterms:description """Ensemble weather forecasts from the ECMWF Integrated Forecasting System (IFS).
+
+attribution: ECMWF IFS ENS forecast data processed by dynamical.org from ECMWF Open Data.
+spatial_domain: Global
+spatial_resolution: 0.25 degrees (~20km)
+forecast_domain: Forecast lead time 0-360 hours (0-15 days) ahead
+forecast_resolution: Forecast step 0-144 hours: 3 hourly, 144-360 hours: 6 hourly""" ;
+    dcterms:title "ECMWF IFS ENS forecast, 15 day, 0.25 degree" ;
+    qb:structure [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ qb:measure :total_cloud_cover_atmosphere_ecmwf-ifs-ens-forecast-15-day-0-25-degree ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "ensemble_member" ;
+                    qb:dimension :realization ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ qb:measure :geopotential_height_850hpa_ecmwf-ifs-ens-forecast-15-day-0-25-degree ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "ensemble_member" ;
+                    qb:dimension :realization ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "ensemble_member" ;
+                    qb:dimension :realization ],
+                [ qb:measure :wind_v_100m_ecmwf-ifs-ens-forecast-15-day-0-25-degree ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "ensemble_member" ;
+                    qb:dimension :realization ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ qb:measure :geopotential_height_500hpa_ecmwf-ifs-ens-forecast-15-day-0-25-degree ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ qb:measure :categorical_precipitation_type_surface_ecmwf-ifs-ens-forecast-15-day-0-25-degree ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "ensemble_member" ;
+                    qb:dimension :realization ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ qb:measure :pressure_surface_ecmwf-ifs-ens-forecast-15-day-0-25-degree ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "ensemble_member" ;
+                    qb:dimension :realization ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ qb:measure :wind_v_10m_ecmwf-ifs-ens-forecast-15-day-0-25-degree ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "ensemble_member" ;
+                    qb:dimension :realization ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "ensemble_member" ;
+                    qb:dimension :realization ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ qb:measure :temperature_850hpa_ecmwf-ifs-ens-forecast-15-day-0-25-degree ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ qb:measure :dew_point_temperature_2m_ecmwf-ifs-ens-forecast-15-day-0-25-degree ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "ensemble_member" ;
+                    qb:dimension :realization ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ qb:measure :temperature_2m_ecmwf-ifs-ens-forecast-15-day-0-25-degree ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "ensemble_member" ;
+                    qb:dimension :realization ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ qb:measure :geopotential_height_925hpa_ecmwf-ifs-ens-forecast-15-day-0-25-degree ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "ensemble_member" ;
+                    qb:dimension :realization ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "ensemble_member" ;
+                    qb:dimension :realization ],
+                [ qb:measure :pressure_reduced_to_mean_sea_level_ecmwf-ifs-ens-forecast-15-day-0-25-degree ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ qb:measure :downward_short_wave_radiation_flux_surface_ecmwf-ifs-ens-forecast-15-day-0-25-degree ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "ensemble_member" ;
+                    qb:dimension :realization ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "ensemble_member" ;
+                    qb:dimension :realization ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ qb:measure :downward_long_wave_radiation_flux_surface_ecmwf-ifs-ens-forecast-15-day-0-25-degree ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ qb:measure :wind_u_10m_ecmwf-ifs-ens-forecast-15-day-0-25-degree ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "ensemble_member" ;
+                    qb:dimension :realization ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "ensemble_member" ;
+                    qb:dimension :realization ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ qb:measure :wind_gust_10m_ecmwf-ifs-ens-forecast-15-day-0-25-degree ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ qb:measure :wind_u_100m_ecmwf-ifs-ens-forecast-15-day-0-25-degree ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "ensemble_member" ;
+                    qb:dimension :realization ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "ensemble_member" ;
+                    qb:dimension :realization ],
+                [ qb:measure :precipitation_surface_ecmwf-ifs-ens-forecast-15-day-0-25-degree ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ qb:measure :temperature_925hpa_ecmwf-ifs-ens-forecast-15-day-0-25-degree ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "ensemble_member" ;
+                    qb:dimension :realization ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ] ] ;
+    rdfs:comment """Ensemble weather forecasts from the ECMWF Integrated Forecasting System (IFS).
+
+attribution: ECMWF IFS ENS forecast data processed by dynamical.org from ECMWF Open Data.
+spatial_domain: Global
+spatial_resolution: 0.25 degrees (~20km)
+forecast_domain: Forecast lead time 0-360 hours (0-15 days) ahead
+forecast_resolution: Forecast step 0-144 hours: 3 hourly, 144-360 hours: 6 hourly""" ;
+    dcat:distribution [ a dcat:Distribution ;
+            dcat:accessURL <https://data.dynamical.org/ecmwf/ifs-ens/forecast-15-day-0-25-degree/latest.zarr> ;
+            dcat:mediaType "application/zarr" ] ;
+    dcat:endDate "2026-09-06T17:31:15.134352+00:00"^^xsd:dateTime ;
+    dcat:startDate "2024-04-01T00:00:00+00:00"^^xsd:dateTime ;
+    dcat:temporalResolution "P1D"^^xsd:duration ;
+    schema:contentUrl <https://data.dynamical.org/ecmwf/ifs-ens/forecast-15-day-0-25-degree/latest.zarr> ;
+    schema:description """Ensemble weather forecasts from the ECMWF Integrated Forecasting System (IFS).
+
+attribution: ECMWF IFS ENS forecast data processed by dynamical.org from ECMWF Open Data.
+spatial_domain: Global
+spatial_resolution: 0.25 degrees (~20km)
+forecast_domain: Forecast lead time 0-360 hours (0-15 days) ahead
+forecast_resolution: Forecast step 0-144 hours: 3 hourly, 144-360 hours: 6 hourly""" ;
+    schema:isAccessibleForFree true ;
+    schema:name "ECMWF IFS ENS forecast, 15 day, 0.25 degree" ;
+    schema:url <https://dynamical.org/catalog/ecmwf-ifs-ens-forecast-15-day-0-25-degree> ;
+    schema:variableMeasured :categorical_precipitation_type_surface_ecmwf-ifs-ens-forecast-15-day-0-25-degree,
+        :dew_point_temperature_2m_ecmwf-ifs-ens-forecast-15-day-0-25-degree,
+        :downward_long_wave_radiation_flux_surface_ecmwf-ifs-ens-forecast-15-day-0-25-degree,
+        :downward_short_wave_radiation_flux_surface_ecmwf-ifs-ens-forecast-15-day-0-25-degree,
+        :forecast_period,
+        :forecast_reference_time,
+        :geopotential_height_500hpa_ecmwf-ifs-ens-forecast-15-day-0-25-degree,
+        :geopotential_height_850hpa_ecmwf-ifs-ens-forecast-15-day-0-25-degree,
+        :geopotential_height_925hpa_ecmwf-ifs-ens-forecast-15-day-0-25-degree,
+        :latitude,
+        :longitude,
+        :precipitation_surface_ecmwf-ifs-ens-forecast-15-day-0-25-degree,
+        :pressure_reduced_to_mean_sea_level_ecmwf-ifs-ens-forecast-15-day-0-25-degree,
+        :pressure_surface_ecmwf-ifs-ens-forecast-15-day-0-25-degree,
+        :realization,
+        :temperature_2m_ecmwf-ifs-ens-forecast-15-day-0-25-degree,
+        :temperature_850hpa_ecmwf-ifs-ens-forecast-15-day-0-25-degree,
+        :temperature_925hpa_ecmwf-ifs-ens-forecast-15-day-0-25-degree,
+        :total_cloud_cover_atmosphere_ecmwf-ifs-ens-forecast-15-day-0-25-degree,
+        :wind_gust_10m_ecmwf-ifs-ens-forecast-15-day-0-25-degree,
+        :wind_u_100m_ecmwf-ifs-ens-forecast-15-day-0-25-degree,
+        :wind_u_10m_ecmwf-ifs-ens-forecast-15-day-0-25-degree,
+        :wind_v_100m_ecmwf-ifs-ens-forecast-15-day-0-25-degree,
+        :wind_v_10m_ecmwf-ifs-ens-forecast-15-day-0-25-degree ;
+    schema:version "2" .
+
+:field_name a rdf:Property ;
+    rdfs:label "Field name in the dataset." ;
+    rdfs:range xsd:string .
+
+:noaa-gefs-analysis a qb:DataSet,
+        dcat:Dataset,
+        schema:Dataset ;
+    rdfs:label "NOAA GEFS analysis" ;
+    dcterms:description """Weather analysis from the Global Ensemble Forecast System (GEFS) operated by NOAA NWS NCEP.
+
+attribution: NOAA NWS NCEP GEFS data processed by dynamical.org from NOAA Open Data Dissemination archives.
+spatial_domain: Global
+spatial_resolution: 0.25 degrees (~20km)""" ;
+    dcterms:title "NOAA GEFS analysis" ;
+    qb:structure [ a qb:DataStructureDefinition ;
+            qb:component [ qb:measure :geopotential_height_500hpa_noaa-gefs-analysis ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ qb:measure :pressure_surface_noaa-gefs-analysis ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ qb:measure :geopotential_height_cloud_ceiling_noaa-gefs-analysis ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ qb:measure :wind_u_10m_noaa-gefs-analysis ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ qb:measure :total_cloud_cover_atmosphere_noaa-gefs-analysis ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ qb:measure :categorical_rain_surface_noaa-gefs-analysis ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ qb:measure :pressure_80m_noaa-gefs-analysis ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ qb:measure :downward_short_wave_radiation_flux_surface_noaa-gefs-analysis ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ qb:measure :categorical_ice_pellets_surface_noaa-gefs-analysis ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ qb:measure :relative_humidity_2m_noaa-gefs-analysis ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ qb:measure :precipitation_surface_noaa-gefs-analysis ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ qb:measure :maximum_temperature_2m_noaa-gefs-analysis ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ qb:measure :categorical_snow_surface_noaa-gefs-analysis ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ qb:measure :wind_v_80m_noaa-gefs-analysis ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ qb:measure :downward_long_wave_radiation_flux_surface_noaa-gefs-analysis ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ qb:measure :precipitable_water_atmosphere_noaa-gefs-analysis ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ qb:measure :wind_v_100m_noaa-gefs-analysis ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ qb:measure :percent_frozen_precipitation_surface_noaa-gefs-analysis ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ qb:measure :wind_v_10m_noaa-gefs-analysis ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ qb:measure :pressure_reduced_to_mean_sea_level_noaa-gefs-analysis ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ qb:measure :wind_u_80m_noaa-gefs-analysis ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ qb:measure :wind_u_100m_noaa-gefs-analysis ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ qb:measure :wind_gust_surface_noaa-gefs-analysis ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ qb:measure :categorical_freezing_rain_surface_noaa-gefs-analysis ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ qb:measure :minimum_temperature_2m_noaa-gefs-analysis ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ qb:measure :temperature_2m_noaa-gefs-analysis ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ qb:measure :temperature_80m_noaa-gefs-analysis ] ] ;
+    rdfs:comment """Weather analysis from the Global Ensemble Forecast System (GEFS) operated by NOAA NWS NCEP.
+
+attribution: NOAA NWS NCEP GEFS data processed by dynamical.org from NOAA Open Data Dissemination archives.
+spatial_domain: Global
+spatial_resolution: 0.25 degrees (~20km)""" ;
+    dcat:distribution [ a dcat:Distribution ;
+            dcat:accessURL <https://data.dynamical.org/noaa/gefs/analysis/latest.zarr> ;
+            dcat:mediaType "application/zarr" ] ;
+    dcat:endDate "2026-09-06T17:30:36.207152+00:00"^^xsd:dateTime ;
+    dcat:startDate "2000-01-01T00:00:00+00:00"^^xsd:dateTime ;
+    dcat:temporalResolution "PT3H"^^xsd:duration ;
+    schema:contentUrl <https://data.dynamical.org/noaa/gefs/analysis/latest.zarr> ;
+    schema:description """Weather analysis from the Global Ensemble Forecast System (GEFS) operated by NOAA NWS NCEP.
+
+attribution: NOAA NWS NCEP GEFS data processed by dynamical.org from NOAA Open Data Dissemination archives.
+spatial_domain: Global
+spatial_resolution: 0.25 degrees (~20km)""" ;
+    schema:isAccessibleForFree true ;
+    schema:name "NOAA GEFS analysis" ;
+    schema:url <https://dynamical.org/catalog/noaa-gefs-analysis> ;
+    schema:variableMeasured :categorical_freezing_rain_surface_noaa-gefs-analysis,
+        :categorical_ice_pellets_surface_noaa-gefs-analysis,
+        :categorical_rain_surface_noaa-gefs-analysis,
+        :categorical_snow_surface_noaa-gefs-analysis,
+        :downward_long_wave_radiation_flux_surface_noaa-gefs-analysis,
+        :downward_short_wave_radiation_flux_surface_noaa-gefs-analysis,
+        :geopotential_height_500hpa_noaa-gefs-analysis,
+        :geopotential_height_cloud_ceiling_noaa-gefs-analysis,
+        :latitude,
+        :longitude,
+        :maximum_temperature_2m_noaa-gefs-analysis,
+        :minimum_temperature_2m_noaa-gefs-analysis,
+        :percent_frozen_precipitation_surface_noaa-gefs-analysis,
+        :precipitable_water_atmosphere_noaa-gefs-analysis,
+        :precipitation_surface_noaa-gefs-analysis,
+        :pressure_80m_noaa-gefs-analysis,
+        :pressure_reduced_to_mean_sea_level_noaa-gefs-analysis,
+        :pressure_surface_noaa-gefs-analysis,
+        :relative_humidity_2m_noaa-gefs-analysis,
+        :temperature_2m_noaa-gefs-analysis,
+        :temperature_80m_noaa-gefs-analysis,
+        :time,
+        :total_cloud_cover_atmosphere_noaa-gefs-analysis,
+        :wind_gust_surface_noaa-gefs-analysis,
+        :wind_u_100m_noaa-gefs-analysis,
+        :wind_u_10m_noaa-gefs-analysis,
+        :wind_u_80m_noaa-gefs-analysis,
+        :wind_v_100m_noaa-gefs-analysis,
+        :wind_v_10m_noaa-gefs-analysis,
+        :wind_v_80m_noaa-gefs-analysis ;
+    schema:version "2" .
+
+:noaa-gfs-analysis-hourly a qb:DataSet,
+        dcat:Dataset,
+        schema:Dataset ;
+    rdfs:label "NOAA GFS analysis, hourly" ;
+    dcterms:description """Historical weather data from the Global Forecast System (GFS) model operated by NOAA NCEP.
+
+attribution: NOAA NCEP GFS data processed by dynamical.org from NCAR and NOAA BDP AWS archives.
+spatial_domain: Global
+spatial_resolution: 0.25 degrees (~20km)""" ;
+    dcterms:title "NOAA GFS analysis, hourly" ;
+    qb:structure [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ qb:measure :wind_v_10m_noaa-gfs-analysis-hourly ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ qb:measure :precipitation_surface_noaa-gfs-analysis-hourly ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ qb:measure :temperature_2m_noaa-gfs-analysis-hourly ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ qb:measure :wind_u_10m_noaa-gfs-analysis-hourly ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ] ] ;
+    rdfs:comment """Historical weather data from the Global Forecast System (GFS) model operated by NOAA NCEP.
+
+attribution: NOAA NCEP GFS data processed by dynamical.org from NCAR and NOAA BDP AWS archives.
+spatial_domain: Global
+spatial_resolution: 0.25 degrees (~20km)""" ;
+    dcat:distribution [ a dcat:Distribution ;
+            dcat:accessURL <https://data.dynamical.org/noaa/gfs/analysis-hourly/latest.zarr> ;
+            dcat:mediaType "application/zarr" ] ;
+    dcat:endDate "2024-07-01T00:00:00+00:00"^^xsd:dateTime ;
+    dcat:startDate "2015-01-15T00:00:00+00:00"^^xsd:dateTime ;
+    dcat:temporalResolution "PT1H"^^xsd:duration ;
+    schema:contentUrl <https://data.dynamical.org/noaa/gfs/analysis-hourly/latest.zarr> ;
+    schema:description """Historical weather data from the Global Forecast System (GFS) model operated by NOAA NCEP.
+
+attribution: NOAA NCEP GFS data processed by dynamical.org from NCAR and NOAA BDP AWS archives.
+spatial_domain: Global
+spatial_resolution: 0.25 degrees (~20km)""" ;
+    schema:isAccessibleForFree true ;
+    schema:name "NOAA GFS analysis, hourly" ;
+    schema:url <https://dynamical.org/catalog/noaa-gfs-analysis-hourly/> ;
+    schema:variableMeasured :latitude,
+        :longitude,
+        :precipitation_surface_noaa-gfs-analysis-hourly,
+        :temperature_2m_noaa-gfs-analysis-hourly,
+        :time,
+        :wind_u_10m_noaa-gfs-analysis-hourly,
+        :wind_v_10m_noaa-gfs-analysis-hourly ;
+    schema:version "2" .
+
+:noaa-gfs-forecast a qb:DataSet,
+        dcat:Dataset,
+        schema:Dataset ;
+    rdfs:label "NOAA GFS forecast" ;
+    dcterms:description """Weather forecasts from the Global Forecast System (GFS) operated by NOAA NWS NCEP.
+
+attribution: NOAA NWS NCEP GFS data processed by dynamical.org from NOAA Open Data Dissemination archives.
+spatial_domain: Global
+spatial_resolution: 0.25 degrees (~20km)
+forecast_domain: Forecast lead time 0-384 hours (0-16 days) ahead
+forecast_resolution: Forecast step 0-120 hours: hourly, 123-384 hours: 3 hourly""" ;
+    dcterms:title "NOAA GFS forecast" ;
+    qb:structure [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ qb:measure :maximum_temperature_2m_noaa-gfs-forecast ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ qb:measure :precipitable_water_atmosphere_noaa-gfs-forecast ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ qb:measure :wind_u_10m_noaa-gfs-forecast ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ qb:measure :geopotential_height_cloud_ceiling_noaa-gfs-forecast ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ qb:measure :categorical_rain_surface_noaa-gfs-forecast ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ qb:measure :pressure_80m_noaa-gfs-forecast ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ qb:measure :downward_short_wave_radiation_flux_surface_noaa-gfs-forecast ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ qb:measure :temperature_2m_noaa-gfs-forecast ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ qb:measure :categorical_freezing_rain_surface_noaa-gfs-forecast ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ qb:measure :categorical_snow_surface_noaa-gfs-forecast ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ qb:measure :pressure_reduced_to_mean_sea_level_noaa-gfs-forecast ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ qb:measure :relative_humidity_2m_noaa-gfs-forecast ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ qb:measure :minimum_temperature_2m_noaa-gfs-forecast ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ qb:measure :pressure_surface_noaa-gfs-forecast ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ qb:measure :precipitation_surface_noaa-gfs-forecast ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ qb:measure :percent_frozen_precipitation_surface_noaa-gfs-forecast ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ qb:measure :temperature_80m_noaa-gfs-forecast ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ qb:measure :total_cloud_cover_atmosphere_noaa-gfs-forecast ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ qb:measure :wind_v_80m_noaa-gfs-forecast ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ qb:measure :wind_u_80m_noaa-gfs-forecast ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ qb:measure :wind_v_10m_noaa-gfs-forecast ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ qb:measure :categorical_ice_pellets_surface_noaa-gfs-forecast ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ qb:measure :downward_long_wave_radiation_flux_surface_noaa-gfs-forecast ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ qb:measure :wind_u_100m_noaa-gfs-forecast ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ qb:measure :wind_v_100m_noaa-gfs-forecast ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "latitude" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "longitude" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ] ] ;
+    rdfs:comment """Weather forecasts from the Global Forecast System (GFS) operated by NOAA NWS NCEP.
+
+attribution: NOAA NWS NCEP GFS data processed by dynamical.org from NOAA Open Data Dissemination archives.
+spatial_domain: Global
+spatial_resolution: 0.25 degrees (~20km)
+forecast_domain: Forecast lead time 0-384 hours (0-16 days) ahead
+forecast_resolution: Forecast step 0-120 hours: hourly, 123-384 hours: 3 hourly""" ;
+    dcat:distribution [ a dcat:Distribution ;
+            dcat:accessURL <https://data.dynamical.org/noaa/gfs/forecast/latest.zarr> ;
+            dcat:mediaType "application/zarr" ] ;
+    dcat:endDate "2026-09-06T17:30:50.830624+00:00"^^xsd:dateTime ;
+    dcat:startDate "2021-05-01T00:00:00+00:00"^^xsd:dateTime ;
+    dcat:temporalResolution "PT6H"^^xsd:duration ;
+    schema:contentUrl <https://data.dynamical.org/noaa/gfs/forecast/latest.zarr> ;
+    schema:description """Weather forecasts from the Global Forecast System (GFS) operated by NOAA NWS NCEP.
+
+attribution: NOAA NWS NCEP GFS data processed by dynamical.org from NOAA Open Data Dissemination archives.
+spatial_domain: Global
+spatial_resolution: 0.25 degrees (~20km)
+forecast_domain: Forecast lead time 0-384 hours (0-16 days) ahead
+forecast_resolution: Forecast step 0-120 hours: hourly, 123-384 hours: 3 hourly""" ;
+    schema:isAccessibleForFree true ;
+    schema:name "NOAA GFS forecast" ;
+    schema:url <https://dynamical.org/catalog/noaa-gfs-forecast/> ;
+    schema:variableMeasured :categorical_freezing_rain_surface_noaa-gfs-forecast,
+        :categorical_ice_pellets_surface_noaa-gfs-forecast,
+        :categorical_rain_surface_noaa-gfs-forecast,
+        :categorical_snow_surface_noaa-gfs-forecast,
+        :downward_long_wave_radiation_flux_surface_noaa-gfs-forecast,
+        :downward_short_wave_radiation_flux_surface_noaa-gfs-forecast,
+        :forecast_period,
+        :forecast_reference_time,
+        :geopotential_height_cloud_ceiling_noaa-gfs-forecast,
+        :latitude,
+        :longitude,
+        :maximum_temperature_2m_noaa-gfs-forecast,
+        :minimum_temperature_2m_noaa-gfs-forecast,
+        :percent_frozen_precipitation_surface_noaa-gfs-forecast,
+        :precipitable_water_atmosphere_noaa-gfs-forecast,
+        :precipitation_surface_noaa-gfs-forecast,
+        :pressure_80m_noaa-gfs-forecast,
+        :pressure_reduced_to_mean_sea_level_noaa-gfs-forecast,
+        :pressure_surface_noaa-gfs-forecast,
+        :relative_humidity_2m_noaa-gfs-forecast,
+        :temperature_2m_noaa-gfs-forecast,
+        :temperature_80m_noaa-gfs-forecast,
+        :total_cloud_cover_atmosphere_noaa-gfs-forecast,
+        :wind_u_100m_noaa-gfs-forecast,
+        :wind_u_10m_noaa-gfs-forecast,
+        :wind_u_80m_noaa-gfs-forecast,
+        :wind_v_100m_noaa-gfs-forecast,
+        :wind_v_10m_noaa-gfs-forecast,
+        :wind_v_80m_noaa-gfs-forecast ;
+    schema:version "2" .
+
+:noaa-hrrr-analysis a qb:DataSet,
+        dcat:Dataset,
+        schema:Dataset ;
+    rdfs:label "NOAA HRRR analysis" ;
+    dcterms:description """Analysis data from the High-Resolution Rapid Refresh (HRRR) model operated by NOAA NWS NCEP.
+
+attribution: NOAA NWS NCEP HRRR data processed by dynamical.org from NOAA Open Data Dissemination archives.
+spatial_domain: Continental United States
+spatial_resolution: 3 km""" ;
+    dcterms:title "NOAA HRRR analysis" ;
+    qb:structure [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ],
+                [ qb:measure :precipitable_water_atmosphere_noaa-hrrr-analysis ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ qb:measure :snow_thickness_surface_noaa-hrrr-analysis ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ qb:measure :categorical_ice_pellets_surface_noaa-hrrr-analysis ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ qb:measure :wind_u_80m_noaa-hrrr-analysis ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ],
+                [ qb:measure :dew_point_temperature_2m_noaa-hrrr-analysis ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ qb:measure :visible_beam_downward_solar_flux_surface_noaa-hrrr-analysis ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ],
+                [ qb:measure :wind_v_80m_noaa-hrrr-analysis ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ qb:measure :snow_area_fraction_surface_noaa-hrrr-analysis ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ],
+                [ qb:measure :wind_gust_surface_noaa-hrrr-analysis ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ qb:measure :categorical_snow_surface_noaa-hrrr-analysis ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ],
+                [ qb:measure :temperature_2m_noaa-hrrr-analysis ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ],
+                [ qb:measure :categorical_rain_surface_noaa-hrrr-analysis ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ],
+                [ qb:measure :wind_u_10m_noaa-hrrr-analysis ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ],
+                [ qb:measure :relative_humidity_2m_noaa-hrrr-analysis ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ],
+                [ qb:measure :pressure_reduced_to_mean_sea_level_noaa-hrrr-analysis ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ qb:measure :categorical_freezing_rain_surface_noaa-hrrr-analysis ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ qb:measure :downward_long_wave_radiation_flux_surface_noaa-hrrr-analysis ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ qb:measure :pressure_surface_noaa-hrrr-analysis ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ],
+                [ qb:measure :snowfall_surface_noaa-hrrr-analysis ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ qb:measure :downward_short_wave_radiation_flux_surface_noaa-hrrr-analysis ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ],
+                [ qb:measure :composite_reflectivity_noaa-hrrr-analysis ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ qb:measure :wind_v_10m_noaa-hrrr-analysis ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ qb:measure :geopotential_height_cloud_ceiling_noaa-hrrr-analysis ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ],
+                [ qb:measure :snow_water_equivalent_surface_noaa-hrrr-analysis ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ qb:measure :total_cloud_cover_atmosphere_noaa-hrrr-analysis ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ qb:measure :percent_frozen_precipitation_surface_noaa-hrrr-analysis ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ qb:measure :precipitation_surface_noaa-hrrr-analysis ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ] ] ;
+    rdfs:comment """Analysis data from the High-Resolution Rapid Refresh (HRRR) model operated by NOAA NWS NCEP.
+
+attribution: NOAA NWS NCEP HRRR data processed by dynamical.org from NOAA Open Data Dissemination archives.
+spatial_domain: Continental United States
+spatial_resolution: 3 km""" ;
+    dcat:distribution [ a dcat:Distribution ;
+            dcat:accessURL <https://data.dynamical.org/noaa/hrrr/analysis/latest.zarr> ;
+            dcat:mediaType "application/zarr" ] ;
+    dcat:endDate "2026-09-06T17:30:39.383465+00:00"^^xsd:dateTime ;
+    dcat:startDate "2014-10-01T00:00:00+00:00"^^xsd:dateTime ;
+    dcat:temporalResolution "PT1H"^^xsd:duration ;
+    schema:contentUrl <https://data.dynamical.org/noaa/hrrr/analysis/latest.zarr> ;
+    schema:description """Analysis data from the High-Resolution Rapid Refresh (HRRR) model operated by NOAA NWS NCEP.
+
+attribution: NOAA NWS NCEP HRRR data processed by dynamical.org from NOAA Open Data Dissemination archives.
+spatial_domain: Continental United States
+spatial_resolution: 3 km""" ;
+    schema:isAccessibleForFree true ;
+    schema:name "NOAA HRRR analysis" ;
+    schema:url <https://dynamical.org/catalog/noaa-hrrr-analysis> ;
+    schema:variableMeasured :categorical_freezing_rain_surface_noaa-hrrr-analysis,
+        :categorical_ice_pellets_surface_noaa-hrrr-analysis,
+        :categorical_rain_surface_noaa-hrrr-analysis,
+        :categorical_snow_surface_noaa-hrrr-analysis,
+        :composite_reflectivity_noaa-hrrr-analysis,
+        :dew_point_temperature_2m_noaa-hrrr-analysis,
+        :downward_long_wave_radiation_flux_surface_noaa-hrrr-analysis,
+        :downward_short_wave_radiation_flux_surface_noaa-hrrr-analysis,
+        :geopotential_height_cloud_ceiling_noaa-hrrr-analysis,
+        :percent_frozen_precipitation_surface_noaa-hrrr-analysis,
+        :precipitable_water_atmosphere_noaa-hrrr-analysis,
+        :precipitation_surface_noaa-hrrr-analysis,
+        :pressure_reduced_to_mean_sea_level_noaa-hrrr-analysis,
+        :pressure_surface_noaa-hrrr-analysis,
+        :relative_humidity_2m_noaa-hrrr-analysis,
+        :snow_area_fraction_surface_noaa-hrrr-analysis,
+        :snow_thickness_surface_noaa-hrrr-analysis,
+        :snow_water_equivalent_surface_noaa-hrrr-analysis,
+        :snowfall_surface_noaa-hrrr-analysis,
+        :temperature_2m_noaa-hrrr-analysis,
+        :time,
+        :total_cloud_cover_atmosphere_noaa-hrrr-analysis,
+        :visible_beam_downward_solar_flux_surface_noaa-hrrr-analysis,
+        :wind_gust_surface_noaa-hrrr-analysis,
+        :wind_u_10m_noaa-hrrr-analysis,
+        :wind_u_80m_noaa-hrrr-analysis,
+        :wind_v_10m_noaa-hrrr-analysis,
+        :wind_v_80m_noaa-hrrr-analysis,
+        :x,
+        :y ;
+    schema:version "2" .
+
+:noaa-hrrr-forecast-48-hour a qb:DataSet,
+        dcat:Dataset,
+        schema:Dataset ;
+    rdfs:label "NOAA HRRR forecast, 48 hour" ;
+    dcterms:description """Weather forecasts from the High-Resolution Rapid Refresh (HRRR) model operated by NOAA NWS NCEP.
+
+attribution: NOAA NWS NCEP HRRR data processed by dynamical.org from NOAA Open Data Dissemination archives.
+spatial_domain: Continental United States
+spatial_resolution: 3 km
+forecast_domain: Forecast lead time 0-48 hours ahead
+forecast_resolution: Hourly""" ;
+    dcterms:title "NOAA HRRR forecast, 48 hour" ;
+    qb:structure [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ qb:measure :snow_area_fraction_surface_noaa-hrrr-forecast-48-hour ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ],
+                [ qb:measure :snow_water_equivalent_surface_noaa-hrrr-forecast-48-hour ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ],
+                [ qb:measure :wind_v_10m_noaa-hrrr-forecast-48-hour ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ qb:measure :downward_long_wave_radiation_flux_surface_noaa-hrrr-forecast-48-hour ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ qb:measure :categorical_ice_pellets_surface_noaa-hrrr-forecast-48-hour ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ qb:measure :pressure_surface_noaa-hrrr-forecast-48-hour ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ],
+                [ qb:measure :categorical_rain_surface_noaa-hrrr-forecast-48-hour ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ],
+                [ qb:measure :temperature_2m_noaa-hrrr-forecast-48-hour ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ],
+                [ qb:measure :composite_reflectivity_noaa-hrrr-forecast-48-hour ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ],
+                [ qb:measure :categorical_freezing_rain_surface_noaa-hrrr-forecast-48-hour ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ qb:measure :wind_gust_surface_noaa-hrrr-forecast-48-hour ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ qb:measure :pressure_reduced_to_mean_sea_level_noaa-hrrr-forecast-48-hour ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ],
+                [ qb:measure :precipitable_water_atmosphere_noaa-hrrr-forecast-48-hour ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ],
+                [ qb:measure :categorical_snow_surface_noaa-hrrr-forecast-48-hour ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ qb:measure :total_cloud_cover_atmosphere_noaa-hrrr-forecast-48-hour ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ qb:measure :visible_beam_downward_solar_flux_surface_noaa-hrrr-forecast-48-hour ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ qb:measure :snow_thickness_surface_noaa-hrrr-forecast-48-hour ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ qb:measure :dew_point_temperature_2m_noaa-hrrr-forecast-48-hour ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ],
+                [ qb:measure :wind_u_80m_noaa-hrrr-forecast-48-hour ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ qb:measure :snowfall_surface_noaa-hrrr-forecast-48-hour ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ],
+                [ qb:measure :wind_u_10m_noaa-hrrr-forecast-48-hour ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ qb:measure :geopotential_height_cloud_ceiling_noaa-hrrr-forecast-48-hour ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ],
+                [ qb:measure :wind_v_80m_noaa-hrrr-forecast-48-hour ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ qb:measure :downward_short_wave_radiation_flux_surface_noaa-hrrr-forecast-48-hour ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ qb:measure :relative_humidity_2m_noaa-hrrr-forecast-48-hour ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ qb:measure :precipitation_surface_noaa-hrrr-forecast-48-hour ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ qb:measure :percent_frozen_precipitation_surface_noaa-hrrr-forecast-48-hour ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lead_time" ;
+                    qb:dimension :forecast_period ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "x" ;
+                    qb:dimension :x ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "y" ;
+                    qb:dimension :y ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "init_time" ;
+                    qb:dimension :forecast_reference_time ] ] ;
+    rdfs:comment """Weather forecasts from the High-Resolution Rapid Refresh (HRRR) model operated by NOAA NWS NCEP.
+
+attribution: NOAA NWS NCEP HRRR data processed by dynamical.org from NOAA Open Data Dissemination archives.
+spatial_domain: Continental United States
+spatial_resolution: 3 km
+forecast_domain: Forecast lead time 0-48 hours ahead
+forecast_resolution: Hourly""" ;
+    dcat:distribution [ a dcat:Distribution ;
+            dcat:accessURL <https://data.dynamical.org/noaa/hrrr/forecast-48-hour/latest.zarr> ;
+            dcat:mediaType "application/zarr" ] ;
+    dcat:endDate "2026-09-06T17:31:08.908381+00:00"^^xsd:dateTime ;
+    dcat:startDate "2018-07-13T12:00:00+00:00"^^xsd:dateTime ;
+    dcat:temporalResolution "PT6H"^^xsd:duration ;
+    schema:contentUrl <https://data.dynamical.org/noaa/hrrr/forecast-48-hour/latest.zarr> ;
+    schema:description """Weather forecasts from the High-Resolution Rapid Refresh (HRRR) model operated by NOAA NWS NCEP.
+
+attribution: NOAA NWS NCEP HRRR data processed by dynamical.org from NOAA Open Data Dissemination archives.
+spatial_domain: Continental United States
+spatial_resolution: 3 km
+forecast_domain: Forecast lead time 0-48 hours ahead
+forecast_resolution: Hourly""" ;
+    schema:isAccessibleForFree true ;
+    schema:name "NOAA HRRR forecast, 48 hour" ;
+    schema:url <https://dynamical.org/catalog/noaa-hrrr-forecast-48-hour> ;
+    schema:variableMeasured :categorical_freezing_rain_surface_noaa-hrrr-forecast-48-hour,
+        :categorical_ice_pellets_surface_noaa-hrrr-forecast-48-hour,
+        :categorical_rain_surface_noaa-hrrr-forecast-48-hour,
+        :categorical_snow_surface_noaa-hrrr-forecast-48-hour,
+        :composite_reflectivity_noaa-hrrr-forecast-48-hour,
+        :dew_point_temperature_2m_noaa-hrrr-forecast-48-hour,
+        :downward_long_wave_radiation_flux_surface_noaa-hrrr-forecast-48-hour,
+        :downward_short_wave_radiation_flux_surface_noaa-hrrr-forecast-48-hour,
+        :forecast_period,
+        :forecast_reference_time,
+        :geopotential_height_cloud_ceiling_noaa-hrrr-forecast-48-hour,
+        :percent_frozen_precipitation_surface_noaa-hrrr-forecast-48-hour,
+        :precipitable_water_atmosphere_noaa-hrrr-forecast-48-hour,
+        :precipitation_surface_noaa-hrrr-forecast-48-hour,
+        :pressure_reduced_to_mean_sea_level_noaa-hrrr-forecast-48-hour,
+        :pressure_surface_noaa-hrrr-forecast-48-hour,
+        :relative_humidity_2m_noaa-hrrr-forecast-48-hour,
+        :snow_area_fraction_surface_noaa-hrrr-forecast-48-hour,
+        :snow_thickness_surface_noaa-hrrr-forecast-48-hour,
+        :snow_water_equivalent_surface_noaa-hrrr-forecast-48-hour,
+        :snowfall_surface_noaa-hrrr-forecast-48-hour,
+        :temperature_2m_noaa-hrrr-forecast-48-hour,
+        :total_cloud_cover_atmosphere_noaa-hrrr-forecast-48-hour,
+        :visible_beam_downward_solar_flux_surface_noaa-hrrr-forecast-48-hour,
+        :wind_gust_surface_noaa-hrrr-forecast-48-hour,
+        :wind_u_10m_noaa-hrrr-forecast-48-hour,
+        :wind_u_80m_noaa-hrrr-forecast-48-hour,
+        :wind_v_10m_noaa-hrrr-forecast-48-hour,
+        :wind_v_80m_noaa-hrrr-forecast-48-hour,
+        :x,
+        :y ;
+    schema:version "2" .
+
+:categorical_freezing_rain_surface_noaa-gefs-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Categorical freezing rain" ;
+    :field_name "categorical_freezing_rain_surface" ;
+    schema:alternateName "categorical_freezing_rain_surface" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "1" .
+
+:categorical_freezing_rain_surface_noaa-gfs-forecast a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Categorical freezing rain" ;
+    :field_name "categorical_freezing_rain_surface" ;
+    schema:alternateName "categorical_freezing_rain_surface" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "1" .
+
+:categorical_freezing_rain_surface_noaa-hrrr-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Categorical freezing rain" ;
+    :field_name "categorical_freezing_rain_surface" ;
+    schema:alternateName "categorical_freezing_rain_surface" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "1" .
+
+:categorical_freezing_rain_surface_noaa-hrrr-forecast-48-hour a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Categorical freezing rain" ;
+    :field_name "categorical_freezing_rain_surface" ;
+    schema:alternateName "categorical_freezing_rain_surface" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "1" .
+
+:categorical_ice_pellets_surface_noaa-gefs-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Categorical ice pellets" ;
+    :field_name "categorical_ice_pellets_surface" ;
+    schema:alternateName "categorical_ice_pellets_surface" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "1" .
+
+:categorical_ice_pellets_surface_noaa-gfs-forecast a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Categorical ice pellets" ;
+    :field_name "categorical_ice_pellets_surface" ;
+    schema:alternateName "categorical_ice_pellets_surface" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "1" .
+
+:categorical_ice_pellets_surface_noaa-hrrr-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Categorical ice pellets" ;
+    :field_name "categorical_ice_pellets_surface" ;
+    schema:alternateName "categorical_ice_pellets_surface" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "1" .
+
+:categorical_ice_pellets_surface_noaa-hrrr-forecast-48-hour a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Categorical ice pellets" ;
+    :field_name "categorical_ice_pellets_surface" ;
+    schema:alternateName "categorical_ice_pellets_surface" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "1" .
+
+:categorical_precipitation_type_surface_ecmwf-ifs-ens-forecast-15-day-0-25-degree a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Precipitation type" ;
+    :field_name "categorical_precipitation_type_surface" ;
+    schema:alternateName "categorical_precipitation_type_surface" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "1" .
+
+:categorical_rain_surface_noaa-gefs-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Categorical rain" ;
+    :field_name "categorical_rain_surface" ;
+    schema:alternateName "categorical_rain_surface" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "1" .
+
+:categorical_rain_surface_noaa-gfs-forecast a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Categorical rain" ;
+    :field_name "categorical_rain_surface" ;
+    schema:alternateName "categorical_rain_surface" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "1" .
+
+:categorical_rain_surface_noaa-hrrr-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Categorical rain" ;
+    :field_name "categorical_rain_surface" ;
+    schema:alternateName "categorical_rain_surface" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "1" .
+
+:categorical_rain_surface_noaa-hrrr-forecast-48-hour a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Categorical rain" ;
+    :field_name "categorical_rain_surface" ;
+    schema:alternateName "categorical_rain_surface" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "1" .
+
+:categorical_snow_surface_noaa-gefs-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Categorical snow" ;
+    :field_name "categorical_snow_surface" ;
+    schema:alternateName "categorical_snow_surface" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "1" .
+
+:categorical_snow_surface_noaa-gfs-forecast a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Categorical snow" ;
+    :field_name "categorical_snow_surface" ;
+    schema:alternateName "categorical_snow_surface" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "1" .
+
+:categorical_snow_surface_noaa-hrrr-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Categorical snow" ;
+    :field_name "categorical_snow_surface" ;
+    schema:alternateName "categorical_snow_surface" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "1" .
+
+:categorical_snow_surface_noaa-hrrr-forecast-48-hour a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Categorical snow" ;
+    :field_name "categorical_snow_surface" ;
+    schema:alternateName "categorical_snow_surface" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "1" .
+
+:composite_reflectivity_noaa-hrrr-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Maximum/Composite radar reflectivity" ;
+    :cf_standard_name cf:equivalent_reflectivity_factor ;
+    :field_name "composite_reflectivity" ;
+    schema:alternateName "composite_reflectivity" ;
+    schema:name "equivalent_reflectivity_factor" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "dBZ" .
+
+:composite_reflectivity_noaa-hrrr-forecast-48-hour a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Maximum/Composite radar reflectivity" ;
+    :cf_standard_name cf:equivalent_reflectivity_factor ;
+    :field_name "composite_reflectivity" ;
+    schema:alternateName "composite_reflectivity" ;
+    schema:name "equivalent_reflectivity_factor" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "dBZ" .
+
+:dew_point_temperature_2m_ecmwf-ifs-ens-forecast-15-day-0-25-degree a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "2 metre dewpoint temperature" ;
+    :cf_standard_name cf:dew_point_temperature ;
+    :field_name "dew_point_temperature_2m" ;
+    schema:alternateName "dew_point_temperature_2m" ;
+    schema:name "dew_point_temperature" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "degree_Celsius" .
+
+:dew_point_temperature_2m_noaa-hrrr-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "2 metre dewpoint temperature" ;
+    :cf_standard_name cf:dew_point_temperature ;
+    :field_name "dew_point_temperature_2m" ;
+    schema:alternateName "dew_point_temperature_2m" ;
+    schema:name "dew_point_temperature" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "degree_Celsius" .
+
+:dew_point_temperature_2m_noaa-hrrr-forecast-48-hour a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "2 metre dewpoint temperature" ;
+    :cf_standard_name cf:dew_point_temperature ;
+    :field_name "dew_point_temperature_2m" ;
+    schema:alternateName "dew_point_temperature_2m" ;
+    schema:name "dew_point_temperature" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "degree_Celsius" .
+
+:downward_long_wave_radiation_flux_surface_ecmwf-ifs-ens-forecast-15-day-0-25-degree a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Surface downward long-wave radiation flux" ;
+    :cf_standard_name cf:surface_downwelling_longwave_flux_in_air ;
+    :field_name "downward_long_wave_radiation_flux_surface" ;
+    schema:alternateName "downward_long_wave_radiation_flux_surface" ;
+    schema:name "surface_downwelling_longwave_flux_in_air" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "W m-2" .
+
+:downward_long_wave_radiation_flux_surface_noaa-gefs-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Surface downward long-wave radiation flux" ;
+    :cf_standard_name cf:surface_downwelling_longwave_flux_in_air ;
+    :field_name "downward_long_wave_radiation_flux_surface" ;
+    schema:alternateName "downward_long_wave_radiation_flux_surface" ;
+    schema:name "surface_downwelling_longwave_flux_in_air" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "W m-2" .
+
+:downward_long_wave_radiation_flux_surface_noaa-gfs-forecast a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Surface downward long-wave radiation flux" ;
+    :cf_standard_name cf:surface_downwelling_longwave_flux_in_air ;
+    :field_name "downward_long_wave_radiation_flux_surface" ;
+    schema:alternateName "downward_long_wave_radiation_flux_surface" ;
+    schema:name "surface_downwelling_longwave_flux_in_air" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "W m-2" .
+
+:downward_long_wave_radiation_flux_surface_noaa-hrrr-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Surface downward long-wave radiation flux" ;
+    :cf_standard_name cf:surface_downwelling_longwave_flux_in_air ;
+    :field_name "downward_long_wave_radiation_flux_surface" ;
+    schema:alternateName "downward_long_wave_radiation_flux_surface" ;
+    schema:name "surface_downwelling_longwave_flux_in_air" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "W m-2" .
+
+:downward_long_wave_radiation_flux_surface_noaa-hrrr-forecast-48-hour a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Surface downward long-wave radiation flux" ;
+    :cf_standard_name cf:surface_downwelling_longwave_flux_in_air ;
+    :field_name "downward_long_wave_radiation_flux_surface" ;
+    schema:alternateName "downward_long_wave_radiation_flux_surface" ;
+    schema:name "surface_downwelling_longwave_flux_in_air" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "W m-2" .
+
+:downward_short_wave_radiation_flux_surface_ecmwf-ifs-ens-forecast-15-day-0-25-degree a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Surface downward short-wave radiation flux" ;
+    :cf_standard_name cf:surface_downwelling_shortwave_flux_in_air ;
+    :field_name "downward_short_wave_radiation_flux_surface" ;
+    schema:alternateName "downward_short_wave_radiation_flux_surface" ;
+    schema:name "surface_downwelling_shortwave_flux_in_air" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "W m-2" .
+
+:downward_short_wave_radiation_flux_surface_noaa-gefs-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Surface downward short-wave radiation flux" ;
+    :cf_standard_name cf:surface_downwelling_shortwave_flux_in_air ;
+    :field_name "downward_short_wave_radiation_flux_surface" ;
+    schema:alternateName "downward_short_wave_radiation_flux_surface" ;
+    schema:name "surface_downwelling_shortwave_flux_in_air" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "W m-2" .
+
+:downward_short_wave_radiation_flux_surface_noaa-gfs-forecast a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Surface downward short-wave radiation flux" ;
+    :cf_standard_name cf:surface_downwelling_shortwave_flux_in_air ;
+    :field_name "downward_short_wave_radiation_flux_surface" ;
+    schema:alternateName "downward_short_wave_radiation_flux_surface" ;
+    schema:name "surface_downwelling_shortwave_flux_in_air" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "W m-2" .
+
+:downward_short_wave_radiation_flux_surface_noaa-hrrr-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Surface downward short-wave radiation flux" ;
+    :cf_standard_name cf:surface_downwelling_shortwave_flux_in_air ;
+    :field_name "downward_short_wave_radiation_flux_surface" ;
+    schema:alternateName "downward_short_wave_radiation_flux_surface" ;
+    schema:name "surface_downwelling_shortwave_flux_in_air" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "W m-2" .
+
+:downward_short_wave_radiation_flux_surface_noaa-hrrr-forecast-48-hour a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Surface downward short-wave radiation flux" ;
+    :cf_standard_name cf:surface_downwelling_shortwave_flux_in_air ;
+    :field_name "downward_short_wave_radiation_flux_surface" ;
+    schema:alternateName "downward_short_wave_radiation_flux_surface" ;
+    schema:name "surface_downwelling_shortwave_flux_in_air" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "W m-2" .
+
+:geopotential_height_500hpa_ecmwf-ifs-ens-forecast-15-day-0-25-degree a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Geopotential height" ;
+    :cf_standard_name cf:geopotential_height ;
+    :field_name "geopotential_height_500hpa" ;
+    schema:alternateName "geopotential_height_500hpa" ;
+    schema:name "geopotential_height" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "m" .
+
+:geopotential_height_500hpa_noaa-gefs-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Geopotential height" ;
+    :cf_standard_name cf:geopotential_height ;
+    :field_name "geopotential_height_500hpa" ;
+    schema:alternateName "geopotential_height_500hpa" ;
+    schema:name "geopotential_height" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "m" .
+
+:geopotential_height_850hpa_ecmwf-ifs-ens-forecast-15-day-0-25-degree a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Geopotential height" ;
+    :cf_standard_name cf:geopotential_height ;
+    :field_name "geopotential_height_850hpa" ;
+    schema:alternateName "geopotential_height_850hpa" ;
+    schema:name "geopotential_height" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "m" .
+
+:geopotential_height_925hpa_ecmwf-ifs-ens-forecast-15-day-0-25-degree a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Geopotential height" ;
+    :cf_standard_name cf:geopotential_height ;
+    :field_name "geopotential_height_925hpa" ;
+    schema:alternateName "geopotential_height_925hpa" ;
+    schema:name "geopotential_height" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "m" .
+
+:geopotential_height_cloud_ceiling_noaa-gefs-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Geopotential height" ;
+    :cf_standard_name cf:geopotential_height ;
+    :field_name "geopotential_height_cloud_ceiling" ;
+    schema:alternateName "geopotential_height_cloud_ceiling" ;
+    schema:name "geopotential_height" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "m" .
+
+:geopotential_height_cloud_ceiling_noaa-gfs-forecast a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Geopotential height" ;
+    :cf_standard_name cf:geopotential_height ;
+    :field_name "geopotential_height_cloud_ceiling" ;
+    schema:alternateName "geopotential_height_cloud_ceiling" ;
+    schema:name "geopotential_height" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "m" .
+
+:geopotential_height_cloud_ceiling_noaa-hrrr-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Geopotential height" ;
+    :cf_standard_name cf:geopotential_height ;
+    :field_name "geopotential_height_cloud_ceiling" ;
+    schema:alternateName "geopotential_height_cloud_ceiling" ;
+    schema:name "geopotential_height" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "m" .
+
+:geopotential_height_cloud_ceiling_noaa-hrrr-forecast-48-hour a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Geopotential height" ;
+    :cf_standard_name cf:geopotential_height ;
+    :field_name "geopotential_height_cloud_ceiling" ;
+    schema:alternateName "geopotential_height_cloud_ceiling" ;
+    schema:name "geopotential_height" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "m" .
+
+:maximum_temperature_2m_noaa-gefs-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Maximum temperature" ;
+    :cf_standard_name cf:air_temperature ;
+    :field_name "maximum_temperature_2m" ;
+    schema:alternateName "maximum_temperature_2m" ;
+    schema:name "air_temperature" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "degree_Celsius" .
+
+:maximum_temperature_2m_noaa-gfs-forecast a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Maximum temperature" ;
+    :cf_standard_name cf:air_temperature ;
+    :field_name "maximum_temperature_2m" ;
+    schema:alternateName "maximum_temperature_2m" ;
+    schema:name "air_temperature" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "degree_Celsius" .
+
+:minimum_temperature_2m_noaa-gefs-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Minimum temperature" ;
+    :cf_standard_name cf:air_temperature ;
+    :field_name "minimum_temperature_2m" ;
+    schema:alternateName "minimum_temperature_2m" ;
+    schema:name "air_temperature" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "degree_Celsius" .
+
+:minimum_temperature_2m_noaa-gfs-forecast a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Minimum temperature" ;
+    :cf_standard_name cf:air_temperature ;
+    :field_name "minimum_temperature_2m" ;
+    schema:alternateName "minimum_temperature_2m" ;
+    schema:name "air_temperature" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "degree_Celsius" .
+
+:percent_frozen_precipitation_surface_noaa-gefs-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Percent frozen precipitation" ;
+    :field_name "percent_frozen_precipitation_surface" ;
+    schema:alternateName "percent_frozen_precipitation_surface" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "percent" .
+
+:percent_frozen_precipitation_surface_noaa-gfs-forecast a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Percent frozen precipitation" ;
+    :field_name "percent_frozen_precipitation_surface" ;
+    schema:alternateName "percent_frozen_precipitation_surface" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "percent" .
+
+:percent_frozen_precipitation_surface_noaa-hrrr-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Percent frozen precipitation" ;
+    :field_name "percent_frozen_precipitation_surface" ;
+    schema:alternateName "percent_frozen_precipitation_surface" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "percent" .
+
+:percent_frozen_precipitation_surface_noaa-hrrr-forecast-48-hour a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Percent frozen precipitation" ;
+    :field_name "percent_frozen_precipitation_surface" ;
+    schema:alternateName "percent_frozen_precipitation_surface" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "percent" .
+
+:precipitable_water_atmosphere_noaa-gefs-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Precipitable water" ;
+    :cf_standard_name cf:atmosphere_mass_content_of_water_vapor ;
+    :field_name "precipitable_water_atmosphere" ;
+    schema:alternateName "precipitable_water_atmosphere" ;
+    schema:name "atmosphere_mass_content_of_water_vapor" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "kg m-2" .
+
+:precipitable_water_atmosphere_noaa-gfs-forecast a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Precipitable water" ;
+    :cf_standard_name cf:atmosphere_mass_content_of_water_vapor ;
+    :field_name "precipitable_water_atmosphere" ;
+    schema:alternateName "precipitable_water_atmosphere" ;
+    schema:name "atmosphere_mass_content_of_water_vapor" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "kg m-2" .
+
+:precipitable_water_atmosphere_noaa-hrrr-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Precipitable water" ;
+    :cf_standard_name cf:atmosphere_mass_content_of_water_vapor ;
+    :field_name "precipitable_water_atmosphere" ;
+    schema:alternateName "precipitable_water_atmosphere" ;
+    schema:name "atmosphere_mass_content_of_water_vapor" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "kg m-2" .
+
+:precipitable_water_atmosphere_noaa-hrrr-forecast-48-hour a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Precipitable water" ;
+    :cf_standard_name cf:atmosphere_mass_content_of_water_vapor ;
+    :field_name "precipitable_water_atmosphere" ;
+    schema:alternateName "precipitable_water_atmosphere" ;
+    schema:name "atmosphere_mass_content_of_water_vapor" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "kg m-2" .
+
+:precipitation_surface_ecmwf-ifs-ens-forecast-15-day-0-25-degree a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Precipitation rate" ;
+    :cf_standard_name cf:precipitation_flux ;
+    :field_name "precipitation_surface" ;
+    schema:alternateName "precipitation_surface" ;
+    schema:name "precipitation_flux" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "kg m-2 s-1" .
+
+:precipitation_surface_noaa-gefs-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Precipitation rate" ;
+    :cf_standard_name cf:precipitation_flux ;
+    :field_name "precipitation_surface" ;
+    schema:alternateName "precipitation_surface" ;
+    schema:name "precipitation_flux" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "kg m-2 s-1" .
+
+:precipitation_surface_noaa-gfs-analysis-hourly a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Precipitation rate at earth surface" ;
+    :field_name "precipitation_surface" ;
+    schema:alternateName "precipitation_surface" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "kg/(m^2 s)" .
+
+:precipitation_surface_noaa-gfs-forecast a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Precipitation rate" ;
+    :cf_standard_name cf:precipitation_flux ;
+    :field_name "precipitation_surface" ;
+    schema:alternateName "precipitation_surface" ;
+    schema:name "precipitation_flux" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "kg m-2 s-1" .
+
+:precipitation_surface_noaa-hrrr-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Precipitation rate" ;
+    :cf_standard_name cf:precipitation_flux ;
+    :field_name "precipitation_surface" ;
+    schema:alternateName "precipitation_surface" ;
+    schema:name "precipitation_flux" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "kg m-2 s-1" .
+
+:precipitation_surface_noaa-hrrr-forecast-48-hour a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Precipitation rate" ;
+    :cf_standard_name cf:precipitation_flux ;
+    :field_name "precipitation_surface" ;
+    schema:alternateName "precipitation_surface" ;
+    schema:name "precipitation_flux" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "kg m-2 s-1" .
+
+:pressure_80m_noaa-gefs-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "80 metre pressure" ;
+    :cf_standard_name cf:air_pressure ;
+    :field_name "pressure_80m" ;
+    schema:alternateName "pressure_80m" ;
+    schema:name "air_pressure" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "Pa" .
+
+:pressure_80m_noaa-gfs-forecast a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "80 metre pressure" ;
+    :cf_standard_name cf:air_pressure ;
+    :field_name "pressure_80m" ;
+    schema:alternateName "pressure_80m" ;
+    schema:name "air_pressure" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "Pa" .
+
+:pressure_reduced_to_mean_sea_level_ecmwf-ifs-ens-forecast-15-day-0-25-degree a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Pressure reduced to MSL" ;
+    :cf_standard_name cf:air_pressure_at_mean_sea_level ;
+    :field_name "pressure_reduced_to_mean_sea_level" ;
+    schema:alternateName "pressure_reduced_to_mean_sea_level" ;
+    schema:name "air_pressure_at_mean_sea_level" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "Pa" .
+
+:pressure_reduced_to_mean_sea_level_noaa-gefs-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Pressure reduced to MSL" ;
+    :cf_standard_name cf:air_pressure_at_mean_sea_level ;
+    :field_name "pressure_reduced_to_mean_sea_level" ;
+    schema:alternateName "pressure_reduced_to_mean_sea_level" ;
+    schema:name "air_pressure_at_mean_sea_level" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "Pa" .
+
+:pressure_reduced_to_mean_sea_level_noaa-gfs-forecast a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Pressure reduced to MSL" ;
+    :cf_standard_name cf:air_pressure_at_mean_sea_level ;
+    :field_name "pressure_reduced_to_mean_sea_level" ;
+    schema:alternateName "pressure_reduced_to_mean_sea_level" ;
+    schema:name "air_pressure_at_mean_sea_level" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "Pa" .
+
+:pressure_reduced_to_mean_sea_level_noaa-hrrr-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Pressure reduced to MSL" ;
+    :cf_standard_name cf:air_pressure_at_mean_sea_level ;
+    :field_name "pressure_reduced_to_mean_sea_level" ;
+    schema:alternateName "pressure_reduced_to_mean_sea_level" ;
+    schema:name "air_pressure_at_mean_sea_level" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "Pa" .
+
+:pressure_reduced_to_mean_sea_level_noaa-hrrr-forecast-48-hour a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Pressure reduced to MSL" ;
+    :cf_standard_name cf:air_pressure_at_mean_sea_level ;
+    :field_name "pressure_reduced_to_mean_sea_level" ;
+    schema:alternateName "pressure_reduced_to_mean_sea_level" ;
+    schema:name "air_pressure_at_mean_sea_level" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "Pa" .
+
+:pressure_surface_ecmwf-ifs-ens-forecast-15-day-0-25-degree a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Surface pressure" ;
+    :cf_standard_name cf:surface_air_pressure ;
+    :field_name "pressure_surface" ;
+    schema:alternateName "pressure_surface" ;
+    schema:name "surface_air_pressure" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "Pa" .
+
+:pressure_surface_noaa-gefs-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Surface pressure" ;
+    :cf_standard_name cf:surface_air_pressure ;
+    :field_name "pressure_surface" ;
+    schema:alternateName "pressure_surface" ;
+    schema:name "surface_air_pressure" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "Pa" .
+
+:pressure_surface_noaa-gfs-forecast a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Surface pressure" ;
+    :cf_standard_name cf:surface_air_pressure ;
+    :field_name "pressure_surface" ;
+    schema:alternateName "pressure_surface" ;
+    schema:name "surface_air_pressure" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "Pa" .
+
+:pressure_surface_noaa-hrrr-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Surface pressure" ;
+    :cf_standard_name cf:surface_air_pressure ;
+    :field_name "pressure_surface" ;
+    schema:alternateName "pressure_surface" ;
+    schema:name "surface_air_pressure" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "Pa" .
+
+:pressure_surface_noaa-hrrr-forecast-48-hour a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Surface pressure" ;
+    :cf_standard_name cf:surface_air_pressure ;
+    :field_name "pressure_surface" ;
+    schema:alternateName "pressure_surface" ;
+    schema:name "surface_air_pressure" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "Pa" .
+
+:relative_humidity_2m_noaa-gefs-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "2 metre relative humidity" ;
+    :cf_standard_name cf:relative_humidity ;
+    :field_name "relative_humidity_2m" ;
+    schema:alternateName "relative_humidity_2m" ;
+    schema:name "relative_humidity" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "percent" .
+
+:relative_humidity_2m_noaa-gfs-forecast a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "2 metre relative humidity" ;
+    :cf_standard_name cf:relative_humidity ;
+    :field_name "relative_humidity_2m" ;
+    schema:alternateName "relative_humidity_2m" ;
+    schema:name "relative_humidity" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "percent" .
+
+:relative_humidity_2m_noaa-hrrr-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "2 metre relative humidity" ;
+    :cf_standard_name cf:relative_humidity ;
+    :field_name "relative_humidity_2m" ;
+    schema:alternateName "relative_humidity_2m" ;
+    schema:name "relative_humidity" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "percent" .
+
+:relative_humidity_2m_noaa-hrrr-forecast-48-hour a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "2 metre relative humidity" ;
+    :cf_standard_name cf:relative_humidity ;
+    :field_name "relative_humidity_2m" ;
+    schema:alternateName "relative_humidity_2m" ;
+    schema:name "relative_humidity" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "percent" .
+
+:snow_area_fraction_surface_noaa-hrrr-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Snow cover" ;
+    :cf_standard_name cf:surface_snow_area_fraction ;
+    :field_name "snow_area_fraction_surface" ;
+    schema:alternateName "snow_area_fraction_surface" ;
+    schema:name "surface_snow_area_fraction" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "1" .
+
+:snow_area_fraction_surface_noaa-hrrr-forecast-48-hour a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Snow cover" ;
+    :cf_standard_name cf:surface_snow_area_fraction ;
+    :field_name "snow_area_fraction_surface" ;
+    schema:alternateName "snow_area_fraction_surface" ;
+    schema:name "surface_snow_area_fraction" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "1" .
+
+:snow_thickness_surface_noaa-hrrr-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Snow depth" ;
+    :cf_standard_name cf:surface_snow_thickness ;
+    :field_name "snow_thickness_surface" ;
+    schema:alternateName "snow_thickness_surface" ;
+    schema:name "surface_snow_thickness" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "m" .
+
+:snow_thickness_surface_noaa-hrrr-forecast-48-hour a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Snow depth" ;
+    :cf_standard_name cf:surface_snow_thickness ;
+    :field_name "snow_thickness_surface" ;
+    schema:alternateName "snow_thickness_surface" ;
+    schema:name "surface_snow_thickness" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "m" .
+
+:snow_water_equivalent_surface_noaa-hrrr-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Snow depth water equivalent" ;
+    :cf_standard_name cf:lwe_thickness_of_surface_snow_amount ;
+    :field_name "snow_water_equivalent_surface" ;
+    schema:alternateName "snow_water_equivalent_surface" ;
+    schema:name "lwe_thickness_of_surface_snow_amount" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "m" .
+
+:snow_water_equivalent_surface_noaa-hrrr-forecast-48-hour a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Snow depth water equivalent" ;
+    :cf_standard_name cf:lwe_thickness_of_surface_snow_amount ;
+    :field_name "snow_water_equivalent_surface" ;
+    schema:alternateName "snow_water_equivalent_surface" ;
+    schema:name "lwe_thickness_of_surface_snow_amount" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "m" .
+
+:snowfall_surface_noaa-hrrr-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Total snowfall rate" ;
+    :field_name "snowfall_surface" ;
+    schema:alternateName "snowfall_surface" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "m s-1" .
+
+:snowfall_surface_noaa-hrrr-forecast-48-hour a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Total snowfall rate" ;
+    :field_name "snowfall_surface" ;
+    schema:alternateName "snowfall_surface" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "m s-1" .
+
+:temperature_2m_ecmwf-ifs-ens-forecast-15-day-0-25-degree a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "2 metre temperature" ;
+    :cf_standard_name cf:air_temperature ;
+    :field_name "temperature_2m" ;
+    schema:alternateName "temperature_2m" ;
+    schema:name "air_temperature" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "degree_Celsius" .
+
+:temperature_2m_noaa-gefs-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "2 metre temperature" ;
+    :cf_standard_name cf:air_temperature ;
+    :field_name "temperature_2m" ;
+    schema:alternateName "temperature_2m" ;
+    schema:name "air_temperature" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "degree_Celsius" .
+
+:temperature_2m_noaa-gfs-analysis-hourly a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Temperature 2 meters above earth surface" ;
+    :field_name "temperature_2m" ;
+    schema:alternateName "temperature_2m" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "C" .
+
+:temperature_2m_noaa-gfs-forecast a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "2 metre temperature" ;
+    :cf_standard_name cf:air_temperature ;
+    :field_name "temperature_2m" ;
+    schema:alternateName "temperature_2m" ;
+    schema:name "air_temperature" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "degree_Celsius" .
+
+:temperature_2m_noaa-hrrr-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "2 metre temperature" ;
+    :cf_standard_name cf:air_temperature ;
+    :field_name "temperature_2m" ;
+    schema:alternateName "temperature_2m" ;
+    schema:name "air_temperature" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "degree_Celsius" .
+
+:temperature_2m_noaa-hrrr-forecast-48-hour a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "2 metre temperature" ;
+    :cf_standard_name cf:air_temperature ;
+    :field_name "temperature_2m" ;
+    schema:alternateName "temperature_2m" ;
+    schema:name "air_temperature" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "degree_Celsius" .
+
+:temperature_80m_noaa-gefs-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "80 metre temperature" ;
+    :cf_standard_name cf:air_temperature ;
+    :field_name "temperature_80m" ;
+    schema:alternateName "temperature_80m" ;
+    schema:name "air_temperature" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "degree_Celsius" .
+
+:temperature_80m_noaa-gfs-forecast a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "80 metre temperature" ;
+    :cf_standard_name cf:air_temperature ;
+    :field_name "temperature_80m" ;
+    schema:alternateName "temperature_80m" ;
+    schema:name "air_temperature" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "degree_Celsius" .
+
+:temperature_850hpa_ecmwf-ifs-ens-forecast-15-day-0-25-degree a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Temperature" ;
+    :cf_standard_name cf:air_temperature ;
+    :field_name "temperature_850hpa" ;
+    schema:alternateName "temperature_850hpa" ;
+    schema:name "air_temperature" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "degree_Celsius" .
+
+:temperature_925hpa_ecmwf-ifs-ens-forecast-15-day-0-25-degree a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Temperature" ;
+    :cf_standard_name cf:air_temperature ;
+    :field_name "temperature_925hpa" ;
+    schema:alternateName "temperature_925hpa" ;
+    schema:name "air_temperature" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "degree_Celsius" .
+
+:total_cloud_cover_atmosphere_ecmwf-ifs-ens-forecast-15-day-0-25-degree a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Total cloud cover" ;
+    :cf_standard_name cf:cloud_area_fraction ;
+    :field_name "total_cloud_cover_atmosphere" ;
+    schema:alternateName "total_cloud_cover_atmosphere" ;
+    schema:name "cloud_area_fraction" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "percent" .
+
+:total_cloud_cover_atmosphere_noaa-gefs-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Total cloud cover" ;
+    :cf_standard_name cf:cloud_area_fraction ;
+    :field_name "total_cloud_cover_atmosphere" ;
+    schema:alternateName "total_cloud_cover_atmosphere" ;
+    schema:name "cloud_area_fraction" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "percent" .
+
+:total_cloud_cover_atmosphere_noaa-gfs-forecast a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Total cloud cover" ;
+    :cf_standard_name cf:cloud_area_fraction ;
+    :field_name "total_cloud_cover_atmosphere" ;
+    schema:alternateName "total_cloud_cover_atmosphere" ;
+    schema:name "cloud_area_fraction" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "percent" .
+
+:total_cloud_cover_atmosphere_noaa-hrrr-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Total cloud cover" ;
+    :cf_standard_name cf:cloud_area_fraction ;
+    :field_name "total_cloud_cover_atmosphere" ;
+    schema:alternateName "total_cloud_cover_atmosphere" ;
+    schema:name "cloud_area_fraction" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "percent" .
+
+:total_cloud_cover_atmosphere_noaa-hrrr-forecast-48-hour a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Total cloud cover" ;
+    :cf_standard_name cf:cloud_area_fraction ;
+    :field_name "total_cloud_cover_atmosphere" ;
+    schema:alternateName "total_cloud_cover_atmosphere" ;
+    schema:name "cloud_area_fraction" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "percent" .
+
+:visible_beam_downward_solar_flux_surface_noaa-hrrr-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Visible Beam Downward Solar Flux" ;
+    :field_name "visible_beam_downward_solar_flux_surface" ;
+    schema:alternateName "visible_beam_downward_solar_flux_surface" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "W m-2" .
+
+:visible_beam_downward_solar_flux_surface_noaa-hrrr-forecast-48-hour a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Visible Beam Downward Solar Flux" ;
+    :field_name "visible_beam_downward_solar_flux_surface" ;
+    schema:alternateName "visible_beam_downward_solar_flux_surface" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "W m-2" .
+
+:wind_gust_10m_ecmwf-ifs-ens-forecast-15-day-0-25-degree a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Maximum 10 metre wind gust since previous post-processing" ;
+    :cf_standard_name cf:wind_speed_of_gust ;
+    :field_name "wind_gust_10m" ;
+    schema:alternateName "wind_gust_10m" ;
+    schema:name "wind_speed_of_gust" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "m s-1" .
+
+:wind_gust_surface_noaa-gefs-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Wind speed (gust)" ;
+    :cf_standard_name cf:wind_speed_of_gust ;
+    :field_name "wind_gust_surface" ;
+    schema:alternateName "wind_gust_surface" ;
+    schema:name "wind_speed_of_gust" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "m s-1" .
+
+:wind_gust_surface_noaa-hrrr-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Wind speed (gust)" ;
+    :cf_standard_name cf:wind_speed_of_gust ;
+    :field_name "wind_gust_surface" ;
+    schema:alternateName "wind_gust_surface" ;
+    schema:name "wind_speed_of_gust" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "m s-1" .
+
+:wind_gust_surface_noaa-hrrr-forecast-48-hour a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Wind speed (gust)" ;
+    :cf_standard_name cf:wind_speed_of_gust ;
+    :field_name "wind_gust_surface" ;
+    schema:alternateName "wind_gust_surface" ;
+    schema:name "wind_speed_of_gust" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "m s-1" .
+
+:wind_u_100m_ecmwf-ifs-ens-forecast-15-day-0-25-degree a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "100 metre U wind component" ;
+    :cf_standard_name cf:eastward_wind ;
+    :field_name "wind_u_100m" ;
+    schema:alternateName "wind_u_100m" ;
+    schema:name "eastward_wind" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "m s-1" .
+
+:wind_u_100m_noaa-gefs-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "100 metre U wind component" ;
+    :cf_standard_name cf:eastward_wind ;
+    :field_name "wind_u_100m" ;
+    schema:alternateName "wind_u_100m" ;
+    schema:name "eastward_wind" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "m s-1" .
+
+:wind_u_100m_noaa-gfs-forecast a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "100 metre U wind component" ;
+    :cf_standard_name cf:eastward_wind ;
+    :field_name "wind_u_100m" ;
+    schema:alternateName "wind_u_100m" ;
+    schema:name "eastward_wind" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "m s-1" .
+
+:wind_u_10m_ecmwf-ifs-ens-forecast-15-day-0-25-degree a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "10 metre U wind component" ;
+    :cf_standard_name cf:eastward_wind ;
+    :field_name "wind_u_10m" ;
+    schema:alternateName "wind_u_10m" ;
+    schema:name "eastward_wind" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "m s-1" .
+
+:wind_u_10m_noaa-gefs-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "10 metre U wind component" ;
+    :cf_standard_name cf:eastward_wind ;
+    :field_name "wind_u_10m" ;
+    schema:alternateName "wind_u_10m" ;
+    schema:name "eastward_wind" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "m s-1" .
+
+:wind_u_10m_noaa-gfs-analysis-hourly a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Wind speed u-component 10 meters above earth surface" ;
+    :field_name "wind_u_10m" ;
+    schema:alternateName "wind_u_10m" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "m/s" .
+
+:wind_u_10m_noaa-gfs-forecast a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "10 metre U wind component" ;
+    :cf_standard_name cf:eastward_wind ;
+    :field_name "wind_u_10m" ;
+    schema:alternateName "wind_u_10m" ;
+    schema:name "eastward_wind" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "m s-1" .
+
+:wind_u_10m_noaa-hrrr-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "10 metre U wind component" ;
+    :cf_standard_name cf:x_wind ;
+    :field_name "wind_u_10m" ;
+    schema:alternateName "wind_u_10m" ;
+    schema:name "x_wind" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "m s-1" .
+
+:wind_u_10m_noaa-hrrr-forecast-48-hour a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "10 metre U wind component" ;
+    :cf_standard_name cf:x_wind ;
+    :field_name "wind_u_10m" ;
+    schema:alternateName "wind_u_10m" ;
+    schema:name "x_wind" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "m s-1" .
+
+:wind_u_80m_noaa-gefs-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "80 metre U wind component" ;
+    :cf_standard_name cf:eastward_wind ;
+    :field_name "wind_u_80m" ;
+    schema:alternateName "wind_u_80m" ;
+    schema:name "eastward_wind" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "m s-1" .
+
+:wind_u_80m_noaa-gfs-forecast a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "80 metre U wind component" ;
+    :cf_standard_name cf:eastward_wind ;
+    :field_name "wind_u_80m" ;
+    schema:alternateName "wind_u_80m" ;
+    schema:name "eastward_wind" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "m s-1" .
+
+:wind_u_80m_noaa-hrrr-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "80 metre U wind component" ;
+    :cf_standard_name cf:x_wind ;
+    :field_name "wind_u_80m" ;
+    schema:alternateName "wind_u_80m" ;
+    schema:name "x_wind" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "m s-1" .
+
+:wind_u_80m_noaa-hrrr-forecast-48-hour a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "80 metre U wind component" ;
+    :cf_standard_name cf:x_wind ;
+    :field_name "wind_u_80m" ;
+    schema:alternateName "wind_u_80m" ;
+    schema:name "x_wind" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "m s-1" .
+
+:wind_v_100m_ecmwf-ifs-ens-forecast-15-day-0-25-degree a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "100 metre V wind component" ;
+    :cf_standard_name cf:northward_wind ;
+    :field_name "wind_v_100m" ;
+    schema:alternateName "wind_v_100m" ;
+    schema:name "northward_wind" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "m s-1" .
+
+:wind_v_100m_noaa-gefs-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "100 metre V wind component" ;
+    :cf_standard_name cf:northward_wind ;
+    :field_name "wind_v_100m" ;
+    schema:alternateName "wind_v_100m" ;
+    schema:name "northward_wind" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "m s-1" .
+
+:wind_v_100m_noaa-gfs-forecast a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "100 metre V wind component" ;
+    :cf_standard_name cf:northward_wind ;
+    :field_name "wind_v_100m" ;
+    schema:alternateName "wind_v_100m" ;
+    schema:name "northward_wind" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "m s-1" .
+
+:wind_v_10m_ecmwf-ifs-ens-forecast-15-day-0-25-degree a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "10 metre V wind component" ;
+    :cf_standard_name cf:northward_wind ;
+    :field_name "wind_v_10m" ;
+    schema:alternateName "wind_v_10m" ;
+    schema:name "northward_wind" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "m s-1" .
+
+:wind_v_10m_noaa-gefs-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "10 metre V wind component" ;
+    :cf_standard_name cf:northward_wind ;
+    :field_name "wind_v_10m" ;
+    schema:alternateName "wind_v_10m" ;
+    schema:name "northward_wind" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "m s-1" .
+
+:wind_v_10m_noaa-gfs-analysis-hourly a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "Wind speed v-component 10 meters above earth surface" ;
+    :field_name "wind_v_10m" ;
+    schema:alternateName "wind_v_10m" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "m/s" .
+
+:wind_v_10m_noaa-gfs-forecast a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "10 metre V wind component" ;
+    :cf_standard_name cf:northward_wind ;
+    :field_name "wind_v_10m" ;
+    schema:alternateName "wind_v_10m" ;
+    schema:name "northward_wind" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "m s-1" .
+
+:wind_v_10m_noaa-hrrr-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "10 metre V wind component" ;
+    :cf_standard_name cf:y_wind ;
+    :field_name "wind_v_10m" ;
+    schema:alternateName "wind_v_10m" ;
+    schema:name "y_wind" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "m s-1" .
+
+:wind_v_10m_noaa-hrrr-forecast-48-hour a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "10 metre V wind component" ;
+    :cf_standard_name cf:y_wind ;
+    :field_name "wind_v_10m" ;
+    schema:alternateName "wind_v_10m" ;
+    schema:name "y_wind" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "m s-1" .
+
+:wind_v_80m_noaa-gefs-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "80 metre V wind component" ;
+    :cf_standard_name cf:northward_wind ;
+    :field_name "wind_v_80m" ;
+    schema:alternateName "wind_v_80m" ;
+    schema:name "northward_wind" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "m s-1" .
+
+:wind_v_80m_noaa-gfs-forecast a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "80 metre V wind component" ;
+    :cf_standard_name cf:northward_wind ;
+    :field_name "wind_v_80m" ;
+    schema:alternateName "wind_v_80m" ;
+    schema:name "northward_wind" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "m s-1" .
+
+:wind_v_80m_noaa-hrrr-analysis a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "80 metre V wind component" ;
+    :cf_standard_name cf:y_wind ;
+    :field_name "wind_v_80m" ;
+    schema:alternateName "wind_v_80m" ;
+    schema:name "y_wind" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "m s-1" .
+
+:wind_v_80m_noaa-hrrr-forecast-48-hour a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "80 metre V wind component" ;
+    :cf_standard_name cf:y_wind ;
+    :field_name "wind_v_80m" ;
+    schema:alternateName "wind_v_80m" ;
+    schema:name "y_wind" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "m s-1" .
+
+:realization a qb:DimensionProperty,
+        schema:PropertyValue ;
+    rdfs:label "realization" ;
+    :cf_standard_name cf:realization ;
+    schema:alternateName "ensemble_member" ;
+    schema:name "realization" ;
+    schema:propertyID qb:measureDimension .
+
+:x a qb:DimensionProperty,
+        schema:PropertyValue ;
+    rdfs:label "x" ;
+    schema:name "x" ;
+    schema:propertyID qb:measureDimension .
+
+:y a qb:DimensionProperty,
+        schema:PropertyValue ;
+    rdfs:label "y" ;
+    schema:name "y" ;
+    schema:propertyID qb:measureDimension .
+
+:time a qb:DimensionProperty,
+        schema:PropertyValue ;
+    rdfs:label "time" ;
+    :cf_standard_name cf:time ;
+    schema:name "time" ;
+    schema:propertyID qb:measureDimension .
+
+:forecast_period a qb:DimensionProperty,
+        schema:PropertyValue ;
+    rdfs:label "forecast_period" ;
+    :cf_standard_name cf:forecast_period ;
+    schema:alternateName "lead_time" ;
+    schema:name "forecast_period" ;
+    schema:propertyID qb:measureDimension .
+
+:forecast_reference_time a qb:DimensionProperty,
+        schema:PropertyValue ;
+    rdfs:label "forecast_reference_time" ;
+    :cf_standard_name cf:forecast_reference_time ;
+    schema:alternateName "init_time",
+        "time" ;
+    schema:name "forecast_reference_time" ;
+    schema:propertyID qb:measureDimension .
+
+:latitude a qb:DimensionProperty,
+        schema:PropertyValue ;
+    rdfs:label "latitude" ;
+    :cf_standard_name cf:latitude ;
+    schema:alternateName "lat" ;
+    schema:name "latitude" ;
+    schema:propertyID qb:measureDimension .
+
+:longitude a qb:DimensionProperty,
+        schema:PropertyValue ;
+    rdfs:label "longitude" ;
+    :cf_standard_name cf:longitude ;
+    schema:alternateName "lon" ;
+    schema:name "longitude" ;
+    schema:propertyID qb:measureDimension .

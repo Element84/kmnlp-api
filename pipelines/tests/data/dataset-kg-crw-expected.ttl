@@ -1,0 +1,441 @@
+@prefix : <http://kmnlp-demo.noaa.gov/> .
+@prefix cf: <http://mmisw.org/ont/cf/parameter/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix qb: <http://purl.org/linked-data/cube#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <https://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:cf_standard_name a rdf:Property ;
+    rdfs:label "Matching entry in the CF Standard Names table." ;
+    rdfs:range cf:Standard_Name .
+
+:crw_sst_annual_max a qb:DataSet,
+        dcat:Dataset,
+        schema:Dataset ;
+    rdfs:label "NOAA Coral Reef Watch Global 5km Satellite Sea Surface Temperature (CoralTemp) Annual Maximum Composite for 2025" ;
+    dcterms:description "This is a product of NOAA Coral Reef Watch Daily Global 5km Satellite Coral Bleaching Heat Stress Monitoring Product Suite" ;
+    dcterms:title "NOAA Coral Reef Watch Global 5km Satellite Sea Surface Temperature (CoralTemp) Annual Maximum Composite for 2025" ;
+    qb:structure [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lat" ;
+                    qb:dimension :latitude ],
+                [ qb:measure :mask_crw_sst_annual_max ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lon" ;
+                    qb:dimension :longitude ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "lon" ;
+                    qb:dimension :longitude ],
+                [ qb:measure :sea_surface_temperature_crw_sst_annual_max ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lat" ;
+                    qb:dimension :latitude ] ] ;
+    rdfs:comment "This is a product of NOAA Coral Reef Watch Daily Global 5km Satellite Coral Bleaching Heat Stress Monitoring Product Suite" ;
+    dcat:distribution [ a dcat:Distribution ;
+            dcat:accessURL <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/crw/sst_annual_max> ;
+            dcat:mediaType "application/icechunk-zarr" ] ;
+    dcat:endDate "2025-12-31T12:00:00+00:00"^^xsd:dateTime ;
+    dcat:startDate "1985-12-31T12:00:00+00:00"^^xsd:dateTime ;
+    dcat:temporalResolution "P1Y"^^xsd:duration ;
+    schema:contentUrl <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/crw/sst_annual_max> ;
+    schema:description "This is a product of NOAA Coral Reef Watch Daily Global 5km Satellite Coral Bleaching Heat Stress Monitoring Product Suite" ;
+    schema:isAccessibleForFree true ;
+    schema:keywords "Oceans > Ocean Temperature > Sea Surface Temperature",
+        "Oceans > Ocean Temperature > Water Temperature",
+        "Spectral/Engineering > Infrared Wavelengths > Thermal Infrared" ;
+    schema:name "NOAA Coral Reef Watch Global 5km Satellite Sea Surface Temperature (CoralTemp) Annual Maximum Composite for 2025" ;
+    schema:url <https://coralreefwatch.noaa.gov/product/5km/index.php> ;
+    schema:variableMeasured :latitude,
+        :longitude,
+        :mask_crw_sst_annual_max,
+        :sea_surface_temperature_crw_sst_annual_max,
+        :time ;
+    schema:version "2" .
+
+:crw_sst_annual_mean a qb:DataSet,
+        dcat:Dataset,
+        schema:Dataset ;
+    rdfs:label "NOAA Coral Reef Watch Global 5km Satellite Sea Surface Temperature (CoralTemp) Annual Mean Composite for 2025" ;
+    dcterms:description "This is a product of NOAA Coral Reef Watch Daily Global 5km Satellite Coral Bleaching Heat Stress Monitoring Product Suite" ;
+    dcterms:title "NOAA Coral Reef Watch Global 5km Satellite Sea Surface Temperature (CoralTemp) Annual Mean Composite for 2025" ;
+    qb:structure [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "lon" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ qb:measure :mask_crw_sst_annual_mean ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lat" ;
+                    qb:dimension :latitude ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ qb:measure :sea_surface_temperature_crw_sst_annual_mean ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lon" ;
+                    qb:dimension :longitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lat" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ] ] ;
+    rdfs:comment "This is a product of NOAA Coral Reef Watch Daily Global 5km Satellite Coral Bleaching Heat Stress Monitoring Product Suite" ;
+    dcat:distribution [ a dcat:Distribution ;
+            dcat:accessURL <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/crw/sst_annual_mean> ;
+            dcat:mediaType "application/icechunk-zarr" ] ;
+    dcat:endDate "2025-12-31T12:00:00+00:00"^^xsd:dateTime ;
+    dcat:startDate "1985-12-31T12:00:00+00:00"^^xsd:dateTime ;
+    dcat:temporalResolution "P1Y"^^xsd:duration ;
+    schema:contentUrl <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/crw/sst_annual_mean> ;
+    schema:description "This is a product of NOAA Coral Reef Watch Daily Global 5km Satellite Coral Bleaching Heat Stress Monitoring Product Suite" ;
+    schema:isAccessibleForFree true ;
+    schema:keywords "Oceans > Ocean Temperature > Sea Surface Temperature",
+        "Oceans > Ocean Temperature > Water Temperature",
+        "Spectral/Engineering > Infrared Wavelengths > Thermal Infrared" ;
+    schema:name "NOAA Coral Reef Watch Global 5km Satellite Sea Surface Temperature (CoralTemp) Annual Mean Composite for 2025" ;
+    schema:url <https://coralreefwatch.noaa.gov/product/5km/index.php> ;
+    schema:variableMeasured :latitude,
+        :longitude,
+        :mask_crw_sst_annual_mean,
+        :sea_surface_temperature_crw_sst_annual_mean,
+        :time ;
+    schema:version "2" .
+
+:crw_sst_annual_min a qb:DataSet,
+        dcat:Dataset,
+        schema:Dataset ;
+    rdfs:label "NOAA Coral Reef Watch Global 5km Satellite Sea Surface Temperature (CoralTemp) Annual Minimum Composite for 2025" ;
+    dcterms:description "This is a product of NOAA Coral Reef Watch Daily Global 5km Satellite Coral Bleaching Heat Stress Monitoring Product Suite" ;
+    dcterms:title "NOAA Coral Reef Watch Global 5km Satellite Sea Surface Temperature (CoralTemp) Annual Minimum Composite for 2025" ;
+    qb:structure [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lat" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lon" ;
+                    qb:dimension :longitude ],
+                [ qb:measure :sea_surface_temperature_crw_sst_annual_min ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "lon" ;
+                    qb:dimension :longitude ],
+                [ qb:measure :mask_crw_sst_annual_min ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lat" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ] ] ;
+    rdfs:comment "This is a product of NOAA Coral Reef Watch Daily Global 5km Satellite Coral Bleaching Heat Stress Monitoring Product Suite" ;
+    dcat:distribution [ a dcat:Distribution ;
+            dcat:accessURL <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/crw/sst_annual_min> ;
+            dcat:mediaType "application/icechunk-zarr" ] ;
+    dcat:endDate "2025-12-31T12:00:00+00:00"^^xsd:dateTime ;
+    dcat:startDate "1985-12-31T12:00:00+00:00"^^xsd:dateTime ;
+    dcat:temporalResolution "P1Y"^^xsd:duration ;
+    schema:contentUrl <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/crw/sst_annual_min> ;
+    schema:description "This is a product of NOAA Coral Reef Watch Daily Global 5km Satellite Coral Bleaching Heat Stress Monitoring Product Suite" ;
+    schema:isAccessibleForFree true ;
+    schema:keywords "Oceans > Ocean Temperature > Sea Surface Temperature",
+        "Oceans > Ocean Temperature > Water Temperature",
+        "Spectral/Engineering > Infrared Wavelengths > Thermal Infrared" ;
+    schema:name "NOAA Coral Reef Watch Global 5km Satellite Sea Surface Temperature (CoralTemp) Annual Minimum Composite for 2025" ;
+    schema:url <https://coralreefwatch.noaa.gov/product/5km/index.php> ;
+    schema:variableMeasured :latitude,
+        :longitude,
+        :mask_crw_sst_annual_min,
+        :sea_surface_temperature_crw_sst_annual_min,
+        :time ;
+    schema:version "2" .
+
+:crw_sst_monthly_max a qb:DataSet,
+        dcat:Dataset,
+        schema:Dataset ;
+    rdfs:label "NOAA Coral Reef Watch Global 5km Satellite Sea Surface Temperature (CoralTemp) Monthly Maximum Composite for March 2026" ;
+    dcterms:description "This is a product of NOAA Coral Reef Watch Daily Global 5km Satellite Coral Bleaching Heat Stress Monitoring Product Suite" ;
+    dcterms:title "NOAA Coral Reef Watch Global 5km Satellite Sea Surface Temperature (CoralTemp) Monthly Maximum Composite for March 2026" ;
+    qb:structure [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ qb:measure :mask_crw_sst_monthly_max ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lat" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lon" ;
+                    qb:dimension :longitude ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lat" ;
+                    qb:dimension :latitude ],
+                [ qb:measure :sea_surface_temperature_crw_sst_monthly_max ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lon" ;
+                    qb:dimension :longitude ] ] ;
+    rdfs:comment "This is a product of NOAA Coral Reef Watch Daily Global 5km Satellite Coral Bleaching Heat Stress Monitoring Product Suite" ;
+    dcat:distribution [ a dcat:Distribution ;
+            dcat:accessURL <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/crw/sst_monthly_max> ;
+            dcat:mediaType "application/icechunk-zarr" ] ;
+    dcat:endDate "2026-03-31T12:00:00+00:00"^^xsd:dateTime ;
+    dcat:startDate "1985-01-31T12:00:00+00:00"^^xsd:dateTime ;
+    dcat:temporalResolution "P1M"^^xsd:duration ;
+    schema:contentUrl <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/crw/sst_monthly_max> ;
+    schema:description "This is a product of NOAA Coral Reef Watch Daily Global 5km Satellite Coral Bleaching Heat Stress Monitoring Product Suite" ;
+    schema:isAccessibleForFree true ;
+    schema:keywords "Oceans > Ocean Temperature > Sea Surface Temperature",
+        "Oceans > Ocean Temperature > Water Temperature",
+        "Spectral/Engineering > Infrared Wavelengths > Thermal Infrared" ;
+    schema:name "NOAA Coral Reef Watch Global 5km Satellite Sea Surface Temperature (CoralTemp) Monthly Maximum Composite for March 2026" ;
+    schema:url <https://coralreefwatch.noaa.gov/product/5km/index.php> ;
+    schema:variableMeasured :latitude,
+        :longitude,
+        :mask_crw_sst_monthly_max,
+        :sea_surface_temperature_crw_sst_monthly_max,
+        :time ;
+    schema:version "2" .
+
+:crw_sst_monthly_min a qb:DataSet,
+        dcat:Dataset,
+        schema:Dataset ;
+    rdfs:label "NOAA Coral Reef Watch Global 5km Satellite Sea Surface Temperature (CoralTemp) Monthly Minimum Composite for March 2026" ;
+    dcterms:description "This is a product of NOAA Coral Reef Watch Daily Global 5km Satellite Coral Bleaching Heat Stress Monitoring Product Suite" ;
+    dcterms:title "NOAA Coral Reef Watch Global 5km Satellite Sea Surface Temperature (CoralTemp) Monthly Minimum Composite for March 2026" ;
+    qb:structure [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "lat" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ],
+                [ qb:measure :mask_crw_sst_monthly_min ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lon" ;
+                    qb:dimension :longitude ] ],
+        [ a qb:DataStructureDefinition ;
+            qb:component [ a qb:ComponentSpecification ;
+                    :field_name "lat" ;
+                    qb:dimension :latitude ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "lon" ;
+                    qb:dimension :longitude ],
+                [ qb:measure :sea_surface_temperature_crw_sst_monthly_min ],
+                [ a qb:ComponentSpecification ;
+                    :field_name "time" ;
+                    qb:dimension :time ] ] ;
+    rdfs:comment "This is a product of NOAA Coral Reef Watch Daily Global 5km Satellite Coral Bleaching Heat Stress Monitoring Product Suite" ;
+    dcat:distribution [ a dcat:Distribution ;
+            dcat:accessURL <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/crw/sst_monthly_min> ;
+            dcat:mediaType "application/icechunk-zarr" ] ;
+    dcat:endDate "2026-03-31T12:00:00+00:00"^^xsd:dateTime ;
+    dcat:startDate "1985-01-31T12:00:00+00:00"^^xsd:dateTime ;
+    dcat:temporalResolution "P1M"^^xsd:duration ;
+    schema:contentUrl <s3://data-c6c22a2e42294c11b52ee7f0c792c071/icechunk/crw/sst_monthly_min> ;
+    schema:description "This is a product of NOAA Coral Reef Watch Daily Global 5km Satellite Coral Bleaching Heat Stress Monitoring Product Suite" ;
+    schema:isAccessibleForFree true ;
+    schema:keywords "Oceans > Ocean Temperature > Sea Surface Temperature",
+        "Oceans > Ocean Temperature > Water Temperature",
+        "Spectral/Engineering > Infrared Wavelengths > Thermal Infrared" ;
+    schema:name "NOAA Coral Reef Watch Global 5km Satellite Sea Surface Temperature (CoralTemp) Monthly Minimum Composite for March 2026" ;
+    schema:url <https://coralreefwatch.noaa.gov/product/5km/index.php> ;
+    schema:variableMeasured :latitude,
+        :longitude,
+        :mask_crw_sst_monthly_min,
+        :sea_surface_temperature_crw_sst_monthly_min,
+        :time ;
+    schema:version "2" .
+
+:field_name a rdf:Property ;
+    rdfs:label "Field name in the dataset." ;
+    rdfs:range xsd:string .
+
+:mask_crw_sst_annual_max a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "pixel characteristics flag array" ;
+    :field_name "mask" ;
+    schema:alternateName "mask" ;
+    schema:description """Other metadata:
+comment: A 2D array, in the same size as the data array in the X and Y directions, classifying land, missing, and ice pixels that are all flagged by the same missing_value (specified by the variable attribute _FillValue) in the data array(s), along with water (data) pixels.
+coordinates: time lat lon
+coverage_content_type: thematicClassification
+flag_meanings: valid-water land missing ice
+flag_values: [0, 1, 2, 4]
+grid_mapping: crs
+long_name: pixel characteristics flag array""" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "pixel_classification" .
+
+:mask_crw_sst_annual_mean a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "pixel characteristics flag array" ;
+    :field_name "mask" ;
+    schema:alternateName "mask" ;
+    schema:description """Other metadata:
+comment: A 2D array, in the same size as the data array in the X and Y directions, classifying land, missing, and ice pixels that are all flagged by the same missing_value (specified by the variable attribute _FillValue) in the data array(s), along with water (data) pixels.
+coordinates: time lat lon
+coverage_content_type: thematicClassification
+flag_meanings: valid-water land missing ice
+flag_values: [0, 1, 2, 4]
+grid_mapping: crs
+long_name: pixel characteristics flag array""" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "pixel_classification" .
+
+:mask_crw_sst_annual_min a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "pixel characteristics flag array" ;
+    :field_name "mask" ;
+    schema:alternateName "mask" ;
+    schema:description """Other metadata:
+comment: A 2D array, in the same size as the data array in the X and Y directions, classifying land, missing, and ice pixels that are all flagged by the same missing_value (specified by the variable attribute _FillValue) in the data array(s), along with water (data) pixels.
+coordinates: time lat lon
+coverage_content_type: thematicClassification
+flag_meanings: valid-water land missing ice
+flag_values: [0, 1, 2, 4]
+grid_mapping: crs
+long_name: pixel characteristics flag array""" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "pixel_classification" .
+
+:mask_crw_sst_monthly_max a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "pixel characteristics flag array" ;
+    :field_name "mask" ;
+    schema:alternateName "mask" ;
+    schema:description """Other metadata:
+comment: A 2D array, in the same size as the data array in the X and Y directions, classifying land, missing, and ice pixels that are all flagged by the same missing_value (specified by the variable attribute _FillValue) in the data array(s), along with water (data) pixels.
+coordinates: time lat lon
+coverage_content_type: thematicClassification
+flag_meanings: valid-water land missing ice
+flag_values: [0, 1, 2, 4]
+grid_mapping: crs
+long_name: pixel characteristics flag array""" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "pixel_classification" .
+
+:mask_crw_sst_monthly_min a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "pixel characteristics flag array" ;
+    :field_name "mask" ;
+    schema:alternateName "mask" ;
+    schema:description """Other metadata:
+comment: A 2D array, in the same size as the data array in the X and Y directions, classifying land, missing, and ice pixels that are all flagged by the same missing_value (specified by the variable attribute _FillValue) in the data array(s), along with water (data) pixels.
+coordinates: time lat lon
+coverage_content_type: thematicClassification
+flag_meanings: valid-water land missing ice
+flag_values: [0, 1, 2, 4]
+grid_mapping: crs
+long_name: pixel characteristics flag array""" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "pixel_classification" .
+
+:sea_surface_temperature_crw_sst_annual_max a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "analysed sea surface temperature" ;
+    :cf_standard_name cf:sea_surface_temperature ;
+    :field_name "sea_surface_temperature" ;
+    schema:alternateName "sea_surface_temperature" ;
+    schema:description """Other metadata:
+coverage_content_type: physicalMeasurement
+grid_mapping: crs
+long_name: analysed sea surface temperature""" ;
+    schema:name "sea_surface_temperature" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "degrees_Celsius" .
+
+:sea_surface_temperature_crw_sst_annual_mean a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "analysed sea surface temperature" ;
+    :cf_standard_name cf:sea_surface_temperature ;
+    :field_name "sea_surface_temperature" ;
+    schema:alternateName "sea_surface_temperature" ;
+    schema:description """Other metadata:
+coverage_content_type: physicalMeasurement
+grid_mapping: crs
+long_name: analysed sea surface temperature""" ;
+    schema:name "sea_surface_temperature" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "degrees_Celsius" .
+
+:sea_surface_temperature_crw_sst_annual_min a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "analysed sea surface temperature" ;
+    :cf_standard_name cf:sea_surface_temperature ;
+    :field_name "sea_surface_temperature" ;
+    schema:alternateName "sea_surface_temperature" ;
+    schema:description """Other metadata:
+coverage_content_type: physicalMeasurement
+grid_mapping: crs
+long_name: analysed sea surface temperature""" ;
+    schema:name "sea_surface_temperature" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "degrees_Celsius" .
+
+:sea_surface_temperature_crw_sst_monthly_max a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "analysed sea surface temperature" ;
+    :cf_standard_name cf:sea_surface_temperature ;
+    :field_name "sea_surface_temperature" ;
+    schema:alternateName "sea_surface_temperature" ;
+    schema:description """Other metadata:
+coverage_content_type: physicalMeasurement
+grid_mapping: crs
+long_name: analysed sea surface temperature""" ;
+    schema:name "sea_surface_temperature" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "degrees_Celsius" .
+
+:sea_surface_temperature_crw_sst_monthly_min a qb:MeasureProperty,
+        schema:PropertyValue ;
+    rdfs:label "analysed sea surface temperature" ;
+    :cf_standard_name cf:sea_surface_temperature ;
+    :field_name "sea_surface_temperature" ;
+    schema:alternateName "sea_surface_temperature" ;
+    schema:description """Other metadata:
+coverage_content_type: physicalMeasurement
+grid_mapping: crs
+long_name: analysed sea surface temperature""" ;
+    schema:name "sea_surface_temperature" ;
+    schema:propertyID qb:measure ;
+    schema:unitText "degrees_Celsius" .
+
+:latitude a qb:DimensionProperty,
+        schema:PropertyValue ;
+    rdfs:label "latitude" ;
+    :cf_standard_name cf:latitude ;
+    schema:alternateName "lat" ;
+    schema:name "latitude" ;
+    schema:propertyID qb:measureDimension .
+
+:longitude a qb:DimensionProperty,
+        schema:PropertyValue ;
+    rdfs:label "longitude" ;
+    :cf_standard_name cf:longitude ;
+    schema:alternateName "lon" ;
+    schema:name "longitude" ;
+    schema:propertyID qb:measureDimension .
+
+:time a qb:DimensionProperty,
+        schema:PropertyValue ;
+    rdfs:label "time" ;
+    :cf_standard_name cf:time ;
+    schema:name "time" ;
+    schema:propertyID qb:measureDimension .
+

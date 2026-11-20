@@ -1,0 +1,101 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kmnlp-ingest"
+version = "0.1.0"
+description = "KMNLP data ingestion functions"
+requires-python = ">=3.12"
+dependencies = [
+    "boto3>=1.40.34",
+    "dask[distributed]>=2025.12.0",
+    "defusedxml>=0.7.1",
+    "pydantic-ai-slim[bedrock]>=1.106.0",
+    "fsspec>=2025.12.0",
+    "h5netcdf>=1.7.3",
+    "h5py>=3.15.1",
+    "icechunk>=1.1.15",
+    "kerchunk>=0.2.9",
+    "netcdf4>=1.7.3",
+    "numpy>=2.3.5",
+    "pandas>=2.2.0",
+    "pydantic>=2.10.6",
+    "rdflib",
+    "rechunker>=0.5.2",
+    "requests>=2.32.0",
+    "rich>=14.2.0",
+    "s3fs>=2025.12.0",
+    "siphon>=0.11.0",
+    "tqdm>=4.67.1",
+    "virtualizarr>=2.2.1",
+    "xarray>=2025.12.0",
+]
+
+[dependency-groups]
+dev  = [
+    "boto3-stubs[bedrock-runtime, s3, stepfunctions]>=1.42.17",
+    "pyright[nodejs]",
+    "ruff",
+]
+test = [
+    "pytest",
+    "pytest-socket>=0.7.0",
+]
+
+[tool.uv]
+default-groups=["dev", "test"]
+
+[tool.pyright]
+stubPath = "./.typings"
+include = ["src/", "tests/"]
+ignore = ["**/.venv/**"]
+exclude = ["notebooks", "**/.venv/**", "*.pyc"]
+typeCheckingMode = "strict"
+reportGeneralTypeIssues = true
+reportImplicitStringConcatenation = "none"
+reportPropertyTypeMismatch = "error"
+reportUninitializedInstanceVariable = "error"
+reportUnknownArgumentType = "error"
+reportUnknownMemberType = "error"
+reportUnknownVariableType = "error"
+reportUnnecessaryComparison = "error"
+
+[tool.pytest.ini_options]
+# pytest-socket configuration: disable sockets by default
+addopts = "--disable-socket"
+pythonpath = ["src"]
+markers = [
+  "integration: test that requires making network calls to S3 or external services",
+]
+
+[tool.ruff]
+line-length = 100
+extend-exclude = ["notebooks/", ".history/"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint]
+# http://docs.astral.sh/ruff/rules/
+select = ["ALL"]
+ignore = [
+    "TD002",
+    "TD003",
+    "FIX002",
+    "EM101",
+    "COM812", # Silence warning about a conflict
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*" = [
+  # Use of assert detected
+  "S101",
+  # Missing return type annotation for public function
+  "ANN201",
+  # Missing docstrings
+  "D1",
+  # Private member accessed
+  "SLF001",
+  # magic values
+  "PLR2004"]

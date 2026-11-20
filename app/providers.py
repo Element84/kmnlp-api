@@ -1,7 +1,10 @@
+import logging
+import os
 from functools import cache
 from typing import Annotated
 
 import boto3
+import botocore.config
 from dask.distributed import Client
 from distributed import LocalCluster
 from fastapi import Depends
@@ -16,28 +19,23 @@ from sqlalchemy import Engine, MetaData, create_engine
 
 from app.dao.aois_dao import AOIsDAO
 from app.dao.users_dao import UsersDAO
+from app.db.postgresql_config import build_postgres_config
 from app.db.sqlalchemy_db import SQLAlchemyDB
 from app.utils.env import (
     ALLOW_LOCAL_DASK_CLUSTER,
-    DASK_SCHEDULER_ADDRESS,
     GEOCODE_INDEX_HOST,
+    LITE_LLM_PROXY_URL,
     NOMINATIM_USER_AGENT,
+    USE_SQLITE,
 )
 
-
-@cache
-def dask_client_provider() -> Client:
-    """Return Dask Client to use for the application, caching the result.
-
-    Creating a Dask Client is expensive. Always return the same instance.
-    """
-    return _create_dask_client(
-        DASK_SCHEDULER_ADDRESS, allow_local_dask_cluster=ALLOW_LOCAL_DASK_CLUSTER
-    )
+log = logging.getLogger(__name__)
 
 
-def _create_dask_client(
-    dask_scheduler_address: str | None, *, allow_local_dask_cluster: bool
+def get_dask_client(
+    dask_scheduler_address: str | None = None,
+    *,
+    allow_local_dask_cluster: bool = ALLOW_LOCAL_DASK_CLUSTER,
 ) -> Client:
     """Create Dask Client to use for the application.
 
@@ -49,11 +47,13 @@ def _create_dask_client(
 
     Do not create the local cluster if `ALLOW_LOCAL_DASK_CLUSTER` is not set.
     """
+    dask_scheduler_address = dask_scheduler_address or os.getenv("DASK_SCHEDULER_ADDRESS")
     if dask_scheduler_address:
-        return Client(dask_scheduler_address)
+        log.info("Using Dask scheduler address from env var: %s", dask_scheduler_address)
+        return Client(dask_scheduler_address, asynchronous=True)
 
     if allow_local_dask_cluster:
-        local_cluster = LocalCluster()
+        local_cluster = LocalCluster(asynchronous=True)
         return Client(local_cluster)
 
     raise ValueError("DASK_SCHEDULER_ADDRESS is not set and ALLOW_LOCAL_DASK_CLUSTER is falsy.")
@@ -62,7 +62,11 @@ def _create_dask_client(
 @cache
 def bedrock_runtime_client_provider() -> BedrockRuntimeClient:
     """Return Bedrock Runtime Client for the application, caching the result."""
-    return boto3.client("bedrock-runtime")  # type: ignore[reportUnknownMemberType]
+    return boto3.client(  # type: ignore[reportUnknownMemberType]
+        "bedrock-runtime",
+        config=botocore.config.Config(read_timeout=300, connect_timeout=2),
+        endpoint_url=LITE_LLM_PROXY_URL,
+    )
 
 
 @cache
@@ -96,7 +100,23 @@ def knowledge_graph_dao_provider() -> KnowledgeGraphDAO:
 @cache
 def sql_alchemy_engine_provider() -> Engine:
     """Return the Knowledge Graph DAO, caching the result."""
-    return create_engine("sqlite+pysqlite:///temp/users.db", echo=False)
+    if USE_SQLITE:
+        return create_engine("sqlite:///temp/users.db", echo=False)
+
+    config = build_postgres_config()
+    return create_engine(
+        "postgresql://",
+        connect_args={
+            "host": config.host,
+            "port": config.port,
+            "dbname": config.name,
+            "user": config.user,
+            "password": config.password,
+            "sslmode": "require",
+            "connect_timeout": 10,
+        },
+        echo=False,
+    )
 
 
 @cache

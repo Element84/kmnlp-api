@@ -1,4 +1,6 @@
-from unittest.mock import MagicMock, patch
+import os
+from collections.abc import Callable
+from unittest.mock import Mock, patch
 
 import pytest
 from dask.distributed import Client
@@ -11,11 +13,10 @@ from app.dao.aois_dao import AOIsDAO
 from app.dao.users_dao import UsersDAO
 from app.db.sqlalchemy_db import SQLAlchemyDB
 from app.providers import (
-    _create_dask_client,  # type: ignore[reportPrivateUsage]
     aois_dao_provider,  # type: ignore[reportPrivateUsage]
     bedrock_runtime_client_provider,
-    dask_client_provider,
     db_provider,
+    get_dask_client,  # type: ignore[reportPrivateUsage]
     knowledge_graph_dao_provider,
     place_lookup_provider,
     s3_client_provider,
@@ -23,58 +24,62 @@ from app.providers import (
 )
 
 
-def test_dask_provider():
-    client = dask_client_provider()
-    assert isinstance(client, Client)
+@pytest.fixture
+def make_dask_client() -> Callable[..., tuple[Mock, Mock, Client]]:
+    def _make_dask_client(
+        dask_scheduler_address: str | None = None, *, allow_local_dask_cluster: bool = True
+    ) -> tuple[Mock, Mock, Client]:
+        with (
+            patch.dict("os.environ"),
+            patch("app.providers.Client") as mock_client_cls,
+            patch("app.providers.LocalCluster") as mock_local_cluster_cls,
+        ):
+            os.environ.pop("DASK_SCHEDULER_ADDRESS", None)
+            os.environ.pop("ALLOW_LOCAL_DASK_CLUSTER", None)
+            with get_dask_client(
+                dask_scheduler_address, allow_local_dask_cluster=allow_local_dask_cluster
+            ) as client:
+                return mock_client_cls, mock_local_cluster_cls, client
+
+    return _make_dask_client
 
 
-def test_dask_provider_returns_same_instance():
-    client1 = dask_client_provider()
-    client2 = dask_client_provider()
-    assert client1 is client2
+@pytest.mark.parametrize(
+    ("dask_scheduler_address", "allow_local_dask_cluster"),
+    [
+        ("tcp://10.0.0.1:8786", False),
+        (None, True),
+    ],
+)
+def test_dask_client_provider(
+    make_dask_client: Callable[..., tuple[Mock, Mock, Client]],
+    dask_scheduler_address: str | None,
+    allow_local_dask_cluster: bool,  # noqa: FBT001
+):
+    mock_client, mock_local_cluster, _ = make_dask_client(
+        dask_scheduler_address, allow_local_dask_cluster=allow_local_dask_cluster
+    )
+    match dask_scheduler_address, allow_local_dask_cluster:
+        case str() as address, _:
+            mock_client.assert_called_once_with(address, asynchronous=True)
+            mock_local_cluster.assert_not_called()
+        case None, True:
+            mock_client.assert_called_once()
+            mock_local_cluster.assert_called_once()
+        case _:
+            pass  # This case is tested in a separate test.
 
 
-def test_dask_client_provider_with_scheduler_address():
+def test_dask_client_provider_no_scheduler_address(
+    make_dask_client: Callable[..., tuple[Mock, Mock, Client]],
+):
     with (
-        patch("app.providers.Client") as mock_client,
-        patch("app.providers.LocalCluster") as mock_local_cluster,
+        pytest.raises(
+            ValueError,
+            match="DASK_SCHEDULER_ADDRESS is not set and ALLOW_LOCAL_DASK_CLUSTER is falsy",
+        ),
     ):
-        client = _create_dask_client("tcp://10.0.0.1:8786", allow_local_dask_cluster=False)
-
-        mock_client.assert_called_once_with("tcp://10.0.0.1:8786")
-        assert isinstance(client, MagicMock)
-        mock_local_cluster.assert_not_called()
-
-
-def test_dask_client_provider_no_scheduler_address():
-    with pytest.raises(
-        ValueError, match="DASK_SCHEDULER_ADDRESS is not set and ALLOW_LOCAL_DASK_CLUSTER is falsy"
-    ):
-        _create_dask_client(None, allow_local_dask_cluster=False)
-
-
-def test_dask_client_provider_with_scheduler_address_and_allow_local():
-    with (
-        patch("app.providers.Client") as mock_client,
-        patch("app.providers.LocalCluster") as mock_local_cluster,
-    ):
-        client = _create_dask_client("tcp://10.0.0.1:8786", allow_local_dask_cluster=True)
-
-        mock_client.assert_called_once_with("tcp://10.0.0.1:8786")
-        assert isinstance(client, MagicMock)
-        mock_local_cluster.assert_not_called()
-
-
-def test_dask_client_provider_with_no_scheduler_address_and_allow_local():
-    with (
-        patch("app.providers.Client") as mock_client,
-        patch("app.providers.LocalCluster") as mock_local_cluster,
-    ):
-        client = _create_dask_client(None, allow_local_dask_cluster=True)
-
-        mock_client.assert_called_once()
-        assert isinstance(client, MagicMock)
-        mock_local_cluster.assert_called_once()
+        _ = make_dask_client(None, allow_local_dask_cluster=False)
 
 
 @mock_aws

@@ -3,12 +3,13 @@ from datetime import MINYEAR, UTC, datetime
 from typing import Final
 from uuid import UUID, uuid4
 
+from pydantic import TypeAdapter
 from sqlalchemy import Table, func, insert, select
 from sqlalchemy.exc import IntegrityError
 
 from app.dao.users_dao import UserNotFoundError
 from app.db.sqlalchemy_db import SQLAlchemyDB
-from app.types.geojson import GeoJSONGeometry
+from app.types.geojson import GeoJSONFeatureCollection, GeoJSONGeometry
 from app.types.internal import AOI, AOIListResponse, AOISummary, Cursor
 
 PAGE_SIZE: Final[int] = 15
@@ -25,7 +26,9 @@ class AOIsDAO:
         self.db = db
         self._table = db.aois_table
 
-    def create_aoi(self, user_id: str, name: str, geometry: GeoJSONGeometry) -> AOI:
+    def create_aoi(
+        self, user_id: str, name: str, geometry: GeoJSONGeometry | GeoJSONFeatureCollection
+    ) -> AOI:
         """Create the requested AOI and return it."""
         aoi_id = uuid4()
         created_at = datetime.now(UTC)
@@ -46,8 +49,9 @@ class AOIsDAO:
 
         return AOI(uuid=aoi_id, user_id=user_id, name=name, geojson=geometry, created_at=created_at)
 
-    def get_aoi(self, uuid: UUID, user_id: str) -> AOI | None:
+    def get_aoi(self, uuid: str | UUID, user_id: str) -> AOI | None:
         """Return AOI by id or None if not present."""
+        uuid = UUID(uuid) if isinstance(uuid, str) else uuid
         columns = self._table.c
         stmt = (
             select(columns.id, columns.user_id, columns.name, columns.geojson, columns.created_at)
@@ -60,11 +64,14 @@ class AOIsDAO:
         if row is None:
             return None
 
+        geometry_or_feature_collection = TypeAdapter[GeoJSONGeometry | GeoJSONFeatureCollection](
+            GeoJSONGeometry | GeoJSONFeatureCollection
+        ).validate_json(row.geojson)
         return AOI(
             uuid=row.id,
             user_id=row.user_id,
             name=row.name,
-            geojson=GeoJSONGeometry.model_validate_json(row.geojson),
+            geojson=geometry_or_feature_collection,
             created_at=row.created_at.replace(tzinfo=UTC),
         )
 
@@ -72,7 +79,9 @@ class AOIsDAO:
         self, user_id: str, *, created_at_after: datetime | None = None
     ) -> AOIListResponse:
         """Return list of AOIs belonging to user, excluding geometry."""
-        effective_created_at_after = created_at_after if created_at_after else MINYEAR
+        effective_created_at_after = (
+            created_at_after if created_at_after else datetime(MINYEAR, 1, 1, tzinfo=UTC)
+        )
 
         columns = self._table.c
         stmt = (

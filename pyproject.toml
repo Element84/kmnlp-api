@@ -25,6 +25,7 @@ dependencies = [
   "boto3-stubs[bedrock-runtime, s3, rds]>=1.40.58",
   "sqlalchemy>=2.0.46",
   "psycopg2-binary>=2.9.11",
+  "moto>=5.1.20",
 ]
 dynamic = ["version"]
 
@@ -68,18 +69,27 @@ pythonpath = "app"
 testpaths = ["tests"]
 markers = [
   "integration: test that requires making network calls to an LLM",
-  "enable_socket: enable socket connections for this test"
+  "enable_socket: enable socket connections for this test",
 ]
 asyncio_mode = "auto"
 asyncio_default_fixture_loop_scope = "function"
-# pytest-socket configuration: disable sockets by default, allow localhost for Dask
-addopts = "--disable-socket --allow-hosts=127.0.0.1"
+# pytest-socket configuration: disable sockets by default
+# Allow list reasons:
+#   * 127.0.0.1: Dask
+#   * localhost: Docker/Postgres running locally
+#   * 172.17.0.1: Docker bridge network gateway in CI (could be re-thought if problematic)
+addopts = "--disable-socket --allow-hosts=127.0.0.1,localhost,172.17.0.1 --allow-unix-socket"
 
 
 [tool.pyright]
 include = ["app/", "tests/"]
 ignore = ["**/.venv/**", "*.pyc"] # suppress errors
-exclude = ["**/.venv/**", "*.pyc", "**/__pycache__", "**/.local/**"] # do not analyze files
+exclude = [
+  "**/.venv/**",
+  "*.pyc",
+  "**/__pycache__",
+  "**/.local/**",
+] # do not analyze files
 typeCheckingMode = "strict"
 reportGeneralTypeIssues = true
 reportImplicitStringConcatenation = "none"

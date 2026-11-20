@@ -1,15 +1,16 @@
 from datetime import UTC, datetime
 from functools import partial
+from uuid import UUID
 
 from pydantic import BaseModel, Field
 
-from app.types.geojson import GeoJSONGeometry
+from app.types.geojson import GeoJSONFeatureCollection, GeoJSONGeometry
 
 
 class UIState(BaseModel):
     """UI state."""
 
-    aoi: str | None = Field(default=None, description="AOI URI or geometry.")
+    aoi: UUID | None = Field(default=None, description="AOI UUID.")
 
 
 class ChatRequest(BaseModel):
@@ -30,4 +31,4 @@ class AOI(BaseModel):
     """Request model for creating a new AOI."""
 
     name: str
-    geometry: GeoJSONGeometry
+    geometry: GeoJSONGeometry | GeoJSONFeatureCollection

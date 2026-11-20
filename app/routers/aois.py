@@ -1,5 +1,4 @@
 from typing import Annotated
-from uuid import UUID
 
 from e84_geoai_common.tracing import observe
 from fastapi import APIRouter, Depends, HTTPException, status
@@ -15,7 +14,8 @@ from app.transformers.cursor_encoding import (
     UnexpectedCursorKeyError,
     decode_datetime_cursor,
 )
-from app.types.input import AOI as IAOI
+from app.types.geojson import GeoJSONFeatureCollection
+from app.types.input import AOI as InputAOI  # noqa: N811
 from app.types.output import AOI, AOIListResponse, UUIDDict
 
 router = APIRouter(
@@ -27,7 +27,7 @@ router = APIRouter(
 @router.post("", status_code=status.HTTP_201_CREATED)
 @observe(name="api.create_aoi")
 async def create_area_of_interest(
-    aoi: IAOI,
+    aoi: InputAOI,
     user_id: Annotated[str, Depends(get_current_user)],
     aois_dao: Annotated[AOIsDAO, Depends(aois_dao_provider)],
 ) -> UUIDDict:
@@ -74,10 +74,13 @@ async def get_aoi(
     aois_dao: Annotated[AOIsDAO, Depends(aois_dao_provider)],
 ) -> AOI:
     """Get single AOI for user."""
-    aoi = aois_dao.get_aoi(UUID(aoi_id), requesting_user_id)
+    aoi = aois_dao.get_aoi(aoi_id, requesting_user_id)
     if aoi:
-        return AOI(
-            uuid=str(aoi.uuid), name=aoi.name, geojson=aoi.geojson, created_at=aoi.created_at
+        geojson = (
+            aoi.geojson
+            if isinstance(aoi.geojson, GeoJSONFeatureCollection)
+            else aoi.geojson.as_feature_collection()
         )
+        return AOI(uuid=str(aoi.uuid), name=aoi.name, geojson=geojson, created_at=aoi.created_at)
 
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="AOI not found")

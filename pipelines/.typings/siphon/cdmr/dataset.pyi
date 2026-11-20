@@ -1,0 +1,53 @@
+from .cdmremote import CDMRemote as CDMRemote
+from .ncstream import unpack_attribute as unpack_attribute, unpack_variable as unpack_variable
+from _typeshed import Incomplete
+
+log: Incomplete
+
+class AttributeContainer:
+    def __init__(self) -> None: ...
+    def ncattrs(self): ...
+
+class Group(AttributeContainer):
+    groups: Incomplete
+    variables: Incomplete
+    dimensions: Incomplete
+    types: Incomplete
+    dataset: Incomplete
+    def __init__(self, parent=None) -> None: ...
+    @property
+    def path(self): ...
+    name: Incomplete
+    def load_from_stream(self, group) -> None: ...
+
+class Dataset(Group):
+    cdmr: Incomplete
+    url: Incomplete
+    def __init__(self, url) -> None: ...
+
+class Variable(AttributeContainer):
+    name: Incomplete
+    dimensions: Incomplete
+    dataset: Incomplete
+    def __init__(self, group, name) -> None: ...
+    def group(self): ...
+    @property
+    def path(self): ...
+    def __getitem__(self, ind): ...
+    shape: Incomplete
+    ndim: Incomplete
+    dtype: Incomplete
+    datatype: Incomplete
+    def load_from_stream(self, var) -> None: ...
+
+class Dimension:
+    name: Incomplete
+    size: Incomplete
+    unlimited: bool
+    private: bool
+    vlen: bool
+    def __init__(self, group, name, size=None) -> None: ...
+    def group(self): ...
+    def isunlimited(self): ...
+    def load_from_stream(self, dim) -> None: ...
+    def __len__(self) -> int: ...

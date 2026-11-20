@@ -2,24 +2,56 @@ from datetime import UTC, datetime
 from functools import partial
 from typing import Literal
 
-from llm_agent.tools.response_shaping_tools.end_turn_tool import EmptyInput
-from llm_agent.tools.response_shaping_tools.text_response_tool import TextResponse
-from pydantic import BaseModel, Field
+from pydantic import AliasChoices, BaseModel, Field
 
-from app.types.geojson import GeoJSONFeatureCollection, GeoJSONGeometry
+from app.types.geojson import GeoJSONFeatureCollection
 from app.types.input import ChatRequest
 
 
-class EndOfTurn(EmptyInput):
+class ModelInfo(BaseModel):
+    """Information about an LLM model used in the system."""
+
+    name: str
+    description: str
+
+
+class EndOfTurn(BaseModel):
     """End of LLM turn."""
 
     content_type: Literal["EndOfTurn"] = "EndOfTurn"
 
 
-class Text(TextResponse):
+class Text(BaseModel):
     """Text response from the LLM."""
 
     content_type: Literal["Text"] = "Text"
+    text: str
+
+
+class TextDelta(BaseModel):
+    """Text delta response from the LLM."""
+
+    content_type: Literal["TextDelta"] = "TextDelta"
+    content_delta: str
+
+
+class Thinking(BaseModel):
+    """Thinking response from the LLM."""
+
+    content_type: Literal["Thinking"] = "Thinking"
+    thinking: str
+    duration: float | None = Field(
+        default=None,
+        description="Duration of the thinking stream in seconds. Will be None if the thinking "
+        "was brief enough to be emitted in one go instead of a stream.",
+    )
+
+
+class ThinkingDelta(BaseModel):
+    """Thinking delta response from the LLM."""
+
+    content_type: Literal["ThinkingDelta"] = "ThinkingDelta"
+    content_delta: str
 
 
 class GeocodedAOI(BaseModel):
@@ -27,14 +59,15 @@ class GeocodedAOI(BaseModel):
 
     content_type: Literal["GeocodedAOI"] = "GeocodedAOI"
     query: str
+    label: str | None = None
     geojson: GeoJSONFeatureCollection
 
 
-class DatasetSearchQuery(BaseModel):
-    """Dataset search query."""
+class FilteredByAOI(BaseModel):
+    """Filtered by AOI."""
 
-    content_type: Literal["DatasetSearchQuery"] = "DatasetSearchQuery"
-    query: str
+    content_type: Literal["FilteredByAOI"] = "FilteredByAOI"
+    geojson: GeoJSONFeatureCollection
 
 
 class DatasetMetadata(BaseModel):
@@ -78,16 +111,27 @@ class DataAnalysisSolution(BaseModel):
     """A data analysis solution."""
 
     content_type: Literal["DataAnalysisSolution"] = "DataAnalysisSolution"
-    thoughts: str
+    reasoning: str | None = None
+    analysis: str = Field(
+        validation_alias=AliasChoices("analysis", "thoughts")
+    )  # alias for backward compatibility
     pseudocode: str
     explanation: str
+
+
+class DownloadLink(BaseModel):
+    """A download link."""
+
+    content_type: Literal["DownloadLink"] = "DownloadLink"
+    file_type: Literal["image", "animation", "geotiff", "data"]
+    url: str
 
 
 class DataAnalysisOutput(BaseModel):
     """A data analysis output."""
 
     name: str
-    value: str
+    value: str | DownloadLink
 
 
 class DataAnalysisDetails(BaseModel):
@@ -133,6 +177,10 @@ class Plan(BaseModel):
     steps: list[Step]
 
 
+class EphemeralPlan(Plan):
+    """Ephemeral plan that is not persisted in the database."""
+
+
 class Legend(BaseModel):
     """A Legend to show on a map."""
 
@@ -155,7 +203,15 @@ class Image(BaseModel):
     """An image to display in chat."""
 
     content_type: Literal["Image"] = "Image"
-    media_type: Literal["image/png"] = "image/png"
+    media_type: Literal["image/png", "image/gif"] = "image/png"
+    url: str
+
+
+class Video(BaseModel):
+    """A video to display in chat."""
+
+    content_type: Literal["Video"] = "Video"
+    media_type: Literal["video/mp4"] = "video/mp4"
     url: str
 
 
@@ -166,7 +222,21 @@ class BackendError(BaseModel):
     message: str
 
 
-chat_response_content_types = BackendError | EndOfTurn | Text | Plan | GeoTIFF | GeocodedAOI | Image
+chat_response_content_types = (
+    BackendError
+    | EndOfTurn
+    | Text
+    | TextDelta
+    | Plan
+    | GeoTIFF
+    | GeocodedAOI
+    | Image
+    | Video
+    | FilteredByAOI
+    | Thinking
+    | ThinkingDelta
+    | ProgressUpdate
+)
 
 
 class ChatResponse(BaseModel):
@@ -230,7 +300,7 @@ class AOI(BaseModel):
 
     uuid: str
     name: str
-    geojson: GeoJSONGeometry
+    geojson: GeoJSONFeatureCollection
     created_at: datetime
 
 
@@ -238,3 +308,9 @@ class UUIDDict(BaseModel):
     """Model to return a single UUID."""
 
     uuid: str
+
+
+class DataDownloadURL(BaseModel):
+    """A data download URL."""
+
+    url: str

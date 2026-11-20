@@ -1,33 +1,14 @@
 from typing import Annotated
 
-from fastapi import Header
-from llm_agent.context import LLMAgentContext
+from fastapi import Header, Request
 
 from app.error_responses import MissingUserIdError
-from app.providers import (
-    bedrock_runtime_client_provider,
-    dask_client_provider,
-    knowledge_graph_dao_provider,
-    place_lookup_provider,
-    s3_client_provider,
-)
-from app.utils.utils import AppState, make_agent
+from app.utils.app_state import AppState
 
 
-def get_app_state() -> AppState:
+def get_app_state(request: Request) -> AppState:
     """Get the application state from the request."""
-    return AppState(
-        context=LLMAgentContext(
-            place_lookup=place_lookup_provider(),
-            s3_client=s3_client_provider(),
-            knowledge_graph_dao=knowledge_graph_dao_provider(),
-            dask_client=dask_client_provider(),
-        ),
-        agent=make_agent(
-            bedrock_runtime_client=bedrock_runtime_client_provider(),
-            orchestration_prompt_simple_transformer=None,
-        ),
-    )
+    return request.app.state.app_state
 
 
 def get_current_user(x_user_id: Annotated[str, Header()]) -> str:

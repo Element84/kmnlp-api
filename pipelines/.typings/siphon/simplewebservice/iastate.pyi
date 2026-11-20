@@ -1,0 +1,9 @@
+from .._tools import get_wind_components as get_wind_components
+from ..http_util import HTTPEndPoint as HTTPEndPoint
+
+class IAStateUpperAir(HTTPEndPoint):
+    def __init__(self) -> None: ...
+    @classmethod
+    def request_data(cls, time, site_id, interp_nans: bool = False, **kwargs): ...
+    @classmethod
+    def request_all_data(cls, time, pressure=None, **kwargs): ...

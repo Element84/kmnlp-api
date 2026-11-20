@@ -1,10 +1,8 @@
 from typing import Self
 
-from llm_agent.tools.response_shaping_tools.agent_plan_tool import (
-    AgentPlan,
-    AgentPlanUpdate,
-    AgentStepUpdate,
-)
+import langfuse
+from langfuse import observe  # pyright: ignore[reportUnknownVariableType]
+from llm_agent.tools.agent_plan_tool import AgentPlan, AgentPlanUpdate, AgentStepUpdate
 from pydantic import BaseModel, Field
 
 from app.types.output import Plan, ProgressUpdate, Step, StepDetails
@@ -74,6 +72,7 @@ class SinglePlanManager(BaseModel):
         )
         return cls(plan=plan)
 
+    @observe(as_type="chain", name="SinglePlanManager.update")
     def update(self, agent_plan_update: AgentPlanUpdate) -> None:
         """Update plan state.
 
@@ -108,6 +107,27 @@ class SinglePlanManager(BaseModel):
                 return step
         raise UnknownStepIDError(self.plan, step_id)
 
+    @observe(as_type="chain", name="SinglePlanManager.update_step_progress")
+    def update_step_progress(self, step_id: str, update: ProgressUpdate) -> None:
+        """Update a step's progress updates.
+
+        Args:
+            step_id (str): Step ID.
+            update (ProgressUpdate): Progress update to add.
+
+        Raises:
+            UnknownStepIDError: If the step ID is not known.
+        """
+        step = self.get_step(step_id)
+
+        if step.progress_updates is None:
+            step.progress_updates = []
+
+        if step.status == "pending":
+            step.status = "in_progress"
+
+        step.progress_updates.append(update)
+
     def _update_step(self, step_update: AgentStepUpdate) -> None:
         """Update a single step's state.
 
@@ -126,6 +146,20 @@ class SinglePlanManager(BaseModel):
         if step_update.outcome_summary is not None:
             step.outcome_summary = step_update.outcome_summary
 
+    @observe(as_type="chain", name="SinglePlanManager.cancel")
+    def cancel(self) -> bool:
+        """Cancel all incomplete steps in the current plan.
+
+        Returns:
+            bool: True if any steps were cancelled, False otherwise.
+        """
+        cancelled_any = False
+        for step in self.plan.steps:
+            if step.status in {"pending", "in_progress"}:
+                step.status = "cancelled"
+                cancelled_any = True
+        return cancelled_any
+
     @property
     def id(self) -> str:
         """Plan ID."""
@@ -138,13 +172,27 @@ class PlanManager(BaseModel):
     plans: dict[str, SinglePlanManager] = Field(default_factory=dict)
     tool_call_id_to_plan_step_id: dict[str, tuple[str, str]] = Field(default_factory=dict)
 
+    @observe(as_type="chain", name="PlanManager.add_plan")
     def add_plan(self, agent_plan: AgentPlan) -> None:
         """Add a new plan.
 
         Args:
             agent_plan (AgentPlan): Initial plan.
         """
-        self.plans[agent_plan.id] = SinglePlanManager.from_agent_plan(agent_plan)
+        if agent_plan.id not in self.plans:
+            self.plans[agent_plan.id] = SinglePlanManager.from_agent_plan(agent_plan)
+        else:
+            # Replace the placeholder plan with the actual plan, merging any step updates
+            existing_plan_manager = self.plans[agent_plan.id]
+            new_plan_manager = SinglePlanManager.from_agent_plan(agent_plan)
+            for existing_step in existing_plan_manager.plan.steps:
+                new_step = new_plan_manager.get_step(existing_step.id)
+                if new_step.status == "pending":
+                    new_step.status = existing_step.status
+                if existing_step.progress_updates:
+                    for update in existing_step.progress_updates:
+                        new_plan_manager.update_step_progress(new_step.id, update)
+            self.plans[agent_plan.id] = new_plan_manager
 
     def update_plan(self, agent_plan_update: AgentPlanUpdate) -> None:
         """Update a plan's state.
@@ -158,6 +206,7 @@ class PlanManager(BaseModel):
         plan_manager = self.get_plan_manager(agent_plan_update.id)
         plan_manager.update(agent_plan_update)
 
+    @observe(as_type="chain", name="PlanManager.register_tool_call")
     def register_tool_call(self, tool_call_id: str, plan_id: str, step_id: str) -> None:
         """Register a tool call ID with a step ID in a plan.
 
@@ -167,6 +216,15 @@ class PlanManager(BaseModel):
             step_id (str): Step ID.
         """
         self.tool_call_id_to_plan_step_id[tool_call_id] = (plan_id, step_id)
+        if plan_id not in self.plans:
+            # Tool call has preceded the creation of the plan, so we create a placeholder plan
+            self.plans[plan_id] = SinglePlanManager(
+                plan=Plan(
+                    id=plan_id,
+                    title="",
+                    steps=[Step(id=step_id, title="", status="in_progress")],
+                )
+            )
 
     def get_plan(self, plan_id: str) -> Plan:
         """Get the current state of a plan.
@@ -213,16 +271,7 @@ class PlanManager(BaseModel):
             UnknownStepIDError: If the step ID is not known.
         """
         plan_manager = self.get_plan_manager(plan_id)
-
-        step = plan_manager.get_step(step_id)
-
-        if step.progress_updates is None:
-            step.progress_updates = []
-
-        if step.status == "pending":
-            step.status = "in_progress"
-
-        step.progress_updates.append(update)
+        plan_manager.update_step_progress(step_id, update)
 
     def get_step_details(self, plan_id: str, step_id: str) -> StepDetails | None:
         """Get a step's details.
@@ -254,6 +303,13 @@ class PlanManager(BaseModel):
             UnknownPlanError: If the plan ID is not known.
             UnknownStepIDError: If the step ID is not known.
         """
+        langfuse.get_client().update_current_span(
+            input={
+                "plan_id": plan_id,
+                "step_id": step_id,
+                "details": {"content": type(details.content)},
+            }
+        )
         plan_manager = self.get_plan_manager(plan_id)
         step = plan_manager.get_step(step_id)
         step.details = details
@@ -271,3 +327,15 @@ class PlanManager(BaseModel):
             return self.plans[plan_id]
         except KeyError as e:
             raise UnknownPlanError(plan_id, list(self.plans.keys())) from e
+
+    def cancel_all(self) -> list[Plan]:
+        """Cancel all incomplete steps in all plans.
+
+        Returns:
+            list[Plan]: A list of plans that had any steps cancelled.
+        """
+        return [
+            plan_manager.plan.model_copy(deep=True)
+            for plan_manager in self.plans.values()
+            if plan_manager.cancel()
+        ]

@@ -1,68 +1,140 @@
 image: quay.io/element84/e84-build-python:3.12-main
 
 stages:
-  - test
-  - side_effecting
+  - api_test
+  - pipelines_test
   - deploy
+
+.api_setup:
+  before_script:
+    - git config --global url."https://gitlab-ci-token:$CI_JOB_TOKEN@repo.element84.com/".insteadOf ssh://git@repo.element84.com/
+    - pip3.12 install uv
+    - uv sync --all-extras
+    - source .venv/bin/activate
 
 # Build the Docker image. This runs in parallel with the other test jobs. The
 # idea is to prepare and push the image eagerly so that the deploy job can
 # run quickly. It is useful to run it on merge requests so that we can
 # anticipate whether the build will succeed on merge.
-build_image:
-  stage: test
+api:build_image:
+  stage: api_test
   services:
     - docker:dind
   script:
     - scripts/build.sh
     - . scripts/gitlab/assume_role.sh
     - scripts/push_containers.sh
-  rules:
-    # Make this run on every branch and merge requests too
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-    - if: $CI_COMMIT_BRANCH
+  only:
+    - merge_requests
+    - main
+  except:
+    - pipelines
 
-lint:
-  stage: test
+pipelines:build_image:
+  stage: pipelines_test
+  needs: []
+  services:
+    - docker:dind
   script:
-    - git config --global url."https://gitlab-ci-token:$CI_JOB_TOKEN@repo.element84.com/".insteadOf ssh://git@repo.element84.com/; 
+    - cd pipelines
+    - scripts/build_image.sh
+    - . ../scripts/gitlab/assume_role.sh
+    - scripts/push_image.sh
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event" || ($CI_PIPELINE_SOURCE != "pipeline" && $CI_COMMIT_BRANCH == "main")
+      changes:
+        - .gitlab-ci.yml
+        - pipelines/**/*
+
+api:lint:
+  extends: .api_setup
+  stage: api_test
+  script:
+    - scripts/lint.sh
+  only:
+    - merge_requests
+    - main
+  except:
+    - pipelines
+
+pipelines:lint:
+  stage: pipelines_test
+  needs: []
+  script:
     - pip3.12 install uv
+    - cd pipelines
     - uv sync --all-extras
     - source .venv/bin/activate
     - scripts/lint.sh
   rules:
-    # Make this run on every branch and merge requests too
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-    - if: $CI_COMMIT_BRANCH
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event" || ($CI_PIPELINE_SOURCE != "pipeline" && $CI_COMMIT_BRANCH == "main")
+      changes:
+        - .gitlab-ci.yml
+        - pipelines/**/*
 
-unit_tests:
-  stage: test
+api:unit_tests:
+  extends: .api_setup
+  stage: api_test
+  services:
+    - docker:dind # used for Postgres test container
   script:
-    - git config --global url."https://gitlab-ci-token:$CI_JOB_TOKEN@repo.element84.com/".insteadOf ssh://git@repo.element84.com/; 
+    - scripts/test.sh
+  only:
+    - merge_requests
+    - main
+  except:
+    - pipelines
+
+pipelines:unit_tests:
+  stage: pipelines_test
+  needs: []
+  script:
     - pip3.12 install uv
+    - cd pipelines
     - uv sync --all-extras
     - source .venv/bin/activate
     - scripts/test.sh
   rules:
-    # Make this run on every branch and merge requests too
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-    - if: $CI_COMMIT_BRANCH
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event" || ($CI_PIPELINE_SOURCE != "pipeline" && $CI_COMMIT_BRANCH == "main")
+      changes:
+        - .gitlab-ci.yml
+        - pipelines/**/*
 
-integration_tests:
-  stage: test
+api:integration_tests:
+  extends: .api_setup
+  stage: api_test
   script:
-    - git config --global url."https://gitlab-ci-token:$CI_JOB_TOKEN@repo.element84.com/".insteadOf ssh://git@repo.element84.com/; 
-    - pip3.12 install uv
-    - uv sync --all-extras
-    - source .venv/bin/activate
     - . scripts/gitlab/assume_role.sh
     - scripts/integration_tests.sh
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+  only:
+    - merge_requests
+    - main
+  except:
+    - pipelines
 
-deploy:
+pipelines:integration_tests:
+  stage: pipelines_test
+  needs: []
+  script:
+    - . scripts/gitlab/assume_role.sh
+    - pip3.12 install uv
+    - cd pipelines
+    - uv sync --all-extras
+    - source .venv/bin/activate
+    - scripts/integration_tests.sh
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event" || ($CI_PIPELINE_SOURCE != "pipeline" && $CI_COMMIT_BRANCH == "main")
+      changes:
+        - .gitlab-ci.yml
+        - pipelines/**/*
+
+api:deploy:
   stage: deploy
+  needs:
+    - "api:build_image"
+    - "api:lint"
+    - "api:unit_tests"
+    - "api:integration_tests"
   services:
     - docker:dind
   script:
@@ -70,7 +142,7 @@ deploy:
     - scripts/gitlab/pull_api_container.sh
     - scripts/gitlab/push_image_tag_file.sh
   rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_PIPELINE_SOURCE != "pipeline" && $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
 upgrade-llm-agent-dependency:
   stage: deploy
